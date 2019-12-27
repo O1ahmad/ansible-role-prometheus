@@ -1,0 +1,184 @@
+I, [2019-12-27T15:12:23.167904 #9825]  INFO -- archive-install-fedora-30: -----> Cleaning up any prior instances of <archive-install-fedora-30>
+I, [2019-12-27T15:12:23.175626 #9825]  INFO -- archive-install-fedora-30: -----> Destroying <archive-install-fedora-30>...
+I, [2019-12-27T15:12:23.186661 #9825]  INFO -- archive-install-fedora-30: Finished destroying <archive-install-fedora-30> (0m0.00s).
+I, [2019-12-27T15:12:23.186974 #9825]  INFO -- archive-install-fedora-30: -----> Testing <archive-install-fedora-30>
+I, [2019-12-27T15:12:23.187091 #9825]  INFO -- archive-install-fedora-30: -----> Creating <archive-install-fedora-30>...
+I, [2019-12-27T15:12:23.316251 #9825]  INFO -- archive-install-fedora-30: Sending build context to Docker daemon    149kB
+I, [2019-12-27T15:12:23.753256 #9825]  INFO -- archive-install-fedora-30: Step 1/20 : FROM fedora:30
+I, [2019-12-27T15:12:23.753322 #9825]  INFO -- archive-install-fedora-30:  ---> 89d6d6a7d521
+I, [2019-12-27T15:12:23.753338 #9825]  INFO -- archive-install-fedora-30: Step 2/20 : ENV container docker
+I, [2019-12-27T15:12:23.753412 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.753845 #9825]  INFO -- archive-install-fedora-30:  ---> 742922c073fd
+I, [2019-12-27T15:12:23.753896 #9825]  INFO -- archive-install-fedora-30: Step 3/20 : RUN dnf clean all
+I, [2019-12-27T15:12:23.760885 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.760948 #9825]  INFO -- archive-install-fedora-30:  ---> b5559a0ccd2b
+I, [2019-12-27T15:12:23.760963 #9825]  INFO -- archive-install-fedora-30: Step 4/20 : RUN dnf install -y sudo openssh-server openssh-clients which curl
+I, [2019-12-27T15:12:23.760978 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.760990 #9825]  INFO -- archive-install-fedora-30:  ---> a9fce6dae259
+I, [2019-12-27T15:12:23.761003 #9825]  INFO -- archive-install-fedora-30: Step 5/20 : RUN [ -f "/etc/ssh/ssh_host_rsa_key" ] || ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+I, [2019-12-27T15:12:23.761021 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761032 #9825]  INFO -- archive-install-fedora-30:  ---> 08070ff9ee7a
+I, [2019-12-27T15:12:23.761044 #9825]  INFO -- archive-install-fedora-30: Step 6/20 : RUN [ -f "/etc/ssh/ssh_host_dsa_key" ] || ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N ''
+I, [2019-12-27T15:12:23.761057 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761068 #9825]  INFO -- archive-install-fedora-30:  ---> a7190f575456
+I, [2019-12-27T15:12:23.761080 #9825]  INFO -- archive-install-fedora-30: Step 7/20 : RUN if ! getent passwd kitchen; then                 useradd -d /home/kitchen -m -s /bin/bash -p '*' kitchen;               fi
+I, [2019-12-27T15:12:23.761093 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761104 #9825]  INFO -- archive-install-fedora-30:  ---> 2f07fe0a317a
+I, [2019-12-27T15:12:23.761115 #9825]  INFO -- archive-install-fedora-30: Step 8/20 : RUN echo "kitchen ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+I, [2019-12-27T15:12:23.761129 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761139 #9825]  INFO -- archive-install-fedora-30:  ---> c312ba5fc359
+I, [2019-12-27T15:12:23.761150 #9825]  INFO -- archive-install-fedora-30: Step 9/20 : RUN echo "Defaults !requiretty" >> /etc/sudoers
+I, [2019-12-27T15:12:23.761162 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761173 #9825]  INFO -- archive-install-fedora-30:  ---> eef0f738d448
+I, [2019-12-27T15:12:23.761183 #9825]  INFO -- archive-install-fedora-30: Step 10/20 : RUN mkdir -p /home/kitchen/.ssh
+I, [2019-12-27T15:12:23.761193 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761205 #9825]  INFO -- archive-install-fedora-30:  ---> 12281941eaa1
+I, [2019-12-27T15:12:23.761218 #9825]  INFO -- archive-install-fedora-30: Step 11/20 : RUN chown -R kitchen /home/kitchen/.ssh
+I, [2019-12-27T15:12:23.761229 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761248 #9825]  INFO -- archive-install-fedora-30:  ---> b2a69d1c9202
+I, [2019-12-27T15:12:23.761259 #9825]  INFO -- archive-install-fedora-30: Step 12/20 : RUN chmod 0700 /home/kitchen/.ssh
+I, [2019-12-27T15:12:23.761272 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761282 #9825]  INFO -- archive-install-fedora-30:  ---> 7fc374df8a77
+I, [2019-12-27T15:12:23.761293 #9825]  INFO -- archive-install-fedora-30: Step 13/20 : RUN touch /home/kitchen/.ssh/authorized_keys
+I, [2019-12-27T15:12:23.761303 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761313 #9825]  INFO -- archive-install-fedora-30:  ---> d941422eed6a
+I, [2019-12-27T15:12:23.761323 #9825]  INFO -- archive-install-fedora-30: Step 14/20 : RUN chown kitchen /home/kitchen/.ssh/authorized_keys
+I, [2019-12-27T15:12:23.761335 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761427 #9825]  INFO -- archive-install-fedora-30:  ---> 76ee1ce8374f
+I, [2019-12-27T15:12:23.761445 #9825]  INFO -- archive-install-fedora-30: Step 15/20 : RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
+I, [2019-12-27T15:12:23.761456 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.761466 #9825]  INFO -- archive-install-fedora-30:  ---> 990f4435b116
+I, [2019-12-27T15:12:23.761476 #9825]  INFO -- archive-install-fedora-30: Step 16/20 : RUN mkdir -p /run/sshd
+I, [2019-12-27T15:12:23.771079 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.771136 #9825]  INFO -- archive-install-fedora-30:  ---> 686e7b2d8d60
+I, [2019-12-27T15:12:23.771150 #9825]  INFO -- archive-install-fedora-30: Step 17/20 : RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+I, [2019-12-27T15:12:23.771161 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.771175 #9825]  INFO -- archive-install-fedora-30:  ---> 825613e0d15b
+I, [2019-12-27T15:12:23.771186 #9825]  INFO -- archive-install-fedora-30: Step 18/20 : RUN systemctl enable sshd.service
+I, [2019-12-27T15:12:23.773128 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.773181 #9825]  INFO -- archive-install-fedora-30:  ---> dd0243d7cd0c
+I, [2019-12-27T15:12:23.773194 #9825]  INFO -- archive-install-fedora-30: Step 19/20 : RUN yum -y install python-pip
+I, [2019-12-27T15:12:23.816515 #9825]  INFO -- archive-install-fedora-30:  ---> Using cache
+I, [2019-12-27T15:12:23.816573 #9825]  INFO -- archive-install-fedora-30:  ---> 6749d7df0c27
+I, [2019-12-27T15:12:23.816588 #9825]  INFO -- archive-install-fedora-30: Step 20/20 : RUN echo ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQC5xlVxSukumkBS8OIrcQwtrTYqToOG5qHibxBuGtL0zSeBi2tbNAFlahXmC0IsTRJlMgycR6qCXk4mMtCNzI9GTRR\+k7MG01NG\+xJwT/kuKMA/i3WqIPJZ6iSfKbduaMevZaEJ6ZpGBU/AXfs3K/uJtJknlsl4Zdx4zbQCSvf3gwIz1PdJ6CcflWB3GVDJxMPfgSasO3AZcuxg9U0I3Uhh4SDn\+vGM2NGtP7imwCoGldyYzvCrR/ru8JoY2OoC/1VdN1d2TzDGiWi9z/fTscwgEYMAeCnOHW9MgBxnBOAWnzknmYqXFIwbuO/N8EhuXGxNVu51gjhn/okE21WY\+9XN\ kitchen_docker_key >> /home/kitchen/.ssh/authorized_keys
+I, [2019-12-27T15:12:23.908849 #9825]  INFO -- archive-install-fedora-30:  ---> Running in e2f50fd4ad5d
+I, [2019-12-27T15:12:26.048274 #9825]  INFO -- archive-install-fedora-30: Removing intermediate container e2f50fd4ad5d
+I, [2019-12-27T15:12:26.048314 #9825]  INFO -- archive-install-fedora-30:  ---> c3baa7f585ca
+I, [2019-12-27T15:12:26.052839 #9825]  INFO -- archive-install-fedora-30: Successfully built c3baa7f585ca
+I, [2019-12-27T15:12:26.278614 #9825]  INFO -- archive-install-fedora-30: a4188fd8b24691cd7acdf336a00887a22d29457c22e83726fb1abdcb304a70d5
+I, [2019-12-27T15:12:27.711521 #9825]  INFO -- archive-install-fedora-30: 0.0.0.0:32801
+I, [2019-12-27T15:12:27.728754 #9825]  INFO -- archive-install-fedora-30: Waiting for SSH service on localhost:32801, retrying in 3 seconds
+I, [2019-12-27T15:12:31.007264 #9825]  INFO -- archive-install-fedora-30: [SSH] Established
+I, [2019-12-27T15:12:31.008903 #9825]  INFO -- archive-install-fedora-30: Finished creating <archive-install-fedora-30> (0m7.82s).
+I, [2019-12-27T15:12:31.009024 #9825]  INFO -- archive-install-fedora-30: -----> Converging <archive-install-fedora-30>...
+I, [2019-12-27T15:12:31.009505 #9825]  INFO -- archive-install-fedora-30: Preparing files for transfer
+I, [2019-12-27T15:12:31.009559 #9825]  INFO -- archive-install-fedora-30: Preparing playbook
+I, [2019-12-27T15:12:31.009721 #9825]  INFO -- archive-install-fedora-30: Preparing inventory
+I, [2019-12-27T15:12:31.009769 #9825]  INFO -- archive-install-fedora-30: Preparing modules
+I, [2019-12-27T15:12:31.009876 #9825]  INFO -- archive-install-fedora-30: nothing to do for modules
+I, [2019-12-27T15:12:31.009906 #9825]  INFO -- archive-install-fedora-30: Preparing roles
+I, [2019-12-27T15:12:31.035931 #9825]  INFO -- archive-install-fedora-30: Preparing ansible.cfg file
+I, [2019-12-27T15:12:31.036255 #9825]  INFO -- archive-install-fedora-30: Found existing ansible.cfg
+I, [2019-12-27T15:12:31.036524 #9825]  INFO -- archive-install-fedora-30: Preparing group_vars
+I, [2019-12-27T15:12:31.036776 #9825]  INFO -- archive-install-fedora-30: nothing to do for group_vars
+I, [2019-12-27T15:12:31.036926 #9825]  INFO -- archive-install-fedora-30: Preparing additional_copy_path
+I, [2019-12-27T15:12:31.037118 #9825]  INFO -- archive-install-fedora-30: Preparing host_vars
+I, [2019-12-27T15:12:31.037509 #9825]  INFO -- archive-install-fedora-30: nothing to do for host_vars
+I, [2019-12-27T15:12:31.037699 #9825]  INFO -- archive-install-fedora-30: Preparing hosts file
+I, [2019-12-27T15:12:31.037937 #9825]  INFO -- archive-install-fedora-30: Preparing spec
+I, [2019-12-27T15:12:31.038137 #9825]  INFO -- archive-install-fedora-30: nothing to do for spec
+I, [2019-12-27T15:12:31.038279 #9825]  INFO -- archive-install-fedora-30: Preparing library plugins
+I, [2019-12-27T15:12:31.038516 #9825]  INFO -- archive-install-fedora-30: nothing to do for library plugins
+I, [2019-12-27T15:12:31.038666 #9825]  INFO -- archive-install-fedora-30: Preparing callback plugins
+I, [2019-12-27T15:12:31.038906 #9825]  INFO -- archive-install-fedora-30: nothing to do for callback plugins
+I, [2019-12-27T15:12:31.039060 #9825]  INFO -- archive-install-fedora-30: Preparing filter_plugins
+I, [2019-12-27T15:12:31.039311 #9825]  INFO -- archive-install-fedora-30: nothing to do for filter_plugins
+I, [2019-12-27T15:12:31.039427 #9825]  INFO -- archive-install-fedora-30: Preparing lookup_plugins
+I, [2019-12-27T15:12:31.039613 #9825]  INFO -- archive-install-fedora-30: nothing to do for lookup_plugins
+I, [2019-12-27T15:12:31.039761 #9825]  INFO -- archive-install-fedora-30: Preparing ansible vault password
+I, [2019-12-27T15:12:31.039910 #9825]  INFO -- archive-install-fedora-30: Preparing additional_ssh_private_keys
+I, [2019-12-27T15:12:31.040054 #9825]  INFO -- archive-install-fedora-30: nothing to do for additional_ssh_private_keys
+I, [2019-12-27T15:12:31.040161 #9825]  INFO -- archive-install-fedora-30: Finished Preparing files for transfer
+I, [2019-12-27T15:12:31.040481 #9825]  INFO -- archive-install-fedora-30: Installing ansible through pip
+I, [2019-12-27T15:12:31.330295 #9825]  INFO -- archive-install-fedora-30: which: no ansible in (/home/kitchen/.local/bin:/home/kitchen/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin)
+I, [2019-12-27T15:13:47.429813 #9825]  INFO -- archive-install-fedora-30: Error: Unable to find a match: python-setuptools-dev
+I, [2019-12-27T15:13:50.873863 #9825]  INFO -- archive-install-fedora-30: [33mDEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7.[0m
+I, [2019-12-27T15:13:50.873926 #9825]  INFO -- archive-install-fedora-30: [33mWARNING: Running pip install with root privileges is generally not a good idea. Try `pip install --user` instead.[0m
+I, [2019-12-27T15:13:50.993873 #9825]  INFO -- archive-install-fedora-30: [33mThe directory '/home/kitchen/.cache/pip/http' or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.[0m
+I, [2019-12-27T15:13:50.998914 #9825]  INFO -- archive-install-fedora-30: [33mThe directory '/home/kitchen/.cache/pip' or its parent directory is not owned by the current user and caching wheels has been disabled. check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.[0m
+I, [2019-12-27T15:13:57.604585 #9825]  INFO -- archive-install-fedora-30: [33mDEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7.[0m
+I, [2019-12-27T15:13:57.604775 #9825]  INFO -- archive-install-fedora-30: [33mWARNING: Running pip install with root privileges is generally not a good idea. Try `pip install --user` instead.[0m
+I, [2019-12-27T15:13:57.675066 #9825]  INFO -- archive-install-fedora-30: [33mThe directory '/home/kitchen/.cache/pip/http' or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.[0m
+I, [2019-12-27T15:13:57.676083 #9825]  INFO -- archive-install-fedora-30: [33mThe directory '/home/kitchen/.cache/pip' or its parent directory is not owned by the current user and caching wheels has been disabled. check the permissions and owner of that directory. If executing pip with sudo, you may want sudo's -H flag.[0m
+I, [2019-12-27T15:14:32.496163 #9825]  INFO -- archive-install-fedora-30: Transferring files to <archive-install-fedora-30>
+I, [2019-12-27T15:14:35.447913 #9825]  INFO -- archive-install-fedora-30: - downloading role 'systemd', owned by 0x0i
+I, [2019-12-27T15:14:36.548930 #9825]  INFO -- archive-install-fedora-30: - downloading role from https://github.com/0x0I/ansible-role-systemd/archive/master.tar.gz
+I, [2019-12-27T15:14:36.883050 #9825]  INFO -- archive-install-fedora-30: - extracting 0x0i.systemd to /tmp/kitchen/roles/0x0i.systemd
+I, [2019-12-27T15:14:36.886537 #9825]  INFO -- archive-install-fedora-30: - 0x0i.systemd (master) was installed successfully
+I, [2019-12-27T15:14:37.961413 #9825]  INFO -- archive-install-fedora-30: [0;34mansible-playbook 2.9.2[0m
+I, [2019-12-27T15:14:37.961505 #9825]  INFO -- archive-install-fedora-30: [0;34m  config file = /etc/ansible/ansible.cfg[0m
+I, [2019-12-27T15:14:37.961542 #9825]  INFO -- archive-install-fedora-30: [0;34m  configured module search path = [u'/home/kitchen/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules'][0m
+I, [2019-12-27T15:14:37.961574 #9825]  INFO -- archive-install-fedora-30: [0;34m  ansible python module location = /usr/lib/python2.7/site-packages/ansible[0m
+I, [2019-12-27T15:14:37.961614 #9825]  INFO -- archive-install-fedora-30: [0;34m  executable location = /usr/bin/ansible-playbook[0m
+I, [2019-12-27T15:14:37.961649 #9825]  INFO -- archive-install-fedora-30: [0;34m  python version = 2.7.17 (default, Oct 21 2019, 17:20:57) [GCC 9.2.1 20190827 (Red Hat 9.2.1-1)][0m
+I, [2019-12-27T15:14:37.963859 #9825]  INFO -- archive-install-fedora-30: [0;34mUsing /etc/ansible/ansible.cfg as config file[0m
+I, [2019-12-27T15:14:38.001794 #9825]  INFO -- archive-install-fedora-30: [0;35m[DEPRECATION WARNING]: The TRANSFORM_INVALID_GROUP_CHARS settings is set to [0m
+I, [2019-12-27T15:14:38.001884 #9825]  INFO -- archive-install-fedora-30: [0;35mallow bad characters in group names by default, this will change, but still be [0m
+I, [2019-12-27T15:14:38.001921 #9825]  INFO -- archive-install-fedora-30: [0;35muser configurable on deprecation. This feature will be removed in version 2.10.[0m
+I, [2019-12-27T15:14:38.003646 #9825]  INFO -- archive-install-fedora-30: [0;35m Deprecation warnings can be disabled by setting deprecation_warnings=False in [0m
+I, [2019-12-27T15:14:38.003708 #9825]  INFO -- archive-install-fedora-30: [0;35mansible.cfg.[0m
+I, [2019-12-27T15:14:38.004055 #9825]  INFO -- archive-install-fedora-30: [1;35m[WARNING]: Invalid characters were found in group names but not replaced, use[0m
+I, [2019-12-27T15:14:38.004088 #9825]  INFO -- archive-install-fedora-30: [1;35m-vvvv to see details[0m
+I, [2019-12-27T15:14:38.004109 #9825]  INFO -- archive-install-fedora-30: [1;35m[0m
+I, [2019-12-27T15:14:39.170430 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:39.170524 #9825]  INFO -- archive-install-fedora-30: PLAYBOOK: default_playbook.yml *************************************************
+I, [2019-12-27T15:14:39.170557 #9825]  INFO -- archive-install-fedora-30: [0;34m1 plays in /tmp/kitchen/default_playbook.yml[0m
+I, [2019-12-27T15:14:39.173733 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:39.173806 #9825]  INFO -- archive-install-fedora-30: PLAY [Default playbook for testing] ********************************************
+I, [2019-12-27T15:14:39.183180 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:39.183264 #9825]  INFO -- archive-install-fedora-30: TASK [Gathering Facts] *********************************************************
+I, [2019-12-27T15:14:39.184105 #9825]  INFO -- archive-install-fedora-30: [1;30mtask path: /tmp/kitchen/default_playbook.yml:2[0m
+I, [2019-12-27T15:14:40.231506 #9825]  INFO -- archive-install-fedora-30: [0;32mok: [localhost][0m
+I, [2019-12-27T15:14:40.232577 #9825]  INFO -- archive-install-fedora-30: [0;34mMETA: ran handlers[0m
+I, [2019-12-27T15:14:40.251209 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:40.251278 #9825]  INFO -- archive-install-fedora-30: TASK [ansible-role-prometheus : Include OS and distribution specific variables.] ***
+I, [2019-12-27T15:14:40.251452 #9825]  INFO -- archive-install-fedora-30: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:2[0m
+I, [2019-12-27T15:14:40.297634 #9825]  INFO -- archive-install-fedora-30: [0;32mok: [localhost] => (item=/tmp/kitchen/roles/ansible-role-prometheus/vars/redhat.yml) => {"ansible_facts": {}, "ansible_included_var_files": ["/tmp/kitchen/roles/ansible-role-prometheus/vars/redhat.yml"], "ansible_loop_var": "item", "changed": false, "item": "/tmp/kitchen/roles/ansible-role-prometheus/vars/redhat.yml"}[0m
+I, [2019-12-27T15:14:40.313325 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:40.313420 #9825]  INFO -- archive-install-fedora-30: TASK [ansible-role-prometheus : Include OS and distribution specific installation tasks.] ***
+I, [2019-12-27T15:14:40.313682 #9825]  INFO -- archive-install-fedora-30: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:10[0m
+I, [2019-12-27T15:14:40.379155 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:40.379241 #9825]  INFO -- archive-install-fedora-30: TASK [ansible-role-prometheus : Include common installation tasks] *************
+I, [2019-12-27T15:14:40.379949 #9825]  INFO -- archive-install-fedora-30: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:18[0m
+I, [2019-12-27T15:14:40.471593 #9825]  INFO -- archive-install-fedora-30: [0;36mincluded: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml for localhost[0m
+I, [2019-12-27T15:14:40.486953 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:40.487024 #9825]  INFO -- archive-install-fedora-30: TASK [ansible-role-prometheus : Ensure Prometheus group exists] ****************
+I, [2019-12-27T15:14:40.487366 #9825]  INFO -- archive-install-fedora-30: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:2[0m
+I, [2019-12-27T15:14:40.953271 #9825]  INFO -- archive-install-fedora-30: [0;33mchanged: [localhost] => {"changed": true, "gid": 1001, "name": "prometheus", "state": "present", "system": false}[0m
+I, [2019-12-27T15:14:40.966803 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:40.966871 #9825]  INFO -- archive-install-fedora-30: TASK [ansible-role-prometheus : Create Prometheus user] ************************
+I, [2019-12-27T15:14:40.967735 #9825]  INFO -- archive-install-fedora-30: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:8[0m
+I, [2019-12-27T15:14:41.546534 #9825]  INFO -- archive-install-fedora-30: [0;33mchanged: [localhost] => {"changed": true, "comment": "Prometheus service account", "create_home": true, "group": 1001, "home": "/home/prometheus", "name": "prometheus", "shell": "/bin/bash", "state": "present", "system": false, "uid": 1001}[0m
+I, [2019-12-27T15:14:41.565250 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:41.565319 #9825]  INFO -- archive-install-fedora-30: TASK [ansible-role-prometheus : perform designated installation procedure] *****
+I, [2019-12-27T15:14:41.565337 #9825]  INFO -- archive-install-fedora-30: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:15[0m
+I, [2019-12-27T15:14:41.628003 #9825]  INFO -- archive-install-fedora-30: [0;34mMETA: ran handlers[0m
+I, [2019-12-27T15:14:41.628383 #9825]  INFO -- archive-install-fedora-30: [0;34mMETA: ran handlers[0m
+I, [2019-12-27T15:14:41.637973 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:41.638829 #9825]  INFO -- archive-install-fedora-30: PLAY RECAP *********************************************************************
+I, [2019-12-27T15:14:41.638988 #9825]  INFO -- archive-install-fedora-30: [0;33mlocalhost[0m                  : [0;32mok=5   [0m [0;33mchanged=2   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+I, [2019-12-27T15:14:41.639079 #9825]  INFO -- archive-install-fedora-30: 
+I, [2019-12-27T15:14:41.702236 #9825]  INFO -- archive-install-fedora-30: Downloading files from <archive-install-fedora-30>
+I, [2019-12-27T15:14:41.706953 #9825]  INFO -- archive-install-fedora-30: Finished converging <archive-install-fedora-30> (2m10.70s).
+I, [2019-12-27T15:14:41.707089 #9825]  INFO -- archive-install-fedora-30: -----> Setting up <archive-install-fedora-30>...
+I, [2019-12-27T15:14:41.708444 #9825]  INFO -- archive-install-fedora-30: Finished setting up <archive-install-fedora-30> (0m0.00s).
+I, [2019-12-27T15:14:41.708590 #9825]  INFO -- archive-install-fedora-30: -----> Verifying <archive-install-fedora-30>...
+I, [2019-12-27T15:14:42.084841 #9825]  INFO -- archive-install-fedora-30: Loaded tests from {:path=>".home.awilson.lab.ansible-role-prometheus.test.integration.install.archive_install"} 
+I, [2019-12-27T15:14:42.242157 #9825]  INFO -- archive-install-fedora-30: Finished verifying <archive-install-fedora-30> (0m0.53s).
+I, [2019-12-27T15:14:42.267105 #9825]  INFO -- archive-install-fedora-30: -----> Destroying <archive-install-fedora-30>...
+I, [2019-12-27T15:14:42.351103 #9825]  INFO -- archive-install-fedora-30: UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+I, [2019-12-27T15:14:42.351181 #9825]  INFO -- archive-install-fedora-30: root                11035               10993               0                   15:12               ?                   00:00:00            /sbin/init
+I, [2019-12-27T15:14:42.896437 #9825]  INFO -- archive-install-fedora-30: a4188fd8b24691cd7acdf336a00887a22d29457c22e83726fb1abdcb304a70d5
+I, [2019-12-27T15:14:43.192893 #9825]  INFO -- archive-install-fedora-30: a4188fd8b24691cd7acdf336a00887a22d29457c22e83726fb1abdcb304a70d5
+I, [2019-12-27T15:14:43.207144 #9825]  INFO -- archive-install-fedora-30: Finished destroying <archive-install-fedora-30> (0m0.94s).
+I, [2019-12-27T15:14:43.207360 #9825]  INFO -- archive-install-fedora-30: Finished testing <archive-install-fedora-30> (2m20.04s).

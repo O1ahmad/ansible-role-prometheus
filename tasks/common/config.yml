@@ -1,0 +1,37 @@
+---
+
+- name: Ensure existence of config dir
+  become: true
+  file:
+    path: "{{ config_dir|default(default_config_dir) }}"
+    owner: "{{ controller_user }}"
+    group: "{{ controller_user }}"
+    state: directory
+
+- name: Ensure proper permissions for log file path
+  become: true
+  file:
+    path: "{{ config.defaults.log_path }}"
+    owner: "{{ controller_user }}"
+    group: "{{ controller_user }}"
+    state: touch
+  when: config.defaults.log_path is defined
+
+- name: Copy Ansible configuration in place
+  become: true
+  template:
+    src: "{{ ansible_config_file }}.j2"
+    dest: "{{ config_dir|default(default_config_dir) }}/{{ ansible_config_file }}"
+    owner: "{{ controller_user }}"
+    group: "{{ controller_user }}"
+    mode: 0644
+  vars:
+    conf: "{{ config }}"
+  when: config is defined and config is not none
+
+- name: Add configuration dir to system-wide profile
+  become: true
+  copy:
+    dest: /etc/profile.d/ansible-vars.sh
+    content: 'ANSIBLE_CONFIG={{ config_dir }}'
+  when: config_dir is defined and config_dir is not none
