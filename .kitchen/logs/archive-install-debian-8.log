@@ -1,0 +1,617 @@
+I, [2019-12-27T15:12:23.175379 #9825]  INFO -- archive-install-debian-8: -----> Cleaning up any prior instances of <archive-install-debian-8>
+I, [2019-12-27T15:12:23.183042 #9825]  INFO -- archive-install-debian-8: -----> Destroying <archive-install-debian-8>...
+I, [2019-12-27T15:12:23.183449 #9825]  INFO -- archive-install-debian-8: Finished destroying <archive-install-debian-8> (0m0.00s).
+I, [2019-12-27T15:12:23.184063 #9825]  INFO -- archive-install-debian-8: -----> Testing <archive-install-debian-8>
+I, [2019-12-27T15:12:23.184173 #9825]  INFO -- archive-install-debian-8: -----> Creating <archive-install-debian-8>...
+I, [2019-12-27T15:12:23.294856 #9825]  INFO -- archive-install-debian-8: Sending build context to Docker daemon    149kB
+I, [2019-12-27T15:12:23.438209 #9825]  INFO -- archive-install-debian-8: Step 1/19 : FROM debian:8
+I, [2019-12-27T15:12:23.438546 #9825]  INFO -- archive-install-debian-8:  ---> 4cb524c015d4
+I, [2019-12-27T15:12:23.438576 #9825]  INFO -- archive-install-debian-8: Step 2/19 : RUN [ ! -f "/sbin/initctl" ] || dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
+I, [2019-12-27T15:12:23.438593 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.438611 #9825]  INFO -- archive-install-debian-8:  ---> 349a1502a7ff
+I, [2019-12-27T15:12:23.438623 #9825]  INFO -- archive-install-debian-8: Step 3/19 : ENV DEBIAN_FRONTEND noninteractive
+I, [2019-12-27T15:12:23.438633 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.438645 #9825]  INFO -- archive-install-debian-8:  ---> a5af2b63ee75
+I, [2019-12-27T15:12:23.438656 #9825]  INFO -- archive-install-debian-8: Step 4/19 : ENV container docker
+I, [2019-12-27T15:12:23.438671 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.438681 #9825]  INFO -- archive-install-debian-8:  ---> 0ea94f4104b1
+I, [2019-12-27T15:12:23.438691 #9825]  INFO -- archive-install-debian-8: Step 5/19 : RUN apt-get update
+I, [2019-12-27T15:12:23.439013 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.439038 #9825]  INFO -- archive-install-debian-8:  ---> fb97ef89ee6d
+I, [2019-12-27T15:12:23.439050 #9825]  INFO -- archive-install-debian-8: Step 6/19 : RUN apt-get install -y sudo openssh-server curl lsb-release
+I, [2019-12-27T15:12:23.439068 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.439079 #9825]  INFO -- archive-install-debian-8:  ---> 84e9ae98e039
+I, [2019-12-27T15:12:23.439095 #9825]  INFO -- archive-install-debian-8: Step 7/19 : RUN if ! getent passwd kitchen; then                 useradd -d /home/kitchen -m -s /bin/bash -p '*' kitchen;               fi
+I, [2019-12-27T15:12:23.439106 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.439116 #9825]  INFO -- archive-install-debian-8:  ---> bb926f665ec8
+I, [2019-12-27T15:12:23.439126 #9825]  INFO -- archive-install-debian-8: Step 8/19 : RUN echo "kitchen ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+I, [2019-12-27T15:12:23.439420 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.439445 #9825]  INFO -- archive-install-debian-8:  ---> 0367d2deb959
+I, [2019-12-27T15:12:23.439457 #9825]  INFO -- archive-install-debian-8: Step 9/19 : RUN echo "Defaults !requiretty" >> /etc/sudoers
+I, [2019-12-27T15:12:23.439471 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.439483 #9825]  INFO -- archive-install-debian-8:  ---> 7fc3a4ea51e1
+I, [2019-12-27T15:12:23.439494 #9825]  INFO -- archive-install-debian-8: Step 10/19 : RUN mkdir -p /home/kitchen/.ssh
+I, [2019-12-27T15:12:23.439504 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.439514 #9825]  INFO -- archive-install-debian-8:  ---> 64ff9411846f
+I, [2019-12-27T15:12:23.439524 #9825]  INFO -- archive-install-debian-8: Step 11/19 : RUN chown -R kitchen /home/kitchen/.ssh
+I, [2019-12-27T15:12:23.439827 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.439853 #9825]  INFO -- archive-install-debian-8:  ---> f132daed456b
+I, [2019-12-27T15:12:23.439876 #9825]  INFO -- archive-install-debian-8: Step 12/19 : RUN chmod 0700 /home/kitchen/.ssh
+I, [2019-12-27T15:12:23.439889 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.439899 #9825]  INFO -- archive-install-debian-8:  ---> 4ec187740fae
+I, [2019-12-27T15:12:23.439909 #9825]  INFO -- archive-install-debian-8: Step 13/19 : RUN touch /home/kitchen/.ssh/authorized_keys
+I, [2019-12-27T15:12:23.440528 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.440560 #9825]  INFO -- archive-install-debian-8:  ---> f16f911b220b
+I, [2019-12-27T15:12:23.440572 #9825]  INFO -- archive-install-debian-8: Step 14/19 : RUN chown kitchen /home/kitchen/.ssh/authorized_keys
+I, [2019-12-27T15:12:23.440583 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.440595 #9825]  INFO -- archive-install-debian-8:  ---> 80e4293b7b59
+I, [2019-12-27T15:12:23.440613 #9825]  INFO -- archive-install-debian-8: Step 15/19 : RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
+I, [2019-12-27T15:12:23.440624 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.440638 #9825]  INFO -- archive-install-debian-8:  ---> 3de73806a1a3
+I, [2019-12-27T15:12:23.440648 #9825]  INFO -- archive-install-debian-8: Step 16/19 : RUN mkdir -p /run/sshd
+I, [2019-12-27T15:12:23.440658 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.440670 #9825]  INFO -- archive-install-debian-8:  ---> 95870f70b15a
+I, [2019-12-27T15:12:23.440680 #9825]  INFO -- archive-install-debian-8: Step 17/19 : RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+I, [2019-12-27T15:12:23.445875 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.445919 #9825]  INFO -- archive-install-debian-8:  ---> b95993e56627
+I, [2019-12-27T15:12:23.445931 #9825]  INFO -- archive-install-debian-8: Step 18/19 : RUN systemctl enable ssh.service
+I, [2019-12-27T15:12:23.445942 #9825]  INFO -- archive-install-debian-8:  ---> Using cache
+I, [2019-12-27T15:12:23.445957 #9825]  INFO -- archive-install-debian-8:  ---> 79e3835dc37c
+I, [2019-12-27T15:12:23.446002 #9825]  INFO -- archive-install-debian-8: Step 19/19 : RUN echo ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQC5xlVxSukumkBS8OIrcQwtrTYqToOG5qHibxBuGtL0zSeBi2tbNAFlahXmC0IsTRJlMgycR6qCXk4mMtCNzI9GTRR\+k7MG01NG\+xJwT/kuKMA/i3WqIPJZ6iSfKbduaMevZaEJ6ZpGBU/AXfs3K/uJtJknlsl4Zdx4zbQCSvf3gwIz1PdJ6CcflWB3GVDJxMPfgSasO3AZcuxg9U0I3Uhh4SDn\+vGM2NGtP7imwCoGldyYzvCrR/ru8JoY2OoC/1VdN1d2TzDGiWi9z/fTscwgEYMAeCnOHW9MgBxnBOAWnzknmYqXFIwbuO/N8EhuXGxNVu51gjhn/okE21WY\+9XN\ kitchen_docker_key >> /home/kitchen/.ssh/authorized_keys
+I, [2019-12-27T15:12:23.514528 #9825]  INFO -- archive-install-debian-8:  ---> Running in 63589a724ee2
+I, [2019-12-27T15:12:25.280349 #9825]  INFO -- archive-install-debian-8: Removing intermediate container 63589a724ee2
+I, [2019-12-27T15:12:25.280421 #9825]  INFO -- archive-install-debian-8:  ---> ee417c1d8e63
+I, [2019-12-27T15:12:25.290355 #9825]  INFO -- archive-install-debian-8: Successfully built ee417c1d8e63
+I, [2019-12-27T15:12:25.505742 #9825]  INFO -- archive-install-debian-8: 7fb28d8a7cb9ec177eb72d60bd002a06e3877bf55150b474823cecb35cae9cfa
+I, [2019-12-27T15:12:27.095576 #9825]  INFO -- archive-install-debian-8: 0.0.0.0:32798
+I, [2019-12-27T15:12:27.212703 #9825]  INFO -- archive-install-debian-8: [SSH] Established
+I, [2019-12-27T15:12:27.213609 #9825]  INFO -- archive-install-debian-8: Finished creating <archive-install-debian-8> (0m4.03s).
+I, [2019-12-27T15:12:27.214118 #9825]  INFO -- archive-install-debian-8: -----> Converging <archive-install-debian-8>...
+I, [2019-12-27T15:12:27.216046 #9825]  INFO -- archive-install-debian-8: Preparing files for transfer
+I, [2019-12-27T15:12:27.216118 #9825]  INFO -- archive-install-debian-8: Preparing playbook
+I, [2019-12-27T15:12:27.216359 #9825]  INFO -- archive-install-debian-8: Preparing inventory
+I, [2019-12-27T15:12:27.216419 #9825]  INFO -- archive-install-debian-8: Preparing modules
+I, [2019-12-27T15:12:27.216556 #9825]  INFO -- archive-install-debian-8: nothing to do for modules
+I, [2019-12-27T15:12:27.216632 #9825]  INFO -- archive-install-debian-8: Preparing roles
+I, [2019-12-27T15:12:27.261377 #9825]  INFO -- archive-install-debian-8: Preparing ansible.cfg file
+I, [2019-12-27T15:12:27.261502 #9825]  INFO -- archive-install-debian-8: Empty ansible.cfg generated
+I, [2019-12-27T15:12:27.261581 #9825]  INFO -- archive-install-debian-8: Preparing group_vars
+I, [2019-12-27T15:12:27.261691 #9825]  INFO -- archive-install-debian-8: nothing to do for group_vars
+I, [2019-12-27T15:12:27.261724 #9825]  INFO -- archive-install-debian-8: Preparing additional_copy_path
+I, [2019-12-27T15:12:27.261796 #9825]  INFO -- archive-install-debian-8: Preparing host_vars
+I, [2019-12-27T15:12:27.261889 #9825]  INFO -- archive-install-debian-8: nothing to do for host_vars
+I, [2019-12-27T15:12:27.261932 #9825]  INFO -- archive-install-debian-8: Preparing hosts file
+I, [2019-12-27T15:12:27.262021 #9825]  INFO -- archive-install-debian-8: Preparing spec
+I, [2019-12-27T15:12:27.262092 #9825]  INFO -- archive-install-debian-8: nothing to do for spec
+I, [2019-12-27T15:12:27.262122 #9825]  INFO -- archive-install-debian-8: Preparing library plugins
+I, [2019-12-27T15:12:27.262364 #9825]  INFO -- archive-install-debian-8: nothing to do for library plugins
+I, [2019-12-27T15:12:27.262405 #9825]  INFO -- archive-install-debian-8: Preparing callback plugins
+I, [2019-12-27T15:12:27.262509 #9825]  INFO -- archive-install-debian-8: nothing to do for callback plugins
+I, [2019-12-27T15:12:27.262542 #9825]  INFO -- archive-install-debian-8: Preparing filter_plugins
+I, [2019-12-27T15:12:27.262655 #9825]  INFO -- archive-install-debian-8: nothing to do for filter_plugins
+I, [2019-12-27T15:12:27.262690 #9825]  INFO -- archive-install-debian-8: Preparing lookup_plugins
+I, [2019-12-27T15:12:27.262787 #9825]  INFO -- archive-install-debian-8: nothing to do for lookup_plugins
+I, [2019-12-27T15:12:27.262846 #9825]  INFO -- archive-install-debian-8: Preparing ansible vault password
+I, [2019-12-27T15:12:27.262917 #9825]  INFO -- archive-install-debian-8: Preparing additional_ssh_private_keys
+I, [2019-12-27T15:12:27.262980 #9825]  INFO -- archive-install-debian-8: nothing to do for additional_ssh_private_keys
+I, [2019-12-27T15:12:27.263009 #9825]  INFO -- archive-install-debian-8: Finished Preparing files for transfer
+I, [2019-12-27T15:12:27.263248 #9825]  INFO -- archive-install-debian-8: Installing ansible, will try to determine platform os
+I, [2019-12-27T15:12:27.771673 #9825]  INFO -- archive-install-debian-8: 0% [Working]            Ign http://deb.debian.org jessie InRelease
+I, [2019-12-27T15:12:27.945898 #9825]  INFO -- archive-install-debian-8:             12% [Connecting to security.debian.org]                                       Hit http://deb.debian.org jessie-updates InRelease
+I, [2019-12-27T15:12:27.997847 #9825]  INFO -- archive-install-debian-8:                                        20% [Waiting for headers]                         20% [Working]             Hit http://deb.debian.org jessie Release.gpg
+I, [2019-12-27T15:12:28.094734 #9825]  INFO -- archive-install-debian-8:              33% [InRelease gpgv 16.3 kB]                            43% [Connecting to security-cdn.debian.org] [Waiting for headers]                                                                 Hit http://deb.debian.org jessie Release
+I, [2019-12-27T15:12:28.104006 #9825]  INFO -- archive-install-debian-8:                                                                  43% [Waiting for headers]                         43% [Waiting for headers] [Release gpgv 77.3 kB] [Waiting for headers]                                                                      Get:1 http://deb.debian.org jessie-updates/main amd64 Packages [20 B]
+I, [2019-12-27T15:12:28.173929 #9825]  INFO -- archive-install-debian-8:                                                                       88% [Waiting for headers] [Release gpgv 77.3 kB]                                                89% [Waiting for headers]                         89% [1 Packages 20 B] [Waiting for headers]                                           93% [Waiting for headers]                         Get:2 http://deb.debian.org jessie/main amd64 Packages [9098 kB]
+I, [2019-12-27T15:12:28.267842 #9825]  INFO -- archive-install-debian-8:                          0% [Waiting for headers] [2 Packages 0 B/9098 kB 0%]                                                    Get:3 http://security.debian.org jessie/updates InRelease [44.9 kB]
+I, [2019-12-27T15:12:28.725409 #9825]  INFO -- archive-install-debian-8:                                                     2% [3 InRelease 4044 B/44.9 kB 9%] [2 Packages 186 kB/9098 kB 2%]                                                                 6% [2 Packages 499 kB/9098 kB 5%]                                 6% [3 InRelease gpgv 44.9 kB] [2 Packages 500 kB/9098 kB 5%]                                                            8% [2 Packages 646 kB/9098 kB 7%]8% [2 Packages 727 kB/9098 kB 8%]                                 Get:4 http://security.debian.org jessie/updates/main amd64 Packages [920 kB]
+I, [2019-12-27T15:12:32.514136 #9825]  INFO -- archive-install-debian-8:                                  14% [4 Packages 2714 B/920 kB 0%] [2 Packages 1366 kB/9098 kB 15%]                                                                  30% [4 Packages 541 kB/920 kB 59%] [2 Packages 2390 kB/9098 kB 26%]                                                                   36% [2 Packages 2666 kB/9098 kB 29%]                                    36% [4 Packages 915 kB] [2 Packages 2666 kB/9098 kB 29%]                                                        38% [2 Packages 2909 kB/9098 kB 32%]56% [2 Packages 4684 kB/9098 kB 51%]73% [2 Packages 6354 kB/9098 kB 70%]84% [2 Packages 7534 kB/9098 kB 83%]94% [2 Packages 8505 kB/9098 kB 93%]                                    100% [Working]              100% [2 Packages 9098 kB]100% [2 Packages 9098 kB]                         100% [Working]              Fetched 10.1 MB in 4s (2095 kB/s)
+I, [2019-12-27T15:12:33.885170 #9825]  INFO -- archive-install-debian-8: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 59%Reading package lists... 89%Reading package lists... 89%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2019-12-27T15:12:35.025377 #9825]  INFO -- archive-install-debian-8: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 72%Reading package lists... 89%Reading package lists... 89%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2019-12-27T15:12:35.186247 #9825]  INFO -- archive-install-debian-8: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+I, [2019-12-27T15:12:35.186307 #9825]  INFO -- archive-install-debian-8: Reading state information... 0%Reading state information... 0%Reading state information... Done
+I, [2019-12-27T15:12:35.358464 #9825]  INFO -- archive-install-debian-8: The following extra packages will be installed:
+I, [2019-12-27T15:12:35.358526 #9825]  INFO -- archive-install-debian-8:   git-man ifupdown isc-dhcp-client isc-dhcp-common less libalgorithm-c3-perl
+I, [2019-12-27T15:12:35.358541 #9825]  INFO -- archive-install-debian-8:   libapt-inst1.5 libarchive-extract-perl libassuan0 libcgi-fast-perl
+I, [2019-12-27T15:12:35.358554 #9825]  INFO -- archive-install-debian-8:   libcgi-pm-perl libclass-c3-perl libclass-c3-xs-perl libcpan-meta-perl
+I, [2019-12-27T15:12:35.358566 #9825]  INFO -- archive-install-debian-8:   libcurl3-gnutls libdata-optlist-perl libdata-section-perl libdns-export100
+I, [2019-12-27T15:12:35.358592 #9825]  INFO -- archive-install-debian-8:   liberror-perl libfcgi-perl libgdbm3 libirs-export91 libisc-export95
+I, [2019-12-27T15:12:35.358619 #9825]  INFO -- archive-install-debian-8:   libisccfg-export90 libksba8 liblog-message-perl liblog-message-simple-perl
+I, [2019-12-27T15:12:35.358632 #9825]  INFO -- archive-install-debian-8:   libmodule-build-perl libmodule-pluggable-perl libmodule-signature-perl
+I, [2019-12-27T15:12:35.358644 #9825]  INFO -- archive-install-debian-8:   libmro-compat-perl libpackage-constants-perl libparams-util-perl
+I, [2019-12-27T15:12:35.358655 #9825]  INFO -- archive-install-debian-8:   libpod-latex-perl libpod-readme-perl libpopt0 libpth20 libregexp-common-perl
+I, [2019-12-27T15:12:35.358666 #9825]  INFO -- archive-install-debian-8:   libsoftware-license-perl libsub-exporter-perl libsub-install-perl
+I, [2019-12-27T15:12:35.358676 #9825]  INFO -- archive-install-debian-8:   libterm-ui-perl libtext-soundex-perl libtext-template-perl netbase patch
+I, [2019-12-27T15:12:35.358687 #9825]  INFO -- archive-install-debian-8:   perl perl-modules rename rsync
+I, [2019-12-27T15:12:35.360116 #9825]  INFO -- archive-install-debian-8: Suggested packages:
+I, [2019-12-27T15:12:35.360267 #9825]  INFO -- archive-install-debian-8:   gettext-base git-daemon-run git-daemon-sysvinit git-doc git-el git-email
+I, [2019-12-27T15:12:35.360286 #9825]  INFO -- archive-install-debian-8:   git-gui gitk gitweb git-arch git-cvs git-mediawiki git-svn ppp rdnssd
+I, [2019-12-27T15:12:35.360299 #9825]  INFO -- archive-install-debian-8:   net-tools resolvconf avahi-autoipd ed diffutils-doc perl-doc
+I, [2019-12-27T15:12:35.360311 #9825]  INFO -- archive-install-debian-8:   libterm-readline-gnu-perl libterm-readline-perl-perl make libb-lint-perl
+I, [2019-12-27T15:12:35.360322 #9825]  INFO -- archive-install-debian-8:   libcpanplus-dist-build-perl libcpanplus-perl libfile-checktree-perl
+I, [2019-12-27T15:12:35.360332 #9825]  INFO -- archive-install-debian-8:   libobject-accessor-perl
+I, [2019-12-27T15:12:35.360342 #9825]  INFO -- archive-install-debian-8: Recommended packages:
+I, [2019-12-27T15:12:35.360352 #9825]  INFO -- archive-install-debian-8:   libarchive-tar-perl
+I, [2019-12-27T15:12:35.363866 #9825]  INFO -- archive-install-debian-8: The following NEW packages will be installed:
+I, [2019-12-27T15:12:35.363933 #9825]  INFO -- archive-install-debian-8:   apt-utils dirmngr git git-man ifupdown isc-dhcp-client isc-dhcp-common less
+I, [2019-12-27T15:12:35.363946 #9825]  INFO -- archive-install-debian-8:   libalgorithm-c3-perl libapt-inst1.5 libarchive-extract-perl libassuan0
+I, [2019-12-27T15:12:35.363959 #9825]  INFO -- archive-install-debian-8:   libcgi-fast-perl libcgi-pm-perl libclass-c3-perl libclass-c3-xs-perl
+I, [2019-12-27T15:12:35.363972 #9825]  INFO -- archive-install-debian-8:   libcpan-meta-perl libcurl3-gnutls libdata-optlist-perl libdata-section-perl
+I, [2019-12-27T15:12:35.363984 #9825]  INFO -- archive-install-debian-8:   libdns-export100 liberror-perl libfcgi-perl libgdbm3 libirs-export91
+I, [2019-12-27T15:12:35.363995 #9825]  INFO -- archive-install-debian-8:   libisc-export95 libisccfg-export90 libksba8 liblog-message-perl
+I, [2019-12-27T15:12:35.364006 #9825]  INFO -- archive-install-debian-8:   liblog-message-simple-perl libmodule-build-perl libmodule-pluggable-perl
+I, [2019-12-27T15:12:35.364018 #9825]  INFO -- archive-install-debian-8:   libmodule-signature-perl libmro-compat-perl libpackage-constants-perl
+I, [2019-12-27T15:12:35.364029 #9825]  INFO -- archive-install-debian-8:   libparams-util-perl libpod-latex-perl libpod-readme-perl libpopt0 libpth20
+I, [2019-12-27T15:12:35.364040 #9825]  INFO -- archive-install-debian-8:   libregexp-common-perl libsoftware-license-perl libsub-exporter-perl
+I, [2019-12-27T15:12:35.364051 #9825]  INFO -- archive-install-debian-8:   libsub-install-perl libterm-ui-perl libtext-soundex-perl
+I, [2019-12-27T15:12:35.364061 #9825]  INFO -- archive-install-debian-8:   libtext-template-perl netbase patch perl perl-modules rename rsync
+I, [2019-12-27T15:12:35.374530 #9825]  INFO -- archive-install-debian-8: 0 upgraded, 53 newly installed, 0 to remove and 5 not upgraded.
+I, [2019-12-27T15:12:36.569048 #9825]  INFO -- archive-install-debian-8: Need to get 14.7 MB of archives.
+I, [2019-12-27T15:12:36.569104 #9825]  INFO -- archive-install-debian-8: After this operation, 69.3 MB of additional disk space will be used.
+I, [2019-12-27T15:12:36.813503 #9825]  INFO -- archive-install-debian-8: 0% [Working]            Get:1 http://deb.debian.org/debian/ jessie/main libgdbm3 amd64 1.8.3-13.1 [30.0 kB]
+I, [2019-12-27T15:12:37.064309 #9825]  INFO -- archive-install-debian-8:             0% [Waiting for headers] [1 libgdbm3 8088 B/30.0 kB 27%]                                                        0% [1 libgdbm3 27.8 kB/30.0 kB 93%]                                   0% [Connecting to security-cdn.debian.org (199.232.32.204)] [1 libgdbm3 27.8 kB                                                                               Get:2 http://security.debian.org/debian-security/ jessie/updates/main libapt-inst1.5 amd64 1.0.9.8.5 [169 kB]
+I, [2019-12-27T15:12:37.324494 #9825]  INFO -- archive-install-debian-8: 0% [2 libapt-inst1.5 1348 B/169 kB 1%] [Waiting for headers] [1 libgdbm3 27.8 k                                                                               0% [2 libapt-inst1.5 11.6 kB/169 kB 7%] [1 libgdbm3 27.8 kB/30.0 kB 93%]                                                                        0% [2 libapt-inst1.5 35.9 kB/169 kB 21%] [1 libgdbm3 27.8 kB/30.0 kB 93%]                                                                         0% [2 libapt-inst1.5 35.9 kB/169 kB 21%] [Waiting for headers]1% [2 libapt-inst1.5 81.7 kB/169 kB 48%] [Waiting for headers]                                                              Get:3 http://deb.debian.org/debian/ jessie/main libpopt0 amd64 1.16-10 [49.2 kB]
+I, [2019-12-27T15:12:37.589956 #9825]  INFO -- archive-install-debian-8:                                                               1% [2 libapt-inst1.5 81.7 kB/169 kB 48%] [Waiting for headers] [3 libpopt0 1348                                                                               1% [2 libapt-inst1.5 134 kB/169 kB 80%] [3 libpopt0 16.2 kB/49.2 kB 33%]                                                                        2% [Waiting for headers] [3 libpopt0 39.5 kB/49.2 kB 80%]2% [Waiting for headers] [3 libpopt0 39.5 kB/49.2 kB 80%]                                                         2% [Waiting for headers] [Waiting for headers]                                              Get:4 http://security.debian.org/debian-security/ jessie/updates/main perl-modules all 5.20.2-3+deb8u12 [2553 kB]
+I, [2019-12-27T15:12:37.620495 #9825]  INFO -- archive-install-debian-8:                                               2% [4 perl-modules 0 B/2553 kB 0%] [Waiting for headers] [Waiting for headers]                                                                              Get:5 http://deb.debian.org/debian/ jessie/main libassuan0 amd64 2.1.2-2 [35.5 kB]
+I, [2019-12-27T15:12:38.119687 #9825]  INFO -- archive-install-debian-8:                                                                               2% [4 perl-modules 0 B/2553 kB 0%] [Waiting for headers] [5 libassuan0 0 B/35.5                                                                               2% [4 perl-modules 64.2 kB/2553 kB 3%] [5 libassuan0 22.4 kB/35.5 kB 63%]                                                                         3% [4 perl-modules 87.1 kB/2553 kB 3%] [5 libassuan0 35.5 kB/35.5 kB 100%]                                                                          3% [4 perl-modules 87.1 kB/2553 kB 3%]                                      Get:6 http://deb.debian.org/debian/ jessie/main libksba8 amd64 1.3.2-1+deb8u1 [94.4 kB]
+I, [2019-12-27T15:12:40.816723 #9825]  INFO -- archive-install-debian-8:                                       3% [4 perl-modules 99.3 kB/2553 kB 4%] [Waiting for headers] [6 libksba8 1348 B                                                                               3% [4 perl-modules 126 kB/2553 kB 5%] [6 libksba8 9436 B/94.4 kB 10%]                                                                     3% [4 perl-modules 159 kB/2553 kB 6%] [6 libksba8 25.6 kB/94.4 kB 27%]3% [4 perl-modules 171 kB/2553 kB 7%] [6 libksba8 25.6 kB/94.4 kB 27%]3% [4 perl-modules 181 kB/2553 kB 7%] [6 libksba8 31.0 kB/94.4 kB 33%]4% [4 perl-modules 187 kB/2553 kB 7%] [6 libksba8 53.9 kB/94.4 kB 57%]4% [4 perl-modules 199 kB/2553 kB 8%] [6 libksba8 76.8 kB/94.4 kB 81%]4% [4 perl-modules 207 kB/2553 kB 8%] [6 libksba8 93.0 kB/94.4 kB 99%]                                                                      4% [4 perl-modules 222 kB/2553 kB 9%]                                     Get:7 http://deb.debian.org/debian/ jessie/main libpth20 amd64 2.0.7-20 [78.1 kB]
+I, [2019-12-27T15:12:46.813217 #9825]  INFO -- archive-install-debian-8:                                      4% [4 perl-modules 226 kB/2553 kB 9%] [7 libpth20 0 B/78.1 kB 0%]                                                                 4% [4 perl-modules 262 kB/2553 kB 10%] [7 libpth20 10.8 kB/78.1 kB 14%]5% [4 perl-modules 285 kB/2553 kB 11%] [7 libpth20 10.8 kB/78.1 kB 14%]5% [4 perl-modules 326 kB/2553 kB 13%] [7 libpth20 10.8 kB/78.1 kB 14%]5% [4 perl-modules 369 kB/2553 kB 14%] [7 libpth20 10.8 kB/78.1 kB 14%]6% [4 perl-modules 421 kB/2553 kB 17%] [7 libpth20 10.8 kB/78.1 kB 14%]6% [4 perl-modules 467 kB/2553 kB 18%] [7 libpth20 10.8 kB/78.1 kB 14%]6% [4 perl-modules 486 kB/2553 kB 19%] [7 libpth20 10.8 kB/78.1 kB 14%]6% [4 perl-modules 535 kB/2553 kB 21%] [7 libpth20 10.8 kB/78.1 kB 14%]7% [4 perl-modules 579 kB/2553 kB 23%] [7 libpth20 17.7 kB/78.1 kB 23%]7% [4 perl-modules 638 kB/2553 kB 25%] [7 libpth20 32.2 kB/78.1 kB 41%]8% [4 perl-modules 675 kB/2553 kB 26%] [7 libpth20 51.0 kB/78.1 kB 65%]                                                                       8% [4 perl-modules 715 kB/2553 kB 28%]                        122 kB/s 1min 50s                                                                               Get:8 http://deb.debian.org/debian/ jessie/main ifupdown amd64 0.7.53.1 [67.2 kB]
+I, [2019-12-27T15:12:47.536423 #9825]  INFO -- archive-install-debian-8:                                                                                8% [4 perl-modules 722 kB/2553 kB 28%] [8 ifupdown 0 B/67.2 kB 0%]                                                                  9% [4 perl-modules 792 kB/2553 kB 31%] [8 ifupdown 50.7 kB/67.2 kB 75%]                                                                       9% [4 perl-modules 816 kB/2553 kB 32%] [Waiting for headers]  122 kB/s 1min 49s                                                                               Get:9 http://deb.debian.org/debian/ jessie/main less amd64 458-3 [124 kB]
+I, [2019-12-27T15:12:48.194078 #9825]  INFO -- archive-install-debian-8:                                                                                9% [4 perl-modules 824 kB/2553 kB 32%] [9 less 1448 B/124 kB 1%]                                                                10% [4 perl-modules 915 kB/2553 kB 36%] [9 less 88.3 kB/124 kB 71%]                                                                   11% [4 perl-modules 950 kB/2553 kB 37%]                       122 kB/s 1min 47s                                                                               Get:10 http://deb.debian.org/debian/ jessie/main netbase all 5.3 [19.0 kB]
+I, [2019-12-27T15:12:48.266099 #9825]  INFO -- archive-install-debian-8:                                                                                11% [4 perl-modules 961 kB/2553 kB 38%] [10 netbase 1448 B/19.0 kB 8%]                                                                      11% [4 perl-modules 973 kB/2553 kB 38%] [Waiting for headers]                                                             Get:11 http://deb.debian.org/debian/ jessie/main dirmngr amd64 1.1.1-5 [192 kB]
+I, [2019-12-27T15:12:48.977295 #9825]  INFO -- archive-install-debian-8:                                                              11% [4 perl-modules 978 kB/2553 kB 38%] [11 dirmngr 0 B/192 kB 0%]                                                                  13% [4 perl-modules 1125 kB/2553 kB 44%] [11 dirmngr 155 kB/192 kB 81%]                                                                       14% [4 perl-modules 1187 kB/2553 kB 47%]                           211 kB/s 60s                                                                               Get:12 http://deb.debian.org/debian/ jessie/main liberror-perl all 0.17-1.1 [22.4 kB]
+I, [2019-12-27T15:12:49.188731 #9825]  INFO -- archive-install-debian-8:                                                                                14% [4 perl-modules 1211 kB/2553 kB 47%] [12 liberror-perl 8948 B/22.4 kB 40%]                                                                              15% [4 perl-modules 1271 kB/2553 kB 50%]                           211 kB/s 59s                                                                               Get:13 http://deb.debian.org/debian/ jessie/main libalgorithm-c3-perl all 0.09-1 [11.9 kB]
+I, [2019-12-27T15:12:49.326746 #9825]  INFO -- archive-install-debian-8: 15% [4 perl-modules 1295 kB/2553 kB 51%] [13 libalgorithm-c3-perl 0 B/11.9 kB 015% [4 perl-modules 1333 kB/2553 kB 52%]                           211 kB/s 59s                                                                               Get:14 http://deb.debian.org/debian/ jessie/main libarchive-extract-perl all 0.72-1 [24.8 kB]
+I, [2019-12-27T15:12:49.623224 #9825]  INFO -- archive-install-debian-8: 15% [4 perl-modules 1357 kB/2553 kB 53%] [14 libarchive-extract-perl 1448 B/24.16% [4 perl-modules 1442 kB/2553 kB 56%]                           211 kB/s 58s                                                                               Get:15 http://deb.debian.org/debian/ jessie/main libcgi-pm-perl all 4.09-1 [213 kB]
+I, [2019-12-27T15:12:50.928512 #9825]  INFO -- archive-install-debian-8:                                                                                16% [4 perl-modules 1443 kB/2553 kB 57%] [15 libcgi-pm-perl 0 B/213 kB 0%]                                                                          17% [4 perl-modules 1565 kB/2553 kB 61%] [15 libcgi-pm-perl 43.4 kB/213 kB 20%]                                                                               19% [4 perl-modules 1694 kB/2553 kB 66%] [15 libcgi-pm-perl 122 kB/213 kB 57%]                                                                              20% [4 perl-modules 1813 kB/2553 kB 71%]                           211 kB/s 55s                                                                               Get:16 http://deb.debian.org/debian/ jessie/main libfcgi-perl amd64 0.77-1+deb8u1 [39.0 kB]
+I, [2019-12-27T15:12:51.058227 #9825]  INFO -- archive-install-debian-8:                                                                                20% [4 perl-modules 1831 kB/2553 kB 72%] [16 libfcgi-perl 0 B/39.0 kB 0%]                                                                         21% [4 perl-modules 1869 kB/2553 kB 73%]                           211 kB/s 55s                                                                               Get:17 http://deb.debian.org/debian/ jessie/main libcgi-fast-perl all 1:2.04-1 [10.9 kB]
+I, [2019-12-27T15:12:51.108629 #9825]  INFO -- archive-install-debian-8:                                                                                21% [4 perl-modules 1891 kB/2553 kB 74%] [17 libcgi-fast-perl 0 B/10.9 kB 0%]                                                                             21% [4 perl-modules 1891 kB/2553 kB 74%]                           211 kB/s 55s                                                                               Get:18 http://deb.debian.org/debian/ jessie/main libclass-c3-perl all 0.26-1 [22.9 kB]
+I, [2019-12-27T15:12:51.236107 #9825]  INFO -- archive-install-debian-8:                                                                                21% [4 perl-modules 1915 kB/2553 kB 75%] [18 libclass-c3-perl 0 B/22.9 kB 0%]                                                                             21% [4 perl-modules 1937 kB/2553 kB 76%]                           211 kB/s 54s                                                                               Get:19 http://deb.debian.org/debian/ jessie/main libclass-c3-xs-perl amd64 0.13-2+b1 [15.2 kB]
+I, [2019-12-27T15:12:51.296198 #9825]  INFO -- archive-install-debian-8: 22% [4 perl-modules 1961 kB/2553 kB 77%] [19 libclass-c3-xs-perl 0 B/15.2 kB 0%22% [4 perl-modules 1961 kB/2553 kB 77%]                           211 kB/s 54s                                                                               Get:20 http://deb.debian.org/debian/ jessie/main libcpan-meta-perl all 2.142690-1 [125 kB]
+I, [2019-12-27T15:12:51.770210 #9825]  INFO -- archive-install-debian-8:                                                                                22% [4 perl-modules 1988 kB/2553 kB 78%] [20 libcpan-meta-perl 0 B/125 kB 0%]                                                                             24% [4 perl-modules 2166 kB/2553 kB 85%]                           211 kB/s 53s                                                                               Get:21 http://deb.debian.org/debian/ jessie/main libparams-util-perl amd64 1.07-2+b1 [23.5 kB]
+I, [2019-12-27T15:12:51.895494 #9825]  INFO -- archive-install-debian-8: 24% [4 perl-modules 2187 kB/2553 kB 86%] [21 libparams-util-perl 0 B/23.5 kB 0%24% [4 perl-modules 2190 kB/2553 kB 86%]                           211 kB/s 52s                                                                               Get:22 http://deb.debian.org/debian/ jessie/main libsub-install-perl all 0.928-1 [11.4 kB]
+I, [2019-12-27T15:12:51.955284 #9825]  INFO -- archive-install-debian-8: 24% [4 perl-modules 2226 kB/2553 kB 87%] [22 libsub-install-perl 0 B/11.4 kB 0%24% [4 perl-modules 2226 kB/2553 kB 87%]                           211 kB/s 52s                                                                               Get:23 http://deb.debian.org/debian/ jessie/main libdata-optlist-perl all 0.109-1 [10.6 kB]
+I, [2019-12-27T15:12:52.010174 #9825]  INFO -- archive-install-debian-8: 25% [4 perl-modules 2240 kB/2553 kB 88%] [23 libdata-optlist-perl 0 B/10.6 kB 025% [4 perl-modules 2240 kB/2553 kB 88%]                           211 kB/s 52s                                                                               Get:24 http://deb.debian.org/debian/ jessie/main libmro-compat-perl all 0.12-1 [13.2 kB]
+I, [2019-12-27T15:12:52.060264 #9825]  INFO -- archive-install-debian-8: 25% [4 perl-modules 2240 kB/2553 kB 88%] [24 libmro-compat-perl 1448 B/13.2 kB 25% [4 perl-modules 2240 kB/2553 kB 88%]                           211 kB/s 52s                                                                               Get:25 http://deb.debian.org/debian/ jessie/main libsub-exporter-perl all 0.986-1 [49.9 kB]
+I, [2019-12-27T15:12:52.270654 #9825]  INFO -- archive-install-debian-8: 25% [4 perl-modules 2264 kB/2553 kB 89%] [25 libsub-exporter-perl 2896 B/49.9 k25% [4 perl-modules 2295 kB/2553 kB 90%]                           211 kB/s 51s                                                                               Get:26 http://deb.debian.org/debian/ jessie/main libdata-section-perl all 0.200006-1 [13.4 kB]
+I, [2019-12-27T15:12:52.354694 #9825]  INFO -- archive-install-debian-8: 26% [4 perl-modules 2306 kB/2553 kB 90%] [26 libdata-section-perl 0 B/13.4 kB 026% [4 perl-modules 2309 kB/2553 kB 90%]                           211 kB/s 51s                                                                               Get:27 http://deb.debian.org/debian/ jessie/main liblog-message-perl all 0.8-1 [26.0 kB]
+I, [2019-12-27T15:12:52.554475 #9825]  INFO -- archive-install-debian-8: 26% [4 perl-modules 2319 kB/2553 kB 91%] [27 liblog-message-perl 0 B/26.0 kB 0%26% [4 perl-modules 2348 kB/2553 kB 92%]                           211 kB/s 51s                                                                               Get:28 http://deb.debian.org/debian/ jessie/main liblog-message-simple-perl all 0.10-2 [8126 B]
+I, [2019-12-27T15:12:52.687428 #9825]  INFO -- archive-install-debian-8: 26% [4 perl-modules 2357 kB/2553 kB 92%] [28 liblog-message-simple-perl 0 B/81226% [4 perl-modules 2357 kB/2553 kB 92%]                           211 kB/s 51s                                                                               Get:29 http://deb.debian.org/debian/ jessie/main libmodule-build-perl all 0.421000-2+deb8u1 [265 kB]
+I, [2019-12-27T15:12:53.560334 #9825]  INFO -- archive-install-debian-8: 26% [4 perl-modules 2384 kB/2553 kB 93%] [29 libmodule-build-perl 0 B/265 kB 0%28% [4 perl-modules 2491 kB/2553 kB 98%] [29 libmodule-build-perl 63.7 kB/265 k28% [29 libmodule-build-perl 84.0 kB/265 kB 32%]                   211 kB/s 50s                                                                               Get:30 http://security.debian.org/debian-security/ jessie/updates/main perl amd64 5.20.2-3+deb8u12 [2658 kB]
+I, [2019-12-27T15:12:54.437330 #9825]  INFO -- archive-install-debian-8:                                                                                28% [30 perl 0 B/2658 kB 0%] [29 libmodule-build-perl 84.0 kB/265 kB 32%]                                                                         30% [30 perl 159 kB/2658 kB 6%] [29 libmodule-build-perl 162 kB/265 kB 61%]                                                                           31% [30 perl 278 kB/2658 kB 10%]                                   211 kB/s 47s                                                                               Get:31 http://deb.debian.org/debian/ jessie/main libmodule-pluggable-perl all 5.1-1 [25.0 kB]
+I, [2019-12-27T15:12:54.549138 #9825]  INFO -- archive-install-debian-8:                                                                                31% [30 perl 299 kB/2658 kB 11%] [31 libmodule-pluggable-perl 0 B/25.0 kB 0%]                                                                             32% [30 perl 318 kB/2658 kB 12%]                                   211 kB/s 47s                                                                               Get:32 http://deb.debian.org/debian/ jessie/main libmodule-signature-perl all 0.73-1+deb8u2 [30.4 kB]
+I, [2019-12-27T15:12:54.672341 #9825]  INFO -- archive-install-debian-8:                                                                                32% [30 perl 340 kB/2658 kB 13%] [32 libmodule-signature-perl 0 B/30.4 kB 0%]                                                                             32% [30 perl 369 kB/2658 kB 14%]                                   211 kB/s 47s                                                                               Get:33 http://deb.debian.org/debian/ jessie/main libpackage-constants-perl all 0.04-1 [5820 B]
+I, [2019-12-27T15:12:54.730670 #9825]  INFO -- archive-install-debian-8:                                                                                32% [30 perl 394 kB/2658 kB 15%] [33 libpackage-constants-perl 0 B/5820 B 0%]                                                                             32% [30 perl 394 kB/2658 kB 15%]                                   211 kB/s 47s                                                                               Get:34 http://deb.debian.org/debian/ jessie/main libpod-latex-perl all 0.61-1 [34.7 kB]
+I, [2019-12-27T15:12:54.894872 #9825]  INFO -- archive-install-debian-8:                                                                                33% [30 perl 418 kB/2658 kB 16%] [34 libpod-latex-perl 0 B/34.7 kB 0%]                                                                      33% [30 perl 461 kB/2658 kB 17%]                                   211 kB/s 46s                                                                               Get:35 http://deb.debian.org/debian/ jessie/main libregexp-common-perl all 2013031301-1 [173 kB]
+I, [2019-12-27T15:12:55.581706 #9825]  INFO -- archive-install-debian-8:                                                                                33% [30 perl 485 kB/2658 kB 18%] [35 libregexp-common-perl 0 B/173 kB 0%]                                                                         36% [30 perl 731 kB/2658 kB 27%] [35 libregexp-common-perl 140 kB/173 kB 81%]                                                                             37% [30 perl 806 kB/2658 kB 30%]                                   500 kB/s 18s                                                                               Get:36 http://deb.debian.org/debian/ jessie/main libpod-readme-perl all 0.11-1 [15.3 kB]
+I, [2019-12-27T15:12:55.683205 #9825]  INFO -- archive-install-debian-8:                                                                                37% [30 perl 838 kB/2658 kB 32%] [36 libpod-readme-perl 0 B/15.3 kB 0%]                                                                       37% [30 perl 874 kB/2658 kB 33%] [Waiting for headers]             500 kB/s 18s                                                                               Get:37 http://deb.debian.org/debian/ jessie/main libtext-template-perl all 1.46-1 [53.1 kB]
+I, [2019-12-27T15:12:55.931372 #9825]  INFO -- archive-install-debian-8:                                                                                37% [30 perl 900 kB/2658 kB 34%] [37 libtext-template-perl 1448 B/53.1 kB 3%]                                                                             38% [30 perl 1011 kB/2658 kB 38%]                                  500 kB/s 18s                                                                               Get:38 http://deb.debian.org/debian/ jessie/main libsoftware-license-perl all 0.103010-3 [119 kB]
+I, [2019-12-27T15:12:56.429061 #9825]  INFO -- archive-install-debian-8: 39% [30 perl 1033 kB/2658 kB 39%] [38 libsoftware-license-perl 5792 B/119 kB 5%41% [30 perl 1260 kB/2658 kB 47%]                                  500 kB/s 17s                                                                               Get:39 http://deb.debian.org/debian/ jessie/main libterm-ui-perl all 0.42-1 [19.1 kB]
+I, [2019-12-27T15:12:56.547880 #9825]  INFO -- archive-install-debian-8:                                                                                41% [30 perl 1290 kB/2658 kB 49%] [39 libterm-ui-perl 4344 B/19.1 kB 23%]                                                                         42% [30 perl 1324 kB/2658 kB 50%]                                  500 kB/s 17s                                                                               Get:40 http://deb.debian.org/debian/ jessie/main libtext-soundex-perl amd64 3.4-1+b2 [13.7 kB]
+I, [2019-12-27T15:12:56.662219 #9825]  INFO -- archive-install-debian-8:                                                                                42% [30 perl 1355 kB/2658 kB 51%] [40 libtext-soundex-perl 1448 B/13.7 kB 11%]                                                                              42% [30 perl 1386 kB/2658 kB 52%] [Waiting for headers]            500 kB/s 17s                                                                               Get:41 http://deb.debian.org/debian/ jessie/main rename all 0.20-3 [12.4 kB]
+I, [2019-12-27T15:13:01.122914 #9825]  INFO -- archive-install-debian-8: 42% [30 perl 1419 kB/2658 kB 53%] [41 rename 2896 B/12.4 kB 23%]   500 kB/s 16s44% [30 perl 1601 kB/2658 kB 60%]                                  500 kB/s 16s45% [30 perl 1734 kB/2658 kB 65%]                                  500 kB/s 16s45% [30 perl 1810 kB/2658 kB 68%]                                  500 kB/s 16s46% [30 perl 1920 kB/2658 kB 72%]                                  500 kB/s 15s47% [30 perl 2071 kB/2658 kB 78%]                                  500 kB/s 15s48% [30 perl 2208 kB/2658 kB 83%]                                  500 kB/s 15s49% [30 perl 2402 kB/2658 kB 90%]                                  500 kB/s 14s50% [30 perl 2540 kB/2658 kB 96%]                                  500 kB/s 14s51% [30 perl 2657 kB/2658 kB 100%]                                 500 kB/s 14s51% [Working]                                                      500 kB/s 14s                                                                               Get:42 http://security.debian.org/debian-security/ jessie/updates/main libcurl3-gnutls amd64 7.38.0-4+deb8u16 [253 kB]
+I, [2019-12-27T15:13:02.449328 #9825]  INFO -- archive-install-debian-8: 51% [42 libcurl3-gnutls 0 B/253 kB 0%]                             500 kB/s 14s51% [42 libcurl3-gnutls 96.6 kB/253 kB 38%]                        368 kB/s 19s52% [42 libcurl3-gnutls 206 kB/253 kB 81%]                         368 kB/s 19s53% [Working]                                                      368 kB/s 19s                                                                               Get:43 http://security.debian.org/debian-security/ jessie/updates/main libisc-export95 amd64 1:9.9.5.dfsg-9+deb8u18 [141 kB]
+I, [2019-12-27T15:13:03.501532 #9825]  INFO -- archive-install-debian-8: 53% [43 libisc-export95 524 B/141 kB 0%]                           368 kB/s 19s53% [43 libisc-export95 71.4 kB/141 kB 51%]                        368 kB/s 18s53% [43 libisc-export95 140 kB/141 kB 99%]                         368 kB/s 18s53% [Working]                                                      368 kB/s 18s                                                                               Get:44 http://security.debian.org/debian-security/ jessie/updates/main libdns-export100 amd64 1:9.9.5.dfsg-9+deb8u18 [457 kB]
+I, [2019-12-27T15:13:04.381537 #9825]  INFO -- archive-install-debian-8: 53% [44 libdns-export100 0 B/457 kB 0%]                            368 kB/s 18s55% [44 libdns-export100 163 kB/457 kB 36%]                        368 kB/s 18s57% [Working]                                                      368 kB/s 17s                                                                               Get:45 http://security.debian.org/debian-security/ jessie/updates/main libisccfg-export90 amd64 1:9.9.5.dfsg-9+deb8u18 [41.7 kB]
+I, [2019-12-27T15:13:04.424500 #9825]  INFO -- archive-install-debian-8: 57% [45 libisccfg-export90 0 B/41.7 kB 0%]                         368 kB/s 17s57% [Waiting for headers]                                          368 kB/s 17s                                                                               Get:46 http://security.debian.org/debian-security/ jessie/updates/main libirs-export91 amd64 1:9.9.5.dfsg-9+deb8u18 [39.4 kB]
+I, [2019-12-27T15:13:04.485471 #9825]  INFO -- archive-install-debian-8: 57% [46 libirs-export91 4044 B/39.4 kB 10%]                        368 kB/s 17s57% [Working]                                                      368 kB/s 17s                                                                               Get:47 http://security.debian.org/debian-security/ jessie/updates/main apt-utils amd64 1.0.9.8.5 [368 kB]
+I, [2019-12-27T15:13:04.871462 #9825]  INFO -- archive-install-debian-8: 57% [47 apt-utils 4044 B/368 kB 1%]                                368 kB/s 17s60% [Working]                                                      368 kB/s 16s                                                                               Get:48 http://security.debian.org/debian-security/ jessie/updates/main isc-dhcp-common amd64 4.3.1-6+deb8u4 [212 kB]
+I, [2019-12-27T15:13:05.092555 #9825]  INFO -- archive-install-debian-8: 60% [48 isc-dhcp-common 0 B/212 kB 0%]                             368 kB/s 16s61% [Working]                                                      368 kB/s 15s                                                                               Get:49 http://security.debian.org/debian-security/ jessie/updates/main isc-dhcp-client amd64 4.3.1-6+deb8u4 [251 kB]
+I, [2019-12-27T15:13:05.369508 #9825]  INFO -- archive-install-debian-8: 61% [49 isc-dhcp-client 0 B/251 kB 0%]                             368 kB/s 15s63% [Working]                                                      368 kB/s 14s                                                                               Get:50 http://security.debian.org/debian-security/ jessie/updates/main patch amd64 2.7.5-1+deb8u3 [109 kB]
+I, [2019-12-27T15:13:05.514496 #9825]  INFO -- archive-install-debian-8: 63% [50 patch 1348 B/109 kB 1%]                                    368 kB/s 14s64% [Working]                                                      368 kB/s 14s                                                                               Get:51 http://security.debian.org/debian-security/ jessie/updates/main git-man all 1:2.1.4-2.1+deb8u7 [1269 kB]
+I, [2019-12-27T15:13:06.882428 #9825]  INFO -- archive-install-debian-8: 64% [51 git-man 0 B/1269 kB 0%]                                    368 kB/s 14s67% [51 git-man 524 kB/1269 kB 41%]                                368 kB/s 13s70% [51 git-man 975 kB/1269 kB 77%]                                368 kB/s 11s72% [Working]                                                      368 kB/s 11s                                                                               Get:52 http://security.debian.org/debian-security/ jessie/updates/main git amd64 1:2.1.4-2.1+deb8u7 [3709 kB]
+I, [2019-12-27T15:13:09.812859 #9825]  INFO -- archive-install-debian-8: 72% [52 git 2696 B/3709 kB 0%]                                     368 kB/s 11s75% [52 git 483 kB/3709 kB 13%]                                     368 kB/s 9s79% [52 git 1020 kB/3709 kB 27%]                                    649 kB/s 4s84% [52 git 1711 kB/3709 kB 46%]                                    649 kB/s 3s89% [52 git 2408 kB/3709 kB 65%]                                    649 kB/s 2s94% [52 git 3163 kB/3709 kB 85%]                                    649 kB/s 1s97% [Working]                                                       649 kB/s 0s                                                                               Get:53 http://security.debian.org/debian-security/ jessie/updates/main rsync amd64 3.1.1-3+deb8u2 [390 kB]
+I, [2019-12-27T15:13:10.067896 #9825]  INFO -- archive-install-debian-8: 97% [53 rsync 0 B/390 kB 0%]                                        649 kB/s 0s100% [Working]                                                      649 kB/s 0s                                                                               Fetched 14.7 MB in 33s (440 kB/s)
+I, [2019-12-27T15:13:10.260299 #9825]  INFO -- archive-install-debian-8: debconf: delaying package configuration, since apt-utils is not installed
+I, [2019-12-27T15:13:10.337938 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libapt-inst1.5:amd64.
+I, [2019-12-27T15:13:10.343336 #9825]  INFO -- archive-install-debian-8: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 12148 files and directories currently installed.)
+I, [2019-12-27T15:13:10.343540 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libapt-inst1.5_1.0.9.8.5_amd64.deb ...
+I, [2019-12-27T15:13:10.345776 #9825]  INFO -- archive-install-debian-8: Unpacking libapt-inst1.5:amd64 (1.0.9.8.5) ...
+I, [2019-12-27T15:13:10.428445 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libgdbm3:amd64.
+I, [2019-12-27T15:13:10.428624 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libgdbm3_1.8.3-13.1_amd64.deb ...
+I, [2019-12-27T15:13:10.431054 #9825]  INFO -- archive-install-debian-8: Unpacking libgdbm3:amd64 (1.8.3-13.1) ...
+I, [2019-12-27T15:13:10.460263 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libpopt0:amd64.
+I, [2019-12-27T15:13:10.460323 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libpopt0_1.16-10_amd64.deb ...
+I, [2019-12-27T15:13:10.462243 #9825]  INFO -- archive-install-debian-8: Unpacking libpopt0:amd64 (1.16-10) ...
+I, [2019-12-27T15:13:10.511658 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package perl-modules.
+I, [2019-12-27T15:13:10.511809 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../perl-modules_5.20.2-3+deb8u12_all.deb ...
+I, [2019-12-27T15:13:10.517163 #9825]  INFO -- archive-install-debian-8: Unpacking perl-modules (5.20.2-3+deb8u12) ...
+I, [2019-12-27T15:13:11.141537 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package perl.
+I, [2019-12-27T15:13:11.144195 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../perl_5.20.2-3+deb8u12_amd64.deb ...
+I, [2019-12-27T15:13:11.146830 #9825]  INFO -- archive-install-debian-8: Unpacking perl (5.20.2-3+deb8u12) ...
+I, [2019-12-27T15:13:11.891484 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libassuan0:amd64.
+I, [2019-12-27T15:13:11.894153 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libassuan0_2.1.2-2_amd64.deb ...
+I, [2019-12-27T15:13:11.901374 #9825]  INFO -- archive-install-debian-8: Unpacking libassuan0:amd64 (2.1.2-2) ...
+I, [2019-12-27T15:13:11.937984 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libcurl3-gnutls:amd64.
+I, [2019-12-27T15:13:11.938327 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libcurl3-gnutls_7.38.0-4+deb8u16_amd64.deb ...
+I, [2019-12-27T15:13:11.942118 #9825]  INFO -- archive-install-debian-8: Unpacking libcurl3-gnutls:amd64 (7.38.0-4+deb8u16) ...
+I, [2019-12-27T15:13:12.073930 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libisc-export95.
+I, [2019-12-27T15:13:12.073983 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libisc-export95_1%3a9.9.5.dfsg-9+deb8u18_amd64.deb ...
+I, [2019-12-27T15:13:12.074990 #9825]  INFO -- archive-install-debian-8: Unpacking libisc-export95 (1:9.9.5.dfsg-9+deb8u18) ...
+I, [2019-12-27T15:13:12.182918 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libdns-export100.
+I, [2019-12-27T15:13:12.187985 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libdns-export100_1%3a9.9.5.dfsg-9+deb8u18_amd64.deb ...
+I, [2019-12-27T15:13:12.188148 #9825]  INFO -- archive-install-debian-8: Unpacking libdns-export100 (1:9.9.5.dfsg-9+deb8u18) ...
+I, [2019-12-27T15:13:12.452806 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libisccfg-export90.
+I, [2019-12-27T15:13:12.457039 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libisccfg-export90_1%3a9.9.5.dfsg-9+deb8u18_amd64.deb ...
+I, [2019-12-27T15:13:12.458328 #9825]  INFO -- archive-install-debian-8: Unpacking libisccfg-export90 (1:9.9.5.dfsg-9+deb8u18) ...
+I, [2019-12-27T15:13:12.518433 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libirs-export91.
+I, [2019-12-27T15:13:12.518488 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libirs-export91_1%3a9.9.5.dfsg-9+deb8u18_amd64.deb ...
+I, [2019-12-27T15:13:12.528850 #9825]  INFO -- archive-install-debian-8: Unpacking libirs-export91 (1:9.9.5.dfsg-9+deb8u18) ...
+I, [2019-12-27T15:13:12.590888 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libksba8:amd64.
+I, [2019-12-27T15:13:12.590952 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libksba8_1.3.2-1+deb8u1_amd64.deb ...
+I, [2019-12-27T15:13:12.591419 #9825]  INFO -- archive-install-debian-8: Unpacking libksba8:amd64 (1.3.2-1+deb8u1) ...
+I, [2019-12-27T15:13:12.673426 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libpth20:amd64.
+I, [2019-12-27T15:13:12.673492 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libpth20_2.0.7-20_amd64.deb ...
+I, [2019-12-27T15:13:12.674549 #9825]  INFO -- archive-install-debian-8: Unpacking libpth20:amd64 (2.0.7-20) ...
+I, [2019-12-27T15:13:12.741668 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package apt-utils.
+I, [2019-12-27T15:13:12.741743 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../apt-utils_1.0.9.8.5_amd64.deb ...
+I, [2019-12-27T15:13:12.743800 #9825]  INFO -- archive-install-debian-8: Unpacking apt-utils (1.0.9.8.5) ...
+I, [2019-12-27T15:13:12.934725 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package ifupdown.
+I, [2019-12-27T15:13:12.934791 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../ifupdown_0.7.53.1_amd64.deb ...
+I, [2019-12-27T15:13:12.957594 #9825]  INFO -- archive-install-debian-8: Unpacking ifupdown (0.7.53.1) ...
+I, [2019-12-27T15:13:13.045540 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package isc-dhcp-common.
+I, [2019-12-27T15:13:13.048595 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../isc-dhcp-common_4.3.1-6+deb8u4_amd64.deb ...
+I, [2019-12-27T15:13:13.055504 #9825]  INFO -- archive-install-debian-8: Unpacking isc-dhcp-common (4.3.1-6+deb8u4) ...
+I, [2019-12-27T15:13:13.164941 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package isc-dhcp-client.
+I, [2019-12-27T15:13:13.165000 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../isc-dhcp-client_4.3.1-6+deb8u4_amd64.deb ...
+I, [2019-12-27T15:13:13.183008 #9825]  INFO -- archive-install-debian-8: Unpacking isc-dhcp-client (4.3.1-6+deb8u4) ...
+I, [2019-12-27T15:13:13.309031 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package less.
+I, [2019-12-27T15:13:13.309089 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../archives/less_458-3_amd64.deb ...
+I, [2019-12-27T15:13:13.310685 #9825]  INFO -- archive-install-debian-8: Unpacking less (458-3) ...
+I, [2019-12-27T15:13:13.433566 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package netbase.
+I, [2019-12-27T15:13:13.433652 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../archives/netbase_5.3_all.deb ...
+I, [2019-12-27T15:13:13.436400 #9825]  INFO -- archive-install-debian-8: Unpacking netbase (5.3) ...
+I, [2019-12-27T15:13:13.479894 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package patch.
+I, [2019-12-27T15:13:13.479948 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../patch_2.7.5-1+deb8u3_amd64.deb ...
+I, [2019-12-27T15:13:13.487205 #9825]  INFO -- archive-install-debian-8: Unpacking patch (2.7.5-1+deb8u3) ...
+I, [2019-12-27T15:13:13.703692 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package dirmngr.
+I, [2019-12-27T15:13:13.703748 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../dirmngr_1.1.1-5_amd64.deb ...
+I, [2019-12-27T15:13:13.706861 #9825]  INFO -- archive-install-debian-8: Unpacking dirmngr (1.1.1-5) ...
+I, [2019-12-27T15:13:13.831153 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package liberror-perl.
+I, [2019-12-27T15:13:13.831215 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../liberror-perl_0.17-1.1_all.deb ...
+I, [2019-12-27T15:13:13.834037 #9825]  INFO -- archive-install-debian-8: Unpacking liberror-perl (0.17-1.1) ...
+I, [2019-12-27T15:13:13.886489 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package git-man.
+I, [2019-12-27T15:13:13.886545 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../git-man_1%3a2.1.4-2.1+deb8u7_all.deb ...
+I, [2019-12-27T15:13:13.894831 #9825]  INFO -- archive-install-debian-8: Unpacking git-man (1:2.1.4-2.1+deb8u7) ...
+I, [2019-12-27T15:13:14.166546 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package git.
+I, [2019-12-27T15:13:14.166718 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../git_1%3a2.1.4-2.1+deb8u7_amd64.deb ...
+I, [2019-12-27T15:13:14.179840 #9825]  INFO -- archive-install-debian-8: Unpacking git (1:2.1.4-2.1+deb8u7) ...
+I, [2019-12-27T15:13:15.516925 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libalgorithm-c3-perl.
+I, [2019-12-27T15:13:15.517069 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libalgorithm-c3-perl_0.09-1_all.deb ...
+I, [2019-12-27T15:13:15.522788 #9825]  INFO -- archive-install-debian-8: Unpacking libalgorithm-c3-perl (0.09-1) ...
+I, [2019-12-27T15:13:15.588205 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libarchive-extract-perl.
+I, [2019-12-27T15:13:15.590258 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libarchive-extract-perl_0.72-1_all.deb ...
+I, [2019-12-27T15:13:15.602804 #9825]  INFO -- archive-install-debian-8: Unpacking libarchive-extract-perl (0.72-1) ...
+I, [2019-12-27T15:13:15.654867 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libcgi-pm-perl.
+I, [2019-12-27T15:13:15.658918 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libcgi-pm-perl_4.09-1_all.deb ...
+I, [2019-12-27T15:13:15.698129 #9825]  INFO -- archive-install-debian-8: Unpacking libcgi-pm-perl (4.09-1) ...
+I, [2019-12-27T15:13:15.828113 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libfcgi-perl.
+I, [2019-12-27T15:13:15.830473 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libfcgi-perl_0.77-1+deb8u1_amd64.deb ...
+I, [2019-12-27T15:13:15.835329 #9825]  INFO -- archive-install-debian-8: Unpacking libfcgi-perl (0.77-1+deb8u1) ...
+I, [2019-12-27T15:13:15.886373 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libcgi-fast-perl.
+I, [2019-12-27T15:13:15.893944 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libcgi-fast-perl_1%3a2.04-1_all.deb ...
+I, [2019-12-27T15:13:15.894084 #9825]  INFO -- archive-install-debian-8: Unpacking libcgi-fast-perl (1:2.04-1) ...
+I, [2019-12-27T15:13:15.954054 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libclass-c3-perl.
+I, [2019-12-27T15:13:15.954213 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libclass-c3-perl_0.26-1_all.deb ...
+I, [2019-12-27T15:13:15.958965 #9825]  INFO -- archive-install-debian-8: Unpacking libclass-c3-perl (0.26-1) ...
+I, [2019-12-27T15:13:16.000935 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libclass-c3-xs-perl.
+I, [2019-12-27T15:13:16.002501 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libclass-c3-xs-perl_0.13-2+b1_amd64.deb ...
+I, [2019-12-27T15:13:16.004900 #9825]  INFO -- archive-install-debian-8: Unpacking libclass-c3-xs-perl (0.13-2+b1) ...
+I, [2019-12-27T15:13:16.048345 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libcpan-meta-perl.
+I, [2019-12-27T15:13:16.048863 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libcpan-meta-perl_2.142690-1_all.deb ...
+I, [2019-12-27T15:13:16.058887 #9825]  INFO -- archive-install-debian-8: Unpacking libcpan-meta-perl (2.142690-1) ...
+I, [2019-12-27T15:13:16.139367 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libparams-util-perl.
+I, [2019-12-27T15:13:16.141876 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libparams-util-perl_1.07-2+b1_amd64.deb ...
+I, [2019-12-27T15:13:16.143761 #9825]  INFO -- archive-install-debian-8: Unpacking libparams-util-perl (1.07-2+b1) ...
+I, [2019-12-27T15:13:16.191254 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libsub-install-perl.
+I, [2019-12-27T15:13:16.191310 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libsub-install-perl_0.928-1_all.deb ...
+I, [2019-12-27T15:13:16.195874 #9825]  INFO -- archive-install-debian-8: Unpacking libsub-install-perl (0.928-1) ...
+I, [2019-12-27T15:13:16.251596 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libdata-optlist-perl.
+I, [2019-12-27T15:13:16.251695 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libdata-optlist-perl_0.109-1_all.deb ...
+I, [2019-12-27T15:13:16.262194 #9825]  INFO -- archive-install-debian-8: Unpacking libdata-optlist-perl (0.109-1) ...
+I, [2019-12-27T15:13:16.285875 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libmro-compat-perl.
+I, [2019-12-27T15:13:16.286012 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libmro-compat-perl_0.12-1_all.deb ...
+I, [2019-12-27T15:13:16.290863 #9825]  INFO -- archive-install-debian-8: Unpacking libmro-compat-perl (0.12-1) ...
+I, [2019-12-27T15:13:16.330071 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libsub-exporter-perl.
+I, [2019-12-27T15:13:16.333476 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libsub-exporter-perl_0.986-1_all.deb ...
+I, [2019-12-27T15:13:16.339168 #9825]  INFO -- archive-install-debian-8: Unpacking libsub-exporter-perl (0.986-1) ...
+I, [2019-12-27T15:13:16.384856 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libdata-section-perl.
+I, [2019-12-27T15:13:16.385009 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libdata-section-perl_0.200006-1_all.deb ...
+I, [2019-12-27T15:13:16.394934 #9825]  INFO -- archive-install-debian-8: Unpacking libdata-section-perl (0.200006-1) ...
+I, [2019-12-27T15:13:16.451122 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package liblog-message-perl.
+I, [2019-12-27T15:13:16.451185 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../liblog-message-perl_0.8-1_all.deb ...
+I, [2019-12-27T15:13:16.457837 #9825]  INFO -- archive-install-debian-8: Unpacking liblog-message-perl (0.8-1) ...
+I, [2019-12-27T15:13:16.506657 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package liblog-message-simple-perl.
+I, [2019-12-27T15:13:16.513219 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../liblog-message-simple-perl_0.10-2_all.deb ...
+I, [2019-12-27T15:13:16.525631 #9825]  INFO -- archive-install-debian-8: Unpacking liblog-message-simple-perl (0.10-2) ...
+I, [2019-12-27T15:13:16.591658 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libmodule-build-perl.
+I, [2019-12-27T15:13:16.591857 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libmodule-build-perl_0.421000-2+deb8u1_all.deb ...
+I, [2019-12-27T15:13:16.615836 #9825]  INFO -- archive-install-debian-8: Adding 'diversion of /usr/bin/config_data to /usr/bin/config_data.diverted by libmodule-build-perl'
+I, [2019-12-27T15:13:16.637882 #9825]  INFO -- archive-install-debian-8: Adding 'diversion of /usr/share/man/man1/config_data.1.gz to /usr/share/man/man1/config_data.diverted.1.gz by libmodule-build-perl'
+I, [2019-12-27T15:13:16.640978 #9825]  INFO -- archive-install-debian-8: Unpacking libmodule-build-perl (0.421000-2+deb8u1) ...
+I, [2019-12-27T15:13:16.754867 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libmodule-pluggable-perl.
+I, [2019-12-27T15:13:16.756859 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libmodule-pluggable-perl_5.1-1_all.deb ...
+I, [2019-12-27T15:13:16.763857 #9825]  INFO -- archive-install-debian-8: Unpacking libmodule-pluggable-perl (5.1-1) ...
+I, [2019-12-27T15:13:16.822876 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libmodule-signature-perl.
+I, [2019-12-27T15:13:16.822933 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libmodule-signature-perl_0.73-1+deb8u2_all.deb ...
+I, [2019-12-27T15:13:16.826063 #9825]  INFO -- archive-install-debian-8: Unpacking libmodule-signature-perl (0.73-1+deb8u2) ...
+I, [2019-12-27T15:13:16.868873 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libpackage-constants-perl.
+I, [2019-12-27T15:13:16.870875 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libpackage-constants-perl_0.04-1_all.deb ...
+I, [2019-12-27T15:13:16.878907 #9825]  INFO -- archive-install-debian-8: Unpacking libpackage-constants-perl (0.04-1) ...
+I, [2019-12-27T15:13:16.914852 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libpod-latex-perl.
+I, [2019-12-27T15:13:16.918962 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libpod-latex-perl_0.61-1_all.deb ...
+I, [2019-12-27T15:13:16.944952 #9825]  INFO -- archive-install-debian-8: Adding 'diversion of /usr/bin/pod2latex to /usr/bin/pod2latex.bundled by libpod-latex-perl'
+I, [2019-12-27T15:13:16.982888 #9825]  INFO -- archive-install-debian-8: Adding 'diversion of /usr/share/man/man1/pod2latex.1.gz to /usr/share/man/man1/pod2latex.bundled.1.gz by libpod-latex-perl'
+I, [2019-12-27T15:13:16.983056 #9825]  INFO -- archive-install-debian-8: Unpacking libpod-latex-perl (0.61-1) ...
+I, [2019-12-27T15:13:17.038198 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libregexp-common-perl.
+I, [2019-12-27T15:13:17.038355 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libregexp-common-perl_2013031301-1_all.deb ...
+I, [2019-12-27T15:13:17.038428 #9825]  INFO -- archive-install-debian-8: Unpacking libregexp-common-perl (2013031301-1) ...
+I, [2019-12-27T15:13:17.126633 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libpod-readme-perl.
+I, [2019-12-27T15:13:17.126760 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libpod-readme-perl_0.11-1_all.deb ...
+I, [2019-12-27T15:13:17.138427 #9825]  INFO -- archive-install-debian-8: Unpacking libpod-readme-perl (0.11-1) ...
+I, [2019-12-27T15:13:17.194775 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libtext-template-perl.
+I, [2019-12-27T15:13:17.197248 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libtext-template-perl_1.46-1_all.deb ...
+I, [2019-12-27T15:13:17.206242 #9825]  INFO -- archive-install-debian-8: Unpacking libtext-template-perl (1.46-1) ...
+I, [2019-12-27T15:13:17.299974 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libsoftware-license-perl.
+I, [2019-12-27T15:13:17.300127 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libsoftware-license-perl_0.103010-3_all.deb ...
+I, [2019-12-27T15:13:17.307276 #9825]  INFO -- archive-install-debian-8: Unpacking libsoftware-license-perl (0.103010-3) ...
+I, [2019-12-27T15:13:17.418567 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libterm-ui-perl.
+I, [2019-12-27T15:13:17.418716 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libterm-ui-perl_0.42-1_all.deb ...
+I, [2019-12-27T15:13:17.431243 #9825]  INFO -- archive-install-debian-8: Unpacking libterm-ui-perl (0.42-1) ...
+I, [2019-12-27T15:13:17.497001 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libtext-soundex-perl.
+I, [2019-12-27T15:13:17.497145 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libtext-soundex-perl_3.4-1+b2_amd64.deb ...
+I, [2019-12-27T15:13:17.497223 #9825]  INFO -- archive-install-debian-8: Unpacking libtext-soundex-perl (3.4-1+b2) ...
+I, [2019-12-27T15:13:17.552933 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package rename.
+I, [2019-12-27T15:13:17.553113 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../archives/rename_0.20-3_all.deb ...
+I, [2019-12-27T15:13:17.557480 #9825]  INFO -- archive-install-debian-8: Unpacking rename (0.20-3) ...
+I, [2019-12-27T15:13:17.665473 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package rsync.
+I, [2019-12-27T15:13:17.665537 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../rsync_3.1.1-3+deb8u2_amd64.deb ...
+I, [2019-12-27T15:13:17.665552 #9825]  INFO -- archive-install-debian-8: Unpacking rsync (3.1.1-3+deb8u2) ...
+I, [2019-12-27T15:13:17.849065 #9825]  INFO -- archive-install-debian-8: Processing triggers for systemd (215-17+deb8u13) ...
+I, [2019-12-27T15:13:17.933484 #9825]  INFO -- archive-install-debian-8: Processing triggers for mime-support (3.58) ...
+I, [2019-12-27T15:13:18.083084 #9825]  INFO -- archive-install-debian-8: Setting up libapt-inst1.5:amd64 (1.0.9.8.5) ...
+I, [2019-12-27T15:13:18.120026 #9825]  INFO -- archive-install-debian-8: Setting up libgdbm3:amd64 (1.8.3-13.1) ...
+I, [2019-12-27T15:13:18.142216 #9825]  INFO -- archive-install-debian-8: Setting up libpopt0:amd64 (1.16-10) ...
+I, [2019-12-27T15:13:18.169971 #9825]  INFO -- archive-install-debian-8: Setting up perl-modules (5.20.2-3+deb8u12) ...
+I, [2019-12-27T15:13:18.180593 #9825]  INFO -- archive-install-debian-8: Setting up perl (5.20.2-3+deb8u12) ...
+I, [2019-12-27T15:13:18.197914 #9825]  INFO -- archive-install-debian-8: update-alternatives: using /usr/bin/prename to provide /usr/bin/rename (rename) in auto mode
+I, [2019-12-27T15:13:18.207935 #9825]  INFO -- archive-install-debian-8: Setting up libassuan0:amd64 (2.1.2-2) ...
+I, [2019-12-27T15:13:18.224679 #9825]  INFO -- archive-install-debian-8: Setting up libcurl3-gnutls:amd64 (7.38.0-4+deb8u16) ...
+I, [2019-12-27T15:13:18.244350 #9825]  INFO -- archive-install-debian-8: Setting up libisc-export95 (1:9.9.5.dfsg-9+deb8u18) ...
+I, [2019-12-27T15:13:18.272288 #9825]  INFO -- archive-install-debian-8: Setting up libdns-export100 (1:9.9.5.dfsg-9+deb8u18) ...
+I, [2019-12-27T15:13:18.295008 #9825]  INFO -- archive-install-debian-8: Setting up libisccfg-export90 (1:9.9.5.dfsg-9+deb8u18) ...
+I, [2019-12-27T15:13:18.311195 #9825]  INFO -- archive-install-debian-8: Setting up libirs-export91 (1:9.9.5.dfsg-9+deb8u18) ...
+I, [2019-12-27T15:13:18.346572 #9825]  INFO -- archive-install-debian-8: Setting up libksba8:amd64 (1.3.2-1+deb8u1) ...
+I, [2019-12-27T15:13:18.370469 #9825]  INFO -- archive-install-debian-8: Setting up libpth20:amd64 (2.0.7-20) ...
+I, [2019-12-27T15:13:18.390522 #9825]  INFO -- archive-install-debian-8: Setting up apt-utils (1.0.9.8.5) ...
+I, [2019-12-27T15:13:18.396756 #9825]  INFO -- archive-install-debian-8: Setting up ifupdown (0.7.53.1) ...
+I, [2019-12-27T15:13:18.567174 #9825]  INFO -- archive-install-debian-8: Creating /etc/network/interfaces.
+I, [2019-12-27T15:13:18.967243 #9825]  INFO -- archive-install-debian-8: Setting up isc-dhcp-common (4.3.1-6+deb8u4) ...
+I, [2019-12-27T15:13:18.970340 #9825]  INFO -- archive-install-debian-8: Setting up isc-dhcp-client (4.3.1-6+deb8u4) ...
+I, [2019-12-27T15:13:19.221257 #9825]  INFO -- archive-install-debian-8: debconf: unable to initialize frontend: Dialog
+I, [2019-12-27T15:13:19.221432 #9825]  INFO -- archive-install-debian-8: debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76.)
+I, [2019-12-27T15:13:19.221546 #9825]  INFO -- archive-install-debian-8: debconf: falling back to frontend: Readline
+I, [2019-12-27T15:13:19.269153 #9825]  INFO -- archive-install-debian-8: Setting up less (458-3) ...
+I, [2019-12-27T15:13:19.497985 #9825]  INFO -- archive-install-debian-8: debconf: unable to initialize frontend: Dialog
+I, [2019-12-27T15:13:19.498156 #9825]  INFO -- archive-install-debian-8: debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76.)
+I, [2019-12-27T15:13:19.498269 #9825]  INFO -- archive-install-debian-8: debconf: falling back to frontend: Readline
+I, [2019-12-27T15:13:19.574713 #9825]  INFO -- archive-install-debian-8: Setting up netbase (5.3) ...
+I, [2019-12-27T15:13:19.596633 #9825]  INFO -- archive-install-debian-8: Setting up patch (2.7.5-1+deb8u3) ...
+I, [2019-12-27T15:13:19.605783 #9825]  INFO -- archive-install-debian-8: Setting up dirmngr (1.1.1-5) ...
+I, [2019-12-27T15:13:20.015207 #9825]  INFO -- archive-install-debian-8: invoke-rc.d: policy-rc.d denied execution of start.
+I, [2019-12-27T15:13:20.017814 #9825]  INFO -- archive-install-debian-8: Setting up liberror-perl (0.17-1.1) ...
+I, [2019-12-27T15:13:20.024064 #9825]  INFO -- archive-install-debian-8: Setting up git-man (1:2.1.4-2.1+deb8u7) ...
+I, [2019-12-27T15:13:20.030413 #9825]  INFO -- archive-install-debian-8: Setting up git (1:2.1.4-2.1+deb8u7) ...
+I, [2019-12-27T15:13:20.046804 #9825]  INFO -- archive-install-debian-8: Setting up libalgorithm-c3-perl (0.09-1) ...
+I, [2019-12-27T15:13:20.054058 #9825]  INFO -- archive-install-debian-8: Setting up libarchive-extract-perl (0.72-1) ...
+I, [2019-12-27T15:13:20.059886 #9825]  INFO -- archive-install-debian-8: Setting up libcgi-pm-perl (4.09-1) ...
+I, [2019-12-27T15:13:20.066037 #9825]  INFO -- archive-install-debian-8: Setting up libfcgi-perl (0.77-1+deb8u1) ...
+I, [2019-12-27T15:13:20.075629 #9825]  INFO -- archive-install-debian-8: Setting up libcgi-fast-perl (1:2.04-1) ...
+I, [2019-12-27T15:13:20.081999 #9825]  INFO -- archive-install-debian-8: Setting up libclass-c3-perl (0.26-1) ...
+I, [2019-12-27T15:13:20.089425 #9825]  INFO -- archive-install-debian-8: Setting up libclass-c3-xs-perl (0.13-2+b1) ...
+I, [2019-12-27T15:13:20.096267 #9825]  INFO -- archive-install-debian-8: Setting up libcpan-meta-perl (2.142690-1) ...
+I, [2019-12-27T15:13:20.103034 #9825]  INFO -- archive-install-debian-8: Setting up libparams-util-perl (1.07-2+b1) ...
+I, [2019-12-27T15:13:20.108449 #9825]  INFO -- archive-install-debian-8: Setting up libsub-install-perl (0.928-1) ...
+I, [2019-12-27T15:13:20.114158 #9825]  INFO -- archive-install-debian-8: Setting up libdata-optlist-perl (0.109-1) ...
+I, [2019-12-27T15:13:20.120412 #9825]  INFO -- archive-install-debian-8: Setting up libmro-compat-perl (0.12-1) ...
+I, [2019-12-27T15:13:20.125864 #9825]  INFO -- archive-install-debian-8: Setting up libsub-exporter-perl (0.986-1) ...
+I, [2019-12-27T15:13:20.132867 #9825]  INFO -- archive-install-debian-8: Setting up libdata-section-perl (0.200006-1) ...
+I, [2019-12-27T15:13:20.139701 #9825]  INFO -- archive-install-debian-8: Setting up liblog-message-perl (0.8-1) ...
+I, [2019-12-27T15:13:20.144885 #9825]  INFO -- archive-install-debian-8: Setting up liblog-message-simple-perl (0.10-2) ...
+I, [2019-12-27T15:13:20.152617 #9825]  INFO -- archive-install-debian-8: Setting up libmodule-build-perl (0.421000-2+deb8u1) ...
+I, [2019-12-27T15:13:20.156873 #9825]  INFO -- archive-install-debian-8: Setting up libmodule-pluggable-perl (5.1-1) ...
+I, [2019-12-27T15:13:20.162753 #9825]  INFO -- archive-install-debian-8: Setting up libmodule-signature-perl (0.73-1+deb8u2) ...
+I, [2019-12-27T15:13:20.169248 #9825]  INFO -- archive-install-debian-8: Setting up libpackage-constants-perl (0.04-1) ...
+I, [2019-12-27T15:13:20.175365 #9825]  INFO -- archive-install-debian-8: Setting up libpod-latex-perl (0.61-1) ...
+I, [2019-12-27T15:13:20.181103 #9825]  INFO -- archive-install-debian-8: Setting up libregexp-common-perl (2013031301-1) ...
+I, [2019-12-27T15:13:20.187362 #9825]  INFO -- archive-install-debian-8: Setting up libpod-readme-perl (0.11-1) ...
+I, [2019-12-27T15:13:20.200196 #9825]  INFO -- archive-install-debian-8: Setting up libtext-template-perl (1.46-1) ...
+I, [2019-12-27T15:13:20.202726 #9825]  INFO -- archive-install-debian-8: Setting up libsoftware-license-perl (0.103010-3) ...
+I, [2019-12-27T15:13:20.208284 #9825]  INFO -- archive-install-debian-8: Setting up libterm-ui-perl (0.42-1) ...
+I, [2019-12-27T15:13:20.214235 #9825]  INFO -- archive-install-debian-8: Setting up libtext-soundex-perl (3.4-1+b2) ...
+I, [2019-12-27T15:13:20.216948 #9825]  INFO -- archive-install-debian-8: Setting up rename (0.20-3) ...
+I, [2019-12-27T15:13:20.223461 #9825]  INFO -- archive-install-debian-8: update-alternatives: using /usr/bin/file-rename to provide /usr/bin/rename (rename) in auto mode
+I, [2019-12-27T15:13:20.227099 #9825]  INFO -- archive-install-debian-8: Setting up rsync (3.1.1-3+deb8u2) ...
+I, [2019-12-27T15:13:20.493849 #9825]  INFO -- archive-install-debian-8: invoke-rc.d: policy-rc.d denied execution of restart.
+I, [2019-12-27T15:13:20.496390 #9825]  INFO -- archive-install-debian-8: Processing triggers for libc-bin (2.19-18+deb8u10) ...
+I, [2019-12-27T15:13:20.567478 #9825]  INFO -- archive-install-debian-8: Processing triggers for systemd (215-17+deb8u13) ...
+I, [2019-12-27T15:13:20.855813 #9825]  INFO -- archive-install-debian-8: deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
+I, [2019-12-27T15:13:21.448213 #9825]  INFO -- archive-install-debian-8: Executing: gpg --ignore-time-conflict --no-options --no-default-keyring --homedir /tmp/tmp.dljIFYyd7d --no-auto-check-trustdb --trust-model always --primary-keyring /etc/apt/trusted.gpg --keyring /etc/apt/trusted.gpg.d/debian-archive-jessie-automatic.gpg --keyring /etc/apt/trusted.gpg.d/debian-archive-jessie-security-automatic.gpg --keyring /etc/apt/trusted.gpg.d/debian-archive-jessie-stable.gpg --keyring /etc/apt/trusted.gpg.d/debian-archive-stretch-automatic.gpg --keyring /etc/apt/trusted.gpg.d/debian-archive-stretch-security-automatic.gpg --keyring /etc/apt/trusted.gpg.d/debian-archive-stretch-stable.gpg --keyring /etc/apt/trusted.gpg.d/debian-archive-wheezy-automatic.gpg --keyring /etc/apt/trusted.gpg.d/debian-archive-wheezy-stable.gpg --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+I, [2019-12-27T15:13:21.450243 #9825]  INFO -- archive-install-debian-8: gpg: requesting key 7BB9C367 from hkp server keyserver.ubuntu.com
+I, [2019-12-27T15:13:22.099848 #9825]  INFO -- archive-install-debian-8: gpg: key 7BB9C367: public key "Launchpad PPA for Ansible, Inc." imported
+I, [2019-12-27T15:13:22.099982 #9825]  INFO -- archive-install-debian-8: gpg: Total number processed: 1
+I, [2019-12-27T15:13:22.100002 #9825]  INFO -- archive-install-debian-8: gpg:               imported: 1  (RSA: 1)
+I, [2019-12-27T15:13:22.718867 #9825]  INFO -- archive-install-debian-8: 0% [Working]            0% [Waiting for headers] [Waiting for headers]                                              Ign http://deb.debian.org jessie InRelease
+I, [2019-12-27T15:13:22.781852 #9825]  INFO -- archive-install-debian-8:                                               10% [Connecting to security-cdn.debian.org] [Waiting for headers]                                                                 Get:1 http://ppa.launchpad.net trusty InRelease [15.9 kB]
+I, [2019-12-27T15:13:22.943871 #9825]  INFO -- archive-install-debian-8:                                                                  43% [Connecting to security-cdn.debian.org] [Waiting for headers] [1 InRelease                                                                                Hit http://deb.debian.org jessie-updates InRelease
+I, [2019-12-27T15:13:22.943929 #9825]  INFO -- archive-install-debian-8: 43% [Connecting to security-cdn.debian.org (199.232.32.204)] [1 InRelease 6932                                                                                Hit http://security.debian.org jessie/updates InRelease
+I, [2019-12-27T15:13:23.055257 #9825]  INFO -- archive-install-debian-8:                                                                                43% [1 InRelease 6932 B/15.9 kB 43%]                                    43% [InRelease gpgv 16.3 kB] [Waiting for headers] [1 InRelease 6932 B/15.9 kB                                                                                62% [Waiting for headers] [1 InRelease 9828 B/15.9 kB 62%]                                                          62% [InRelease gpgv 44.9 kB] [Waiting for headers] [1 InRelease 9828 B/15.9 kB                                                                                Hit http://deb.debian.org jessie Release.gpg
+I, [2019-12-27T15:13:23.174898 #9825]  INFO -- archive-install-debian-8:                                                                                62% [InRelease gpgv 44.9 kB] [1 InRelease 9828 B/15.9 kB 62%]                                                             100% [InRelease gpgv 44.9 kB] [Waiting for headers]                                                   100% [Waiting for headers]                          100% [1 InRelease gpgv 15.9 kB] [Waiting for headers] [Waiting for headers]                                                                           100% [1 InRelease gpgv 15.9 kB] [Waiting for headers]                                                     100% [Waiting for headers] [Waiting for headers]                                                Get:2 http://security.debian.org jessie/updates/main amd64 Packages [920 kB]
+I, [2019-12-27T15:13:23.174963 #9825]  INFO -- archive-install-debian-8:                                                 Get:3 http://deb.debian.org jessie-updates/main amd64 Packages [20 B]
+I, [2019-12-27T15:13:23.366656 #9825]  INFO -- archive-install-debian-8:                                                 7% [2 Packages 49.9 kB/920 kB 5%] [Connecting to ppa.launchpad.net (91.189.95.87% [3 Packages 20 B] [2 Packages 49.9 kB/920 kB 5%] [Waiting for headers] [Conn7% [2 Packages 49.9 kB/920 kB 5%] [Waiting for headers] [Connecting to ppa.laun                                                                               Hit http://deb.debian.org jessie Release
+I, [2019-12-27T15:13:23.392593 #9825]  INFO -- archive-install-debian-8:                                                                                26% [2 Packages 226 kB/920 kB 25%] [Waiting for headers]                                                        26% [Release gpgv 77.3 kB] [2 Packages 226 kB/920 kB 25%] [Waiting for headers]                                                                               28% [2 Packages 248 kB/920 kB 27%] [Waiting for headers]                                                        Get:4 http://ppa.launchpad.net trusty/main amd64 Packages [621 B]
+I, [2019-12-27T15:13:23.511042 #9825]  INFO -- archive-install-debian-8:                                                         32% [2 Packages 279 kB/920 kB 30%] [Waiting for headers] [4 Packages 621 B/621                                                                                32% [2 Packages 282 kB/920 kB 31%] [Waiting for headers]                                                        32% [4 Packages 0 B] [2 Packages 282 kB/920 kB 31%] [Waiting for headers]                                                                         32% [2 Packages 287 kB/920 kB 31%] [Waiting for headers]                                                        Get:5 http://deb.debian.org jessie/main amd64 Packages [9098 kB]
+I, [2019-12-27T15:13:36.685614 #9825]  INFO -- archive-install-debian-8:                                                         6% [2 Packages 605 kB/920 kB 66%] [5 Packages 12.1 kB/9098 kB 0%]                                                                 12% [5 Packages 235 kB/9098 kB 3%]                                  12% [2 Packages 920 kB] [5 Packages 237 kB/9098 kB 3%]                                                      17% [5 Packages 767 kB/9098 kB 8%]                                  34% [5 Packages 2434 kB/9098 kB 27%]48% [5 Packages 3870 kB/9098 kB 43%]56% [5 Packages 4684 kB/9098 kB 51%]59% [5 Packages 4944 kB/9098 kB 54%]59% [5 Packages 5001 kB/9098 kB 55%]59% [5 Packages 5033 kB/9098 kB 55%]60% [5 Packages 5081 kB/9098 kB 56%]60% [5 Packages 5117 kB/9098 kB 56%]61% [5 Packages 5153 kB/9098 kB 57%]                                    62% [5 Packages 5291 kB/9098 kB 58%]                                972 kB/s 3s65% [5 Packages 5620 kB/9098 kB 62%]                                972 kB/s 3s67% [5 Packages 5767 kB/9098 kB 63%]                                972 kB/s 3s70% [5 Packages 6062 kB/9098 kB 67%]                                972 kB/s 3s73% [5 Packages 6403 kB/9098 kB 70%]                                972 kB/s 2s76% [5 Packages 6670 kB/9098 kB 73%]                                972 kB/s 2s78% [5 Packages 6908 kB/9098 kB 76%]                                972 kB/s 2s81% [5 Packages 7198 kB/9098 kB 79%]                                972 kB/s 1s84% [5 Packages 7499 kB/9098 kB 82%]                                972 kB/s 1s87% [5 Packages 7750 kB/9098 kB 85%]                                972 kB/s 1s88% [5 Packages 7894 kB/9098 kB 87%]                                972 kB/s 1s90% [5 Packages 8053 kB/9098 kB 89%]                                972 kB/s 1s92% [5 Packages 8319 kB/9098 kB 91%]                                504 kB/s 1s95% [5 Packages 8603 kB/9098 kB 95%]                                504 kB/s 0s98% [5 Packages 8936 kB/9098 kB 98%]                                504 kB/s 0s100% [Working]                                                      504 kB/s 0s100% [5 Packages 9098 kB]                                           504 kB/s 0s100% [5 Packages 9098 kB]                                           504 kB/s 0s100% [Working]                                                      504 kB/s 0s                                                                               Fetched 10.0 MB in 14s (704 kB/s)
+I, [2019-12-27T15:13:37.881919 #9825]  INFO -- archive-install-debian-8: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 68%Reading package lists... 88%Reading package lists... 88%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2019-12-27T15:13:39.566827 #9825]  INFO -- archive-install-debian-8: Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 53%Reading package lists... 88%Reading package lists... 88%Reading package lists... 96%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+I, [2019-12-27T15:13:39.827932 #9825]  INFO -- archive-install-debian-8: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+I, [2019-12-27T15:13:39.828414 #9825]  INFO -- archive-install-debian-8: Reading state information... 0%Reading state information... 0%Reading state information... Done
+I, [2019-12-27T15:13:40.074041 #9825]  INFO -- archive-install-debian-8: The following extra packages will be installed:
+I, [2019-12-27T15:13:40.074236 #9825]  INFO -- archive-install-debian-8:   libyaml-0-2 python-crypto python-ecdsa python-httplib2 python-jinja2
+I, [2019-12-27T15:13:40.074371 #9825]  INFO -- archive-install-debian-8:   python-markupsafe python-paramiko python-pkg-resources python-setuptools
+I, [2019-12-27T15:13:40.074499 #9825]  INFO -- archive-install-debian-8:   python-six python-yaml sshpass
+I, [2019-12-27T15:13:40.074631 #9825]  INFO -- archive-install-debian-8: Suggested packages:
+I, [2019-12-27T15:13:40.074735 #9825]  INFO -- archive-install-debian-8:   python-crypto-dbg python-crypto-doc python-jinja2-doc python-distribute
+I, [2019-12-27T15:13:40.074838 #9825]  INFO -- archive-install-debian-8:   python-distribute-doc
+I, [2019-12-27T15:13:40.074938 #9825]  INFO -- archive-install-debian-8: The following NEW packages will be installed:
+I, [2019-12-27T15:13:40.075040 #9825]  INFO -- archive-install-debian-8:   ansible libyaml-0-2 python-crypto python-ecdsa python-httplib2 python-jinja2
+I, [2019-12-27T15:13:40.075150 #9825]  INFO -- archive-install-debian-8:   python-markupsafe python-paramiko python-pkg-resources python-setuptools
+I, [2019-12-27T15:13:40.075251 #9825]  INFO -- archive-install-debian-8:   python-six python-yaml sshpass
+I, [2019-12-27T15:13:40.086842 #9825]  INFO -- archive-install-debian-8: 0 upgraded, 13 newly installed, 0 to remove and 5 not upgraded.
+I, [2019-12-27T15:13:41.019347 #9825]  INFO -- archive-install-debian-8: Need to get 6893 kB of archives.
+I, [2019-12-27T15:13:41.019402 #9825]  INFO -- archive-install-debian-8: After this operation, 62.2 MB of additional disk space will be used.
+I, [2019-12-27T15:13:41.362863 #9825]  INFO -- archive-install-debian-8: 0% [Working]            Get:1 http://deb.debian.org/debian/ jessie/main libyaml-0-2 amd64 0.1.6-3 [50.4 kB]
+I, [2019-12-27T15:13:41.526971 #9825]  INFO -- archive-install-debian-8:             0% [1 libyaml-0-2 1348 B/50.4 kB 3%] [Connecting to security.debian.org (128.311% [1 libyaml-0-2 48.5 kB/50.4 kB 96%] [Waiting for headers] [Waiting for heade                                                                               Get:2 http://ppa.launchpad.net/ansible/ansible/ubuntu/ trusty/main ansible all 2.9.2-1ppa~trusty [5776 kB]
+I, [2019-12-27T15:13:41.623902 #9825]  INFO -- archive-install-debian-8: 1% [Connecting to security-cdn.debian.org] [1 libyaml-0-2 48.5 kB/50.4 kB 96%] 1% [Connecting to security-cdn.debian.org] [1 libyaml-0-2 48.5 kB/50.4 kB 96%]                                                                                Get:3 http://security.debian.org/debian-security/ jessie/updates/main python-ecdsa all 0.11-1+deb8u1 [37.1 kB]
+I, [2019-12-27T15:13:41.671844 #9825]  INFO -- archive-install-debian-8: 1% [3 python-ecdsa 2696 B/37.1 kB 7%] [1 libyaml-0-2 48.5 kB/50.4 kB 96%] [2 an                                                                               2% [3 python-ecdsa 27.8 kB/37.1 kB 75%] [2 ansible 25.8 kB/5776 kB 0%]                                                                      2% [Waiting for headers] [2 ansible 28.7 kB/5776 kB 0%]                                                       Get:4 http://deb.debian.org/debian/ jessie/main python-markupsafe amd64 0.23-1+b1 [15.9 kB]
+I, [2019-12-27T15:13:41.678833 #9825]  INFO -- archive-install-debian-8:                                                        2% [Waiting for headers] [4 python-markupsafe 1348 B/15.9 kB 8%] [2 ansible 37.                                                                               2% [Waiting for headers] [Waiting for headers] [2 ansible 38.8 kB/5776 kB 1%]                                                                             Get:5 http://security.debian.org/debian-security/ jessie/updates/main python-paramiko all 1.15.1-1+deb8u1 [108 kB]
+I, [2019-12-27T15:13:41.689854 #9825]  INFO -- archive-install-debian-8:                                                                              2% [5 python-paramiko 0 B/108 kB 0%] [Waiting for headers] [2 ansible 40.3 kB/5                                                                               Get:6 http://deb.debian.org/debian/ jessie/main python-jinja2 all 2.7.3-1 [170 kB]
+I, [2019-12-27T15:13:41.922789 #9825]  INFO -- archive-install-debian-8: 2% [5 python-paramiko 27.0 kB/108 kB 25%] [6 python-jinja2 1348 B/170 kB 1%] [2                                                                               5% [6 python-jinja2 84.6 kB/170 kB 50%] [2 ansible 57.7 kB/5776 kB 1%]                                                                      7% [2 ansible 86.6 kB/5776 kB 1%]                                 Get:7 http://deb.debian.org/debian/ jessie/main python-yaml amd64 3.11-2 [112 kB]
+I, [2019-12-27T15:13:42.085973 #9825]  INFO -- archive-install-debian-8:                                  7% [7 python-yaml 0 B/112 kB 0%] [2 ansible 86.6 kB/5776 kB 1%]                                                               9% [2 ansible 159 kB/5776 kB 3%]                                Get:8 http://deb.debian.org/debian/ jessie/main python-crypto amd64 2.6.1-5+deb8u1 [256 kB]
+I, [2019-12-27T15:13:42.647983 #9825]  INFO -- archive-install-debian-8:                                 9% [8 python-crypto 0 B/256 kB 0%] [2 ansible 159 kB/5776 kB 3%]                                                                19% [8 python-crypto 249 kB/256 kB 97%] [2 ansible 567 kB/5776 kB 10%]                                                                      19% [2 ansible 567 kB/5776 kB 10%]                                  Get:9 http://deb.debian.org/debian/ jessie/main python-six all 1.8.0-1 [12.6 kB]
+I, [2019-12-27T15:13:42.730482 #9825]  INFO -- archive-install-debian-8:                                   23% [9 python-six 0 B/12.6 kB 0%] [2 ansible 847 kB/5776 kB 15%]                                                                23% [2 ansible 847 kB/5776 kB 15%]                                  Get:10 http://deb.debian.org/debian/ jessie/main python-httplib2 all 0.9+dfsg-2 [39.0 kB]
+I, [2019-12-27T15:13:43.209112 #9825]  INFO -- archive-install-debian-8:                                   23% [10 python-httplib2 0 B/39.0 kB 0%] [2 ansible 847 kB/5776 kB 15%]                                                                      28% [2 ansible 1134 kB/5776 kB 20%]                                   Get:11 http://deb.debian.org/debian/ jessie/main python-pkg-resources all 5.5.1-1 [64.4 kB]
+I, [2019-12-27T15:13:43.543569 #9825]  INFO -- archive-install-debian-8:                                    28% [11 python-pkg-resources 0 B/64.4 kB 0%] [2 ansible 1134 kB/5776 kB 20%]                                                                            40% [2 ansible 1914 kB/5776 kB 33%]                                   Get:12 http://deb.debian.org/debian/ jessie/main python-setuptools all 5.5.1-1 [242 kB]
+I, [2019-12-27T15:13:44.126872 #9825]  INFO -- archive-install-debian-8:                                    40% [12 python-setuptools 0 B/242 kB 0%] [2 ansible 1914 kB/5776 kB 33%]                                                                        75% [12 python-setuptools 233 kB/242 kB 96%] [2 ansible 4067 kB/5776 kB 70%]                                                                            76% [Waiting for headers] [2 ansible 4122 kB/5776 kB 71%]                                                         Get:13 http://deb.debian.org/debian/ jessie/main sshpass amd64 1.05-1 [11.2 kB]
+I, [2019-12-27T15:13:44.707245 #9825]  INFO -- archive-install-debian-8:                                                          78% [13 sshpass 0 B/11.2 kB 0%] [2 ansible 4255 kB/5776 kB 74%]                                                               78% [2 ansible 4274 kB/5776 kB 74%]97% [2 ansible 5595 kB/5776 kB 97%]                                   100% [Working]              Fetched 6893 kB in 3s (1954 kB/s)
+I, [2019-12-27T15:13:47.380866 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package libyaml-0-2:amd64.
+I, [2019-12-27T15:13:47.394949 #9825]  INFO -- archive-install-debian-8: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15070 files and directories currently installed.)
+I, [2019-12-27T15:13:47.395099 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../libyaml-0-2_0.1.6-3_amd64.deb ...
+I, [2019-12-27T15:13:47.402845 #9825]  INFO -- archive-install-debian-8: Unpacking libyaml-0-2:amd64 (0.1.6-3) ...
+I, [2019-12-27T15:13:47.452382 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-markupsafe.
+I, [2019-12-27T15:13:47.452561 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-markupsafe_0.23-1+b1_amd64.deb ...
+I, [2019-12-27T15:13:47.456955 #9825]  INFO -- archive-install-debian-8: Unpacking python-markupsafe (0.23-1+b1) ...
+I, [2019-12-27T15:13:47.515005 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-jinja2.
+I, [2019-12-27T15:13:47.515192 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-jinja2_2.7.3-1_all.deb ...
+I, [2019-12-27T15:13:47.517888 #9825]  INFO -- archive-install-debian-8: Unpacking python-jinja2 (2.7.3-1) ...
+I, [2019-12-27T15:13:47.758990 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-yaml.
+I, [2019-12-27T15:13:47.759057 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-yaml_3.11-2_amd64.deb ...
+I, [2019-12-27T15:13:47.761032 #9825]  INFO -- archive-install-debian-8: Unpacking python-yaml (3.11-2) ...
+I, [2019-12-27T15:13:47.881384 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-crypto.
+I, [2019-12-27T15:13:47.881444 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-crypto_2.6.1-5+deb8u1_amd64.deb ...
+I, [2019-12-27T15:13:47.883112 #9825]  INFO -- archive-install-debian-8: Unpacking python-crypto (2.6.1-5+deb8u1) ...
+I, [2019-12-27T15:13:48.080854 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-six.
+I, [2019-12-27T15:13:48.080905 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-six_1.8.0-1_all.deb ...
+I, [2019-12-27T15:13:48.092881 #9825]  INFO -- archive-install-debian-8: Unpacking python-six (1.8.0-1) ...
+I, [2019-12-27T15:13:48.133994 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-ecdsa.
+I, [2019-12-27T15:13:48.134129 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-ecdsa_0.11-1+deb8u1_all.deb ...
+I, [2019-12-27T15:13:48.134247 #9825]  INFO -- archive-install-debian-8: Unpacking python-ecdsa (0.11-1+deb8u1) ...
+I, [2019-12-27T15:13:48.183475 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-paramiko.
+I, [2019-12-27T15:13:48.183546 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-paramiko_1.15.1-1+deb8u1_all.deb ...
+I, [2019-12-27T15:13:48.193087 #9825]  INFO -- archive-install-debian-8: Unpacking python-paramiko (1.15.1-1+deb8u1) ...
+I, [2019-12-27T15:13:48.277629 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-httplib2.
+I, [2019-12-27T15:13:48.288401 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-httplib2_0.9+dfsg-2_all.deb ...
+I, [2019-12-27T15:13:48.288557 #9825]  INFO -- archive-install-debian-8: Unpacking python-httplib2 (0.9+dfsg-2) ...
+I, [2019-12-27T15:13:48.346976 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-pkg-resources.
+I, [2019-12-27T15:13:48.347124 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-pkg-resources_5.5.1-1_all.deb ...
+I, [2019-12-27T15:13:48.347203 #9825]  INFO -- archive-install-debian-8: Unpacking python-pkg-resources (5.5.1-1) ...
+I, [2019-12-27T15:13:48.436991 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package python-setuptools.
+I, [2019-12-27T15:13:48.442100 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../python-setuptools_5.5.1-1_all.deb ...
+I, [2019-12-27T15:13:48.442226 #9825]  INFO -- archive-install-debian-8: Unpacking python-setuptools (5.5.1-1) ...
+I, [2019-12-27T15:13:48.587110 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package sshpass.
+I, [2019-12-27T15:13:48.591024 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../sshpass_1.05-1_amd64.deb ...
+I, [2019-12-27T15:13:48.593230 #9825]  INFO -- archive-install-debian-8: Unpacking sshpass (1.05-1) ...
+I, [2019-12-27T15:13:48.642331 #9825]  INFO -- archive-install-debian-8: Selecting previously unselected package ansible.
+I, [2019-12-27T15:13:48.642390 #9825]  INFO -- archive-install-debian-8: Preparing to unpack .../ansible_2.9.2-1ppa~trusty_all.deb ...
+I, [2019-12-27T15:13:48.650153 #9825]  INFO -- archive-install-debian-8: Unpacking ansible (2.9.2-1ppa~trusty) ...
+I, [2019-12-27T15:13:51.657412 #9825]  INFO -- archive-install-debian-8: Setting up libyaml-0-2:amd64 (0.1.6-3) ...
+I, [2019-12-27T15:13:51.688904 #9825]  INFO -- archive-install-debian-8: Setting up python-markupsafe (0.23-1+b1) ...
+I, [2019-12-27T15:13:51.988411 #9825]  INFO -- archive-install-debian-8: Setting up python-jinja2 (2.7.3-1) ...
+I, [2019-12-27T15:13:52.358936 #9825]  INFO -- archive-install-debian-8: Setting up python-yaml (3.11-2) ...
+I, [2019-12-27T15:13:52.615010 #9825]  INFO -- archive-install-debian-8: Setting up python-crypto (2.6.1-5+deb8u1) ...
+I, [2019-12-27T15:13:53.037777 #9825]  INFO -- archive-install-debian-8: Setting up python-six (1.8.0-1) ...
+I, [2019-12-27T15:13:53.157008 #9825]  INFO -- archive-install-debian-8: Setting up python-ecdsa (0.11-1+deb8u1) ...
+I, [2019-12-27T15:13:53.382255 #9825]  INFO -- archive-install-debian-8: Setting up python-paramiko (1.15.1-1+deb8u1) ...
+I, [2019-12-27T15:13:53.767944 #9825]  INFO -- archive-install-debian-8: Setting up python-httplib2 (0.9+dfsg-2) ...
+I, [2019-12-27T15:13:53.953723 #9825]  INFO -- archive-install-debian-8: Setting up python-pkg-resources (5.5.1-1) ...
+I, [2019-12-27T15:13:54.141193 #9825]  INFO -- archive-install-debian-8: Setting up python-setuptools (5.5.1-1) ...
+I, [2019-12-27T15:13:54.514491 #9825]  INFO -- archive-install-debian-8: Setting up sshpass (1.05-1) ...
+I, [2019-12-27T15:13:54.517381 #9825]  INFO -- archive-install-debian-8: Setting up ansible (2.9.2-1ppa~trusty) ...
+I, [2019-12-27T15:14:05.546761 #9825]  INFO -- archive-install-debian-8: Processing triggers for libc-bin (2.19-18+deb8u10) ...
+I, [2019-12-27T15:14:05.793087 #9825]  INFO -- archive-install-debian-8: Transferring files to <archive-install-debian-8>
+I, [2019-12-27T15:14:07.824024 #9825]  INFO -- archive-install-debian-8: - downloading role 'systemd', owned by 0x0i
+I, [2019-12-27T15:14:09.075166 #9825]  INFO -- archive-install-debian-8: - downloading role from https://github.com/0x0I/ansible-role-systemd/archive/master.tar.gz
+I, [2019-12-27T15:14:09.484053 #9825]  INFO -- archive-install-debian-8: - extracting 0x0i.systemd to /tmp/kitchen/roles/0x0i.systemd
+I, [2019-12-27T15:14:09.497049 #9825]  INFO -- archive-install-debian-8: - 0x0i.systemd (master) was installed successfully
+I, [2019-12-27T15:14:10.008661 #9825]  INFO -- archive-install-debian-8: [0;34mansible-playbook 2.9.2[0m
+I, [2019-12-27T15:14:10.008720 #9825]  INFO -- archive-install-debian-8: [0;34m  config file = /etc/ansible/ansible.cfg[0m
+I, [2019-12-27T15:14:10.008737 #9825]  INFO -- archive-install-debian-8: [0;34m  configured module search path = [u'/home/kitchen/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules'][0m
+I, [2019-12-27T15:14:10.008751 #9825]  INFO -- archive-install-debian-8: [0;34m  ansible python module location = /usr/lib/python2.7/dist-packages/ansible[0m
+I, [2019-12-27T15:14:10.008763 #9825]  INFO -- archive-install-debian-8: [0;34m  executable location = /usr/bin/ansible-playbook[0m
+I, [2019-12-27T15:14:10.008776 #9825]  INFO -- archive-install-debian-8: [0;34m  python version = 2.7.9 (default, Sep 14 2019, 20:00:08) [GCC 4.9.2][0m
+I, [2019-12-27T15:14:10.009096 #9825]  INFO -- archive-install-debian-8: [0;34mUsing /etc/ansible/ansible.cfg as config file[0m
+I, [2019-12-27T15:14:10.038540 #9825]  INFO -- archive-install-debian-8: [0;35m[DEPRECATION WARNING]: The TRANSFORM_INVALID_GROUP_CHARS settings is set to [0m
+I, [2019-12-27T15:14:10.038747 #9825]  INFO -- archive-install-debian-8: [0;35mallow bad characters in group names by default, this will change, but still be [0m
+I, [2019-12-27T15:14:10.038855 #9825]  INFO -- archive-install-debian-8: [0;35muser configurable on deprecation. This feature will be removed in version 2.10.[0m
+I, [2019-12-27T15:14:10.038958 #9825]  INFO -- archive-install-debian-8: [0;35m Deprecation warnings can be disabled by setting deprecation_warnings=False in [0m
+I, [2019-12-27T15:14:10.039059 #9825]  INFO -- archive-install-debian-8: [0;35mansible.cfg.[0m
+I, [2019-12-27T15:14:10.039159 #9825]  INFO -- archive-install-debian-8: [1;35m[WARNING]: Invalid characters were found in group names but not replaced, use[0m
+I, [2019-12-27T15:14:10.039259 #9825]  INFO -- archive-install-debian-8: [1;35m-vvvv to see details[0m
+I, [2019-12-27T15:14:10.039355 #9825]  INFO -- archive-install-debian-8: [1;35m[0m
+I, [2019-12-27T15:14:10.457842 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:10.457911 #9825]  INFO -- archive-install-debian-8: PLAYBOOK: default_playbook.yml *************************************************
+I, [2019-12-27T15:14:10.458016 #9825]  INFO -- archive-install-debian-8: [0;34m1 plays in /tmp/kitchen/default_playbook.yml[0m
+I, [2019-12-27T15:14:10.463203 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:10.463254 #9825]  INFO -- archive-install-debian-8: PLAY [Default playbook for testing] ********************************************
+I, [2019-12-27T15:14:10.477897 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:10.477974 #9825]  INFO -- archive-install-debian-8: TASK [Gathering Facts] *********************************************************
+I, [2019-12-27T15:14:10.478544 #9825]  INFO -- archive-install-debian-8: [1;30mtask path: /tmp/kitchen/default_playbook.yml:2[0m
+I, [2019-12-27T15:14:11.884061 #9825]  INFO -- archive-install-debian-8: [0;32mok: [localhost][0m
+I, [2019-12-27T15:14:11.884120 #9825]  INFO -- archive-install-debian-8: [0;34mMETA: ran handlers[0m
+I, [2019-12-27T15:14:11.906362 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:11.906422 #9825]  INFO -- archive-install-debian-8: TASK [ansible-role-prometheus : Include OS and distribution specific variables.] ***
+I, [2019-12-27T15:14:11.906439 #9825]  INFO -- archive-install-debian-8: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:2[0m
+I, [2019-12-27T15:14:11.953673 #9825]  INFO -- archive-install-debian-8: [0;32mok: [localhost] => (item=/tmp/kitchen/roles/ansible-role-prometheus/vars/debian.yml) => {"ansible_facts": {}, "ansible_included_var_files": ["/tmp/kitchen/roles/ansible-role-prometheus/vars/debian.yml"], "ansible_loop_var": "item", "changed": false, "item": "/tmp/kitchen/roles/ansible-role-prometheus/vars/debian.yml"}[0m
+I, [2019-12-27T15:14:11.972246 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:11.972313 #9825]  INFO -- archive-install-debian-8: TASK [ansible-role-prometheus : Include OS and distribution specific installation tasks.] ***
+I, [2019-12-27T15:14:11.972432 #9825]  INFO -- archive-install-debian-8: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:10[0m
+I, [2019-12-27T15:14:12.033186 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:12.033245 #9825]  INFO -- archive-install-debian-8: TASK [ansible-role-prometheus : Include common installation tasks] *************
+I, [2019-12-27T15:14:12.033261 #9825]  INFO -- archive-install-debian-8: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:18[0m
+I, [2019-12-27T15:14:12.140895 #9825]  INFO -- archive-install-debian-8: [0;36mincluded: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml for localhost[0m
+I, [2019-12-27T15:14:12.153937 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:12.154001 #9825]  INFO -- archive-install-debian-8: TASK [ansible-role-prometheus : Ensure Prometheus group exists] ****************
+I, [2019-12-27T15:14:12.154103 #9825]  INFO -- archive-install-debian-8: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:2[0m
+I, [2019-12-27T15:14:12.571321 #9825]  INFO -- archive-install-debian-8: [0;33mchanged: [localhost] => {"changed": true, "gid": 1001, "name": "prometheus", "state": "present", "system": false}[0m
+I, [2019-12-27T15:14:12.591578 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:12.591642 #9825]  INFO -- archive-install-debian-8: TASK [ansible-role-prometheus : Create Prometheus user] ************************
+I, [2019-12-27T15:14:12.591947 #9825]  INFO -- archive-install-debian-8: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:8[0m
+I, [2019-12-27T15:14:13.148895 #9825]  INFO -- archive-install-debian-8: [0;33mchanged: [localhost] => {"changed": true, "comment": "Prometheus service account", "create_home": true, "group": 1001, "home": "/home/prometheus", "name": "prometheus", "shell": "/bin/sh", "state": "present", "system": false, "uid": 1001}[0m
+I, [2019-12-27T15:14:13.169023 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:13.169074 #9825]  INFO -- archive-install-debian-8: TASK [ansible-role-prometheus : perform designated installation procedure] *****
+I, [2019-12-27T15:14:13.169092 #9825]  INFO -- archive-install-debian-8: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:15[0m
+I, [2019-12-27T15:14:13.220023 #9825]  INFO -- archive-install-debian-8: [0;34mMETA: ran handlers[0m
+I, [2019-12-27T15:14:13.220380 #9825]  INFO -- archive-install-debian-8: [0;34mMETA: ran handlers[0m
+I, [2019-12-27T15:14:13.225473 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:13.225534 #9825]  INFO -- archive-install-debian-8: PLAY RECAP *********************************************************************
+I, [2019-12-27T15:14:13.225560 #9825]  INFO -- archive-install-debian-8: [0;33mlocalhost[0m                  : [0;32mok=5   [0m [0;33mchanged=2   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+I, [2019-12-27T15:14:13.225574 #9825]  INFO -- archive-install-debian-8: 
+I, [2019-12-27T15:14:13.264817 #9825]  INFO -- archive-install-debian-8: Downloading files from <archive-install-debian-8>
+I, [2019-12-27T15:14:13.283268 #9825]  INFO -- archive-install-debian-8: Finished converging <archive-install-debian-8> (1m46.06s).
+I, [2019-12-27T15:14:13.283406 #9825]  INFO -- archive-install-debian-8: -----> Setting up <archive-install-debian-8>...
+I, [2019-12-27T15:14:13.286288 #9825]  INFO -- archive-install-debian-8: Finished setting up <archive-install-debian-8> (0m0.00s).
+I, [2019-12-27T15:14:13.286399 #9825]  INFO -- archive-install-debian-8: -----> Verifying <archive-install-debian-8>...
+I, [2019-12-27T15:14:13.499355 #9825]  INFO -- archive-install-debian-8: Loaded tests from {:path=>".home.awilson.lab.ansible-role-prometheus.test.integration.install.archive_install"} 
+I, [2019-12-27T15:14:13.596928 #9825]  INFO -- archive-install-debian-8: Finished verifying <archive-install-debian-8> (0m0.31s).
+I, [2019-12-27T15:14:13.597273 #9825]  INFO -- archive-install-debian-8: -----> Destroying <archive-install-debian-8>...
+I, [2019-12-27T15:14:13.719086 #9825]  INFO -- archive-install-debian-8: UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+I, [2019-12-27T15:14:13.719168 #9825]  INFO -- archive-install-debian-8: root                10787               10750               0                   15:12               ?                   00:00:00            /lib/systemd/systemd
+I, [2019-12-27T15:14:13.719186 #9825]  INFO -- archive-install-debian-8: root                11200               10787               0                   15:12               ?                   00:00:00            /lib/systemd/systemd-journald
+I, [2019-12-27T15:14:13.719275 #9825]  INFO -- archive-install-debian-8: root                11264               10787               0                   15:12               ?                   00:00:00            /usr/sbin/sshd -D
+I, [2019-12-27T15:14:13.719293 #9825]  INFO -- archive-install-debian-8: root                11295               11264               0                   15:12               ?                   00:00:00            sshd: kitchen [priv]
+I, [2019-12-27T15:14:13.719311 #9825]  INFO -- archive-install-debian-8: awilson             11307               11295               0                   15:12               ?                   00:00:00            sshd: kitchen@notty
+I, [2019-12-27T15:14:13.719325 #9825]  INFO -- archive-install-debian-8: root                19941               11264               0                   15:14               ?                   00:00:00            sshd: kitchen [priv]
+I, [2019-12-27T15:14:13.719340 #9825]  INFO -- archive-install-debian-8: awilson             19943               19941               0                   15:14               ?                   00:00:00            sshd: kitchen@notty
+I, [2019-12-27T15:14:14.335832 #9825]  INFO -- archive-install-debian-8: 7fb28d8a7cb9ec177eb72d60bd002a06e3877bf55150b474823cecb35cae9cfa
+I, [2019-12-27T15:14:14.782297 #9825]  INFO -- archive-install-debian-8: 7fb28d8a7cb9ec177eb72d60bd002a06e3877bf55150b474823cecb35cae9cfa
+I, [2019-12-27T15:14:14.796929 #9825]  INFO -- archive-install-debian-8: Finished destroying <archive-install-debian-8> (0m1.20s).
+I, [2019-12-27T15:14:14.797075 #9825]  INFO -- archive-install-debian-8: Finished testing <archive-install-debian-8> (1m51.63s).

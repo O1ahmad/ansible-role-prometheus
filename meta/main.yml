@@ -1,0 +1,27 @@
+---
+# role metadata file
+galaxy_info:
+  author: Ahmad Wilson
+  role_name: Prometheus
+  description: Prometheus - a multi-dimensional time-series data monitoring and alerting toolkit
+  company: "O1.IO"
+  license: license (Apache, BSD, MIT)
+  min_ansible_version: 2.6
+  platforms:
+    - name: EL
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+    - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+
+  galaxy_tags:
+    - prometheus
+    - monitoring
+    - alerting

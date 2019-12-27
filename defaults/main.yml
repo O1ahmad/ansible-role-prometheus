@@ -1,0 +1,3 @@
+---
+# defaults variable file
+prometheus_user: prometheus
