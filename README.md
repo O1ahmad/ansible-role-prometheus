@@ -1,4 +1,4 @@
-Ansible Role :fire: :bar_chart: Prometheus
+Ansible Role :fire: :straight_ruler: Prometheus
 =========
 [![Galaxy Role](https://img.shields.io/ansible/role/45433.svg)](https://galaxy.ansible.com/0x0I/prometheus)
 [![Downloads](https://img.shields.io/ansible/role/d/45433.svg)](https://galaxy.ansible.com/0x0I/prometheus)
