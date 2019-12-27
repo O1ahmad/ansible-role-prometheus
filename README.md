@@ -18,7 +18,7 @@ Ansible Role :fire: :straight_ruler: Prometheus
   - [License](#license)
   - [Author Information](#author-information)
 
-Ansible role that installs and configures Prometheus: a multi-dimensional, non-distributed/stand-alone time-series data monitoring and alerting toolkit.
+Ansible role that installs and configures Prometheus: a multi-dimensional, non-distributed/stand-alone time-series database monitoring/alerting toolkit.
 
 ##### Supported Platforms:
 ```
