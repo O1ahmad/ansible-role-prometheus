@@ -1,3 +1,5 @@
+<p><img src="https://cdn.worldvectorlogo.com/logos/prometheus.svg" alt="prometheus logo" title="prometheus" align="right" height="60" /></p>
+
 Ansible Role :fire: :straight_ruler: Prometheus
 =========
 [![Galaxy Role](https://img.shields.io/ansible/role/45433.svg)](https://galaxy.ansible.com/0x0I/prometheus)
