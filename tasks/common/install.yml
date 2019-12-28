@@ -1,16 +1,20 @@
 ---
-- name: Ensure Prometheus group exists
+- name: Ensure Prometheus system group exists
+  become: true
   group:
     name: "{{ prometheus_user }}"
     state: present
-  become: true
+    system: true
 
-- name: Create Prometheus user
+- name: Create Prometheus system user
+  become: true
   user:
     comment: Prometheus service account
     name: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
-  become: true
+    shell: "/sbin/nologin"
+    system: true
+    create_home: false
 
 - name: perform designated installation procedure
   include_tasks: "common/install/{{ install_type }}_install.yml"

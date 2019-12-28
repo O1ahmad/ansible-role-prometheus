@@ -91,3 +91,9 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/install/archive_install
+  - name: prometheus_config
+    provisioner:
+      playbook: test/integration/config/prometheus_config/default_playbook.yml
+    verifier:
+      inspec_tests:
+        - path: test/integration/config/prometheus_config
