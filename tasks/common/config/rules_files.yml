@@ -1,0 +1,30 @@
+---
+#######  Rules file configuration #######
+- name: set default rules files path
+  set_fact:
+    default_rules_path: "{{ install_dir }}/rules.d"
+
+- name: set rules path
+  set_fact:
+    rules_path: "{{ item.path | default(default_rules_path) }}"
+
+- name: Ensure existence of rules file directory
+  become: true
+  file:
+    path: "{{ rules_path }}"
+    state: directory
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+
+- name: Copy Prometheus rules file configuration in place
+  become: true
+  template:
+    src: "{{ rules_file_template }}"
+    dest: "{{ rules_path }}/{{ item.name }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    mode: 0644
+    validate: "{{ install_dir }}/promtool check rules %s"
+  vars:
+    conf: "{{ item.config }}"
+  when: item.config is defined and item.config is not none

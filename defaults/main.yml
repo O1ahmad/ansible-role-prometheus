@@ -13,14 +13,14 @@ alertmgr_checksum_format: sha256
 default_install_dir: /opt/prometheus
 
 prometheus_config_file: prometheus.yml
-config:
+prometheus_config:
   global: {}
-  rules_files: []
+  rule_files: []
   remote_write: []
   remote_read: []
   scrape_configs: []
 
-file_sd_template: file_sd.j2
+sd_files_template: file_sd.j2
 prometheus_sd_files: []
 
 rules_file_template: rules.j2

@@ -1,25 +1,7 @@
 ---
-- name: Determine configuration directory
-  set_fact:
-    config_dir: "{{ config_dir | default(install_dir) }}"
+- name: Render rules files
+  include_tasks: "common/config/rules_files.yml"
+  with_items: "{{ prometheus_rules_files }}"
 
-- name: Ensure existence of config dir
-  become: true
-  file:
-    path: "{{ config_dir }}"
-    owner: "{{ prometheus_user }}"
-    group: "{{ prometheus_user }}"
-    state: directory
-
-- name: Copy Prometheus configuration in place
-  become: true
-  template:
-    src: "{{ prometheus_config_file }}.j2"
-    dest: "{{ config_dir }}/{{ prometheus_config_file }}"
-    owner: "{{ prometheus_user }}"
-    group: "{{ prometheus_user }}"
-    mode: 0644
-    validate: "{{ install_dir }}/promtool check config %s"
-  vars:
-    conf: "{{ config }}"
-  when: config is defined and config is not none
+- name: Render prometheus.yml config
+  include_tasks: "common/config/prometheus_config.yml"
