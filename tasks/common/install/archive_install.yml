@@ -14,7 +14,7 @@
   become: true
   when: install_type == "archive"
 
-- name: Download Prometheus package ({{ package_url }})
+- name: Download Prometheus archive ({{ archive_url }})
   get_url:
     url: "{{ archive_url }}"
     dest: "/tmp/{{ archive_url | urlsplit('path') | basename }}"
