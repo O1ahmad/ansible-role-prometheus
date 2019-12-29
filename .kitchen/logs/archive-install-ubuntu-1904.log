@@ -1,638 +1,0 @@
-I, [2019-12-27T15:12:23.171794 #9825]  INFO -- archive-install-ubuntu-1904: -----> Cleaning up any prior instances of <archive-install-ubuntu-1904>
-I, [2019-12-27T15:12:23.171992 #9825]  INFO -- archive-install-ubuntu-1904: -----> Destroying <archive-install-ubuntu-1904>...
-I, [2019-12-27T15:12:23.172519 #9825]  INFO -- archive-install-ubuntu-1904: Finished destroying <archive-install-ubuntu-1904> (0m0.00s).
-I, [2019-12-27T15:12:23.172742 #9825]  INFO -- archive-install-ubuntu-1904: -----> Testing <archive-install-ubuntu-1904>
-I, [2019-12-27T15:12:23.172839 #9825]  INFO -- archive-install-ubuntu-1904: -----> Creating <archive-install-ubuntu-1904>...
-I, [2019-12-27T15:12:23.293444 #9825]  INFO -- archive-install-ubuntu-1904: Sending build context to Docker daemon    149kB
-I, [2019-12-27T15:12:23.481075 #9825]  INFO -- archive-install-ubuntu-1904: Step 1/19 : FROM ubuntu:19.04
-I, [2019-12-27T15:12:23.481287 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 51b0783967fc
-I, [2019-12-27T15:12:23.481309 #9825]  INFO -- archive-install-ubuntu-1904: Step 2/19 : RUN [ ! -f "/sbin/initctl" ] || dpkg-divert --local --rename --add /sbin/initctl && ln -sf /bin/true /sbin/initctl
-I, [2019-12-27T15:12:23.481638 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.481667 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 7ef60944a6db
-I, [2019-12-27T15:12:23.481686 #9825]  INFO -- archive-install-ubuntu-1904: Step 3/19 : ENV DEBIAN_FRONTEND noninteractive
-I, [2019-12-27T15:12:23.482258 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.482305 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 6056b72bb86d
-I, [2019-12-27T15:12:23.482318 #9825]  INFO -- archive-install-ubuntu-1904: Step 4/19 : ENV container docker
-I, [2019-12-27T15:12:23.483011 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.483057 #9825]  INFO -- archive-install-ubuntu-1904:  ---> bb7f68904a38
-I, [2019-12-27T15:12:23.483070 #9825]  INFO -- archive-install-ubuntu-1904: Step 5/19 : RUN apt-get update
-I, [2019-12-27T15:12:23.483569 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.483611 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 4fa9f75d3366
-I, [2019-12-27T15:12:23.483629 #9825]  INFO -- archive-install-ubuntu-1904: Step 6/19 : RUN apt-get install -y sudo openssh-server curl lsb-release
-I, [2019-12-27T15:12:23.484169 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.484217 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 0a623e8f6014
-I, [2019-12-27T15:12:23.484231 #9825]  INFO -- archive-install-ubuntu-1904: Step 7/19 : RUN if ! getent passwd kitchen; then                 useradd -d /home/kitchen -m -s /bin/bash -p '*' kitchen;               fi
-I, [2019-12-27T15:12:23.485501 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.486997 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 2c4dcb9acaf0
-I, [2019-12-27T15:12:23.487018 #9825]  INFO -- archive-install-ubuntu-1904: Step 8/19 : RUN echo "kitchen ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
-I, [2019-12-27T15:12:23.487126 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.487142 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 749df124df72
-I, [2019-12-27T15:12:23.487154 #9825]  INFO -- archive-install-ubuntu-1904: Step 9/19 : RUN echo "Defaults !requiretty" >> /etc/sudoers
-I, [2019-12-27T15:12:23.489853 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.489910 #9825]  INFO -- archive-install-ubuntu-1904:  ---> ae2e292b7655
-I, [2019-12-27T15:12:23.489923 #9825]  INFO -- archive-install-ubuntu-1904: Step 10/19 : RUN mkdir -p /home/kitchen/.ssh
-I, [2019-12-27T15:12:23.489934 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.489944 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 1694b9b45155
-I, [2019-12-27T15:12:23.489955 #9825]  INFO -- archive-install-ubuntu-1904: Step 11/19 : RUN chown -R kitchen /home/kitchen/.ssh
-I, [2019-12-27T15:12:23.490911 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.491544 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 0fd78abf5187
-I, [2019-12-27T15:12:23.492171 #9825]  INFO -- archive-install-ubuntu-1904: Step 12/19 : RUN chmod 0700 /home/kitchen/.ssh
-I, [2019-12-27T15:12:23.492806 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.493961 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 1f4b74daeca1
-I, [2019-12-27T15:12:23.494018 #9825]  INFO -- archive-install-ubuntu-1904: Step 13/19 : RUN touch /home/kitchen/.ssh/authorized_keys
-I, [2019-12-27T15:12:23.495320 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.495372 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 579c887fa3be
-I, [2019-12-27T15:12:23.495384 #9825]  INFO -- archive-install-ubuntu-1904: Step 14/19 : RUN chown kitchen /home/kitchen/.ssh/authorized_keys
-I, [2019-12-27T15:12:23.496317 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.500430 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 7380a3d3edcf
-I, [2019-12-27T15:12:23.500484 #9825]  INFO -- archive-install-ubuntu-1904: Step 15/19 : RUN chmod 0600 /home/kitchen/.ssh/authorized_keys
-I, [2019-12-27T15:12:23.501344 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.501377 #9825]  INFO -- archive-install-ubuntu-1904:  ---> eb1de3ba9d4f
-I, [2019-12-27T15:12:23.501389 #9825]  INFO -- archive-install-ubuntu-1904: Step 16/19 : RUN mkdir -p /run/sshd
-I, [2019-12-27T15:12:23.502205 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.502240 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 2ce4980419f2
-I, [2019-12-27T15:12:23.502253 #9825]  INFO -- archive-install-ubuntu-1904: Step 17/19 : RUN sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
-I, [2019-12-27T15:12:23.503443 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.503495 #9825]  INFO -- archive-install-ubuntu-1904:  ---> 35937f345d3f
-I, [2019-12-27T15:12:23.503509 #9825]  INFO -- archive-install-ubuntu-1904: Step 18/19 : RUN systemctl enable ssh.service
-I, [2019-12-27T15:12:23.505536 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Using cache
-I, [2019-12-27T15:12:23.505620 #9825]  INFO -- archive-install-ubuntu-1904:  ---> f3a471360580
-I, [2019-12-27T15:12:23.505639 #9825]  INFO -- archive-install-ubuntu-1904: Step 19/19 : RUN echo ssh-rsa\ AAAAB3NzaC1yc2EAAAADAQABAAABAQC5xlVxSukumkBS8OIrcQwtrTYqToOG5qHibxBuGtL0zSeBi2tbNAFlahXmC0IsTRJlMgycR6qCXk4mMtCNzI9GTRR\+k7MG01NG\+xJwT/kuKMA/i3WqIPJZ6iSfKbduaMevZaEJ6ZpGBU/AXfs3K/uJtJknlsl4Zdx4zbQCSvf3gwIz1PdJ6CcflWB3GVDJxMPfgSasO3AZcuxg9U0I3Uhh4SDn\+vGM2NGtP7imwCoGldyYzvCrR/ru8JoY2OoC/1VdN1d2TzDGiWi9z/fTscwgEYMAeCnOHW9MgBxnBOAWnzknmYqXFIwbuO/N8EhuXGxNVu51gjhn/okE21WY\+9XN\ kitchen_docker_key >> /home/kitchen/.ssh/authorized_keys
-I, [2019-12-27T15:12:23.616908 #9825]  INFO -- archive-install-ubuntu-1904:  ---> Running in b47757013968
-I, [2019-12-27T15:12:25.213012 #9825]  INFO -- archive-install-ubuntu-1904: Removing intermediate container b47757013968
-I, [2019-12-27T15:12:25.213080 #9825]  INFO -- archive-install-ubuntu-1904:  ---> cf962f6550e1
-I, [2019-12-27T15:12:25.220035 #9825]  INFO -- archive-install-ubuntu-1904: Successfully built cf962f6550e1
-I, [2019-12-27T15:12:25.386512 #9825]  INFO -- archive-install-ubuntu-1904: b93bc0f4436b666502272186cf13f3cfa2aef4478b91223d6eaafaeaeb355394
-I, [2019-12-27T15:12:26.656083 #9825]  INFO -- archive-install-ubuntu-1904: 0.0.0.0:32797
-I, [2019-12-27T15:12:26.682309 #9825]  INFO -- archive-install-ubuntu-1904: Waiting for SSH service on localhost:32797, retrying in 3 seconds
-I, [2019-12-27T15:12:29.766084 #9825]  INFO -- archive-install-ubuntu-1904: [SSH] Established
-I, [2019-12-27T15:12:29.767129 #9825]  INFO -- archive-install-ubuntu-1904: Finished creating <archive-install-ubuntu-1904> (0m6.59s).
-I, [2019-12-27T15:12:29.767275 #9825]  INFO -- archive-install-ubuntu-1904: -----> Converging <archive-install-ubuntu-1904>...
-I, [2019-12-27T15:12:29.767800 #9825]  INFO -- archive-install-ubuntu-1904: Preparing files for transfer
-I, [2019-12-27T15:12:29.767867 #9825]  INFO -- archive-install-ubuntu-1904: Preparing playbook
-I, [2019-12-27T15:12:29.768065 #9825]  INFO -- archive-install-ubuntu-1904: Preparing inventory
-I, [2019-12-27T15:12:29.768126 #9825]  INFO -- archive-install-ubuntu-1904: Preparing modules
-I, [2019-12-27T15:12:29.768258 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for modules
-I, [2019-12-27T15:12:29.768296 #9825]  INFO -- archive-install-ubuntu-1904: Preparing roles
-I, [2019-12-27T15:12:29.806439 #9825]  INFO -- archive-install-ubuntu-1904: Preparing ansible.cfg file
-I, [2019-12-27T15:12:29.806553 #9825]  INFO -- archive-install-ubuntu-1904: Empty ansible.cfg generated
-I, [2019-12-27T15:12:29.806636 #9825]  INFO -- archive-install-ubuntu-1904: Preparing group_vars
-I, [2019-12-27T15:12:29.806733 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for group_vars
-I, [2019-12-27T15:12:29.806765 #9825]  INFO -- archive-install-ubuntu-1904: Preparing additional_copy_path
-I, [2019-12-27T15:12:29.806833 #9825]  INFO -- archive-install-ubuntu-1904: Preparing host_vars
-I, [2019-12-27T15:12:29.806919 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for host_vars
-I, [2019-12-27T15:12:29.806959 #9825]  INFO -- archive-install-ubuntu-1904: Preparing hosts file
-I, [2019-12-27T15:12:29.807050 #9825]  INFO -- archive-install-ubuntu-1904: Preparing spec
-I, [2019-12-27T15:12:29.807119 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for spec
-I, [2019-12-27T15:12:29.807148 #9825]  INFO -- archive-install-ubuntu-1904: Preparing library plugins
-I, [2019-12-27T15:12:29.808122 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for library plugins
-I, [2019-12-27T15:12:29.808168 #9825]  INFO -- archive-install-ubuntu-1904: Preparing callback plugins
-I, [2019-12-27T15:12:29.808308 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for callback plugins
-I, [2019-12-27T15:12:29.808341 #9825]  INFO -- archive-install-ubuntu-1904: Preparing filter_plugins
-I, [2019-12-27T15:12:29.808452 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for filter_plugins
-I, [2019-12-27T15:12:29.808485 #9825]  INFO -- archive-install-ubuntu-1904: Preparing lookup_plugins
-I, [2019-12-27T15:12:29.808587 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for lookup_plugins
-I, [2019-12-27T15:12:29.808667 #9825]  INFO -- archive-install-ubuntu-1904: Preparing ansible vault password
-I, [2019-12-27T15:12:29.808738 #9825]  INFO -- archive-install-ubuntu-1904: Preparing additional_ssh_private_keys
-I, [2019-12-27T15:12:29.809727 #9825]  INFO -- archive-install-ubuntu-1904: nothing to do for additional_ssh_private_keys
-I, [2019-12-27T15:12:29.809778 #9825]  INFO -- archive-install-ubuntu-1904: Finished Preparing files for transfer
-I, [2019-12-27T15:12:29.810042 #9825]  INFO -- archive-install-ubuntu-1904: Installing ansible, will try to determine platform os
-I, [2019-12-27T15:12:30.190348 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Working]            Get:1 http://security.ubuntu.com/ubuntu disco-security InRelease [97.5 kB]
-I, [2019-12-27T15:12:30.343422 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Connecting to archive.ubuntu.com (91.189.88.174)] [1 InRelease 5482 B/97.5                                                                                Hit:2 http://archive.ubuntu.com/ubuntu disco InRelease
-I, [2019-12-27T15:12:30.444841 #9825]  INFO -- archive-install-ubuntu-1904:                                                                                0% [Waiting for headers] [1 InRelease 97.5 kB/97.5 kB 100%]                                                           0% [Waiting for headers]                        Get:3 http://archive.ubuntu.com/ubuntu disco-updates InRelease [97.5 kB]
-I, [2019-12-27T15:12:30.605101 #9825]  INFO -- archive-install-ubuntu-1904: 0% [3 InRelease 14.2 kB/97.5 kB 15%]0% [3 InRelease 14.2 kB/97.5 kB 15%]0% [3 InRelease 15.6 kB/97.5 kB 16%]                                    Get:4 http://security.ubuntu.com/ubuntu disco-security/main amd64 Packages [340 kB]
-I, [2019-12-27T15:12:30.935155 #9825]  INFO -- archive-install-ubuntu-1904: 0% [3 InRelease 35.9 kB/97.5 kB 37%] [4 Packages 8479 B/340 kB 2%]                                                                  0% [3 InRelease 92.4 kB/97.5 kB 95%]0% [4 Packages store 0 B] [3 InRelease 92.4 kB/97.5 kB 95%] [Waiting for header                                                                               0% [4 Packages store 0 B] [Waiting for headers] [Waiting for headers]                                                                     0% [Waiting for headers] [Waiting for headers]                                              Get:5 http://security.ubuntu.com/ubuntu disco-security/multiverse amd64 Packages [1380 B]
-I, [2019-12-27T15:12:30.935393 #9825]  INFO -- archive-install-ubuntu-1904:                                               Get:6 http://security.ubuntu.com/ubuntu disco-security/restricted amd64 Packages [7010 B]
-I, [2019-12-27T15:12:30.938006 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Waiting for headers] [6 Packages 1105 B/7010 B 16%]0% [5 Packages store 0 B] [Waiting for headers] [6 Packages 4001 B/7010 B 57%]                                                                              0% [Waiting for headers] [6 Packages 4001 B/7010 B 57%]                                                       0% [Waiting for headers] [Waiting for headers]                                              Get:7 http://security.ubuntu.com/ubuntu disco-security/universe amd64 Packages [357 kB]
-I, [2019-12-27T15:12:31.054002 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Waiting for headers] [7 Packages 1126 B/357 kB 0%]0% [6 Packages store 0 B] [Waiting for headers] [7 Packages 2574 B/357 kB 1%]                                                                             0% [Waiting for headers] [7 Packages 25.7 kB/357 kB 7%]                                                       Get:8 http://archive.ubuntu.com/ubuntu disco-backports InRelease [88.8 kB]
-I, [2019-12-27T15:12:31.327794 #9825]  INFO -- archive-install-ubuntu-1904: 0% [8 InRelease 2601 B/88.8 kB 3%] [7 Packages 139 kB/357 kB 39%]                                                                 0% [8 InRelease 51.8 kB/88.8 kB 58%]0% [7 Packages store 0 B] [8 InRelease 54.7 kB/88.8 kB 62%]                                                           0% [7 Packages store 0 B]                         0% [Working]0% [Working]            Get:9 http://archive.ubuntu.com/ubuntu disco-updates/universe amd64 Packages [422 kB]
-I, [2019-12-27T15:12:31.770521 #9825]  INFO -- archive-install-ubuntu-1904: 0% [9 Packages 5583 B/422 kB 1%]                                0% [Working]0% [9 Packages store 0 B]78% [9 Packages store 0 B] [Waiting for headers]                                                Get:10 http://archive.ubuntu.com/ubuntu disco-updates/multiverse amd64 Packages [1672 B]
-I, [2019-12-27T15:12:31.770583 #9825]  INFO -- archive-install-ubuntu-1904: 78% [9 Packages store 0 B] [10 Packages 1672 B/1672 B 100%]                                                           78% [9 Packages store 0 B]                          Get:11 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 Packages [438 kB]
-I, [2019-12-27T15:12:32.146916 #9825]  INFO -- archive-install-ubuntu-1904: 78% [9 Packages store 0 B] [11 Packages 6602 B/438 kB 2%]                                                         82% [11 Packages 93.5 kB/438 kB 21%]83% [10 Packages store 0 B] [11 Packages 104 kB/438 kB 24%]                                                           83% [11 Packages 104 kB/438 kB 24%]                                   Get:12 http://archive.ubuntu.com/ubuntu disco-updates/restricted amd64 Packages [7512 B]
-I, [2019-12-27T15:12:32.146973 #9825]  INFO -- archive-install-ubuntu-1904:                                    Get:13 http://archive.ubuntu.com/ubuntu disco-backports/universe amd64 Packages [3610 B]
-I, [2019-12-27T15:12:32.289051 #9825]  INFO -- archive-install-ubuntu-1904:                                    98% [Working]98% [11 Packages store 0 B]                           99% [Working]99% [12 Packages store 0 B]                           99% [Working]99% [13 Packages store 0 B]                           100% [Working]              Fetched 1864 kB in 2s (803 kB/s)
-I, [2019-12-27T15:12:34.352798 #9825]  INFO -- archive-install-ubuntu-1904: Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 85%Reading package lists... 85%Reading package lists... 86%Reading package lists... 86%Reading package lists... 87%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
-I, [2019-12-27T15:12:35.362756 #9825]  INFO -- archive-install-ubuntu-1904: Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 85%Reading package lists... 85%Reading package lists... 86%Reading package lists... 86%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
-I, [2019-12-27T15:12:35.591075 #9825]  INFO -- archive-install-ubuntu-1904: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
-I, [2019-12-27T15:12:35.591310 #9825]  INFO -- archive-install-ubuntu-1904: Reading state information... 0%Reading state information... 1%Reading state information... Done
-I, [2019-12-27T15:12:35.832960 #9825]  INFO -- archive-install-ubuntu-1904: The following additional packages will be installed:
-I, [2019-12-27T15:12:35.833121 #9825]  INFO -- archive-install-ubuntu-1904:   git-man gnupg gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client
-I, [2019-12-27T15:12:35.833233 #9825]  INFO -- archive-install-ubuntu-1904:   gpg-wks-server gpgconf gpgsm less libapt-inst2.0 libassuan0 libcurl3-gnutls
-I, [2019-12-27T15:12:35.833339 #9825]  INFO -- archive-install-ubuntu-1904:   liberror-perl libgdbm-compat4 libgdbm6 libksba8 libnpth0 libperl5.28 netbase
-I, [2019-12-27T15:12:35.833449 #9825]  INFO -- archive-install-ubuntu-1904:   patch perl perl-modules-5.28 pinentry-curses
-I, [2019-12-27T15:12:35.835946 #9825]  INFO -- archive-install-ubuntu-1904: Suggested packages:
-I, [2019-12-27T15:12:35.836093 #9825]  INFO -- archive-install-ubuntu-1904:   dbus-user-session pinentry-gnome3 tor gettext-base git-daemon-run
-I, [2019-12-27T15:12:35.836203 #9825]  INFO -- archive-install-ubuntu-1904:   | git-daemon-sysvinit git-doc git-el git-email git-gui gitk gitweb git-cvs
-I, [2019-12-27T15:12:35.836307 #9825]  INFO -- archive-install-ubuntu-1904:   git-mediawiki git-svn parcimonie xloadimage scdaemon gdbm-l10n ed
-I, [2019-12-27T15:12:35.836421 #9825]  INFO -- archive-install-ubuntu-1904:   diffutils-doc perl-doc libterm-readline-gnu-perl
-I, [2019-12-27T15:12:35.836527 #9825]  INFO -- archive-install-ubuntu-1904:   | libterm-readline-perl-perl make libb-debug-perl liblocale-codes-perl
-I, [2019-12-27T15:12:35.836637 #9825]  INFO -- archive-install-ubuntu-1904:   pinentry-doc
-I, [2019-12-27T15:12:35.896719 #9825]  INFO -- archive-install-ubuntu-1904: The following NEW packages will be installed:
-I, [2019-12-27T15:12:35.898949 #9825]  INFO -- archive-install-ubuntu-1904:   apt-utils dirmngr git git-man gnupg gnupg-l10n gnupg-utils gpg gpg-agent
-I, [2019-12-27T15:12:35.899101 #9825]  INFO -- archive-install-ubuntu-1904:   gpg-wks-client gpg-wks-server gpgconf gpgsm less libapt-inst2.0 libassuan0
-I, [2019-12-27T15:12:35.899211 #9825]  INFO -- archive-install-ubuntu-1904:   libcurl3-gnutls liberror-perl libgdbm-compat4 libgdbm6 libksba8 libnpth0
-I, [2019-12-27T15:12:35.899515 #9825]  INFO -- archive-install-ubuntu-1904:   libperl5.28 netbase patch perl perl-modules-5.28 pinentry-curses
-I, [2019-12-27T15:12:35.911131 #9825]  INFO -- archive-install-ubuntu-1904: 0 upgraded, 28 newly installed, 0 to remove and 5 not upgraded.
-I, [2019-12-27T15:12:35.912878 #9825]  INFO -- archive-install-ubuntu-1904: Need to get 15.1 MB of archives.
-I, [2019-12-27T15:12:35.913029 #9825]  INFO -- archive-install-ubuntu-1904: After this operation, 90.6 MB of additional disk space will be used.
-I, [2019-12-27T15:12:36.306639 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu disco/main amd64 perl-modules-5.28 all 5.28.1-6 [2818 kB]
-I, [2019-12-27T15:12:38.142469 #9825]  INFO -- archive-install-ubuntu-1904: 0% [1 perl-modules-5.28 0 B/2818 kB 0%]1% [1 perl-modules-5.28 194 kB/2818 kB 7%]3% [1 perl-modules-5.28 647 kB/2818 kB 23%]5% [1 perl-modules-5.28 945 kB/2818 kB 34%]                                           16% [Working]             Get:2 http://archive.ubuntu.com/ubuntu disco/main amd64 libgdbm6 amd64 1.18.1-4 [27.4 kB]
-I, [2019-12-27T15:12:38.145852 #9825]  INFO -- archive-install-ubuntu-1904: 16% [2 libgdbm6 6959 B/27.4 kB 25%]                                   17% [Working]             Get:3 http://archive.ubuntu.com/ubuntu disco/main amd64 libgdbm-compat4 amd64 1.18.1-4 [6152 B]
-I, [2019-12-27T15:12:38.151006 #9825]  INFO -- archive-install-ubuntu-1904: 17% [3 libgdbm-compat4 0 B/6152 B 0%]                                     17% [Working]             Get:4 http://archive.ubuntu.com/ubuntu disco/main amd64 libperl5.28 amd64 5.28.1-6 [3827 kB]
-I, [2019-12-27T15:12:40.142181 #9825]  INFO -- archive-install-ubuntu-1904: 17% [4 libperl5.28 0 B/3827 kB 0%]19% [4 libperl5.28 326 kB/3827 kB 9%]23% [4 libperl5.28 1133 kB/3827 kB 30%]37% [4 libperl5.28 3648 kB/3827 kB 95%]                                       38% [Waiting for headers]                         Get:5 http://archive.ubuntu.com/ubuntu disco/main amd64 perl amd64 5.28.1-6 [204 kB]
-I, [2019-12-27T15:12:40.145924 #9825]  INFO -- archive-install-ubuntu-1904: 38% [5 perl 4366 B/204 kB 2%]                             40% [Working]             Get:6 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 libapt-inst2.0 amd64 1.8.3 [56.7 kB]
-I, [2019-12-27T15:12:40.146954 #9825]  INFO -- archive-install-ubuntu-1904: 40% [6 libapt-inst2.0 56.7 kB/56.7 kB 100%]                                           41% [Working]             Get:7 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 apt-utils amd64 1.8.3 [205 kB]
-I, [2019-12-27T15:12:40.630779 #9825]  INFO -- archive-install-ubuntu-1904: 41% [7 apt-utils 4096 B/205 kB 2%]                                  43% [Waiting for headers]                         Get:8 http://archive.ubuntu.com/ubuntu disco/main amd64 less amd64 487-0.1build1 [112 kB]
-I, [2019-12-27T15:12:40.652878 #9825]  INFO -- archive-install-ubuntu-1904: 43% [8 less 35.4 kB/112 kB 32%]                               44% [Working]             Get:9 http://archive.ubuntu.com/ubuntu disco/main amd64 netbase all 5.6 [13.0 kB]
-I, [2019-12-27T15:12:40.653125 #9825]  INFO -- archive-install-ubuntu-1904: 44% [9 netbase 13.0 kB/13.0 kB 100%]                                    45% [Working]             Get:10 http://archive.ubuntu.com/ubuntu disco/main amd64 libassuan0 amd64 2.5.2-1 [35.1 kB]
-I, [2019-12-27T15:12:40.653253 #9825]  INFO -- archive-install-ubuntu-1904: 45% [10 libassuan0 1993 B/35.1 kB 6%]                                     46% [Working]             Get:11 http://archive.ubuntu.com/ubuntu disco/main amd64 gpgconf amd64 2.2.12-1ubuntu3 [123 kB]
-I, [2019-12-27T15:12:40.655285 #9825]  INFO -- archive-install-ubuntu-1904: 46% [11 gpgconf 32.2 kB/123 kB 26%]                                   47% [Working]             Get:12 http://archive.ubuntu.com/ubuntu disco/main amd64 libksba8 amd64 1.3.5-2 [92.6 kB]
-I, [2019-12-27T15:12:40.741322 #9825]  INFO -- archive-install-ubuntu-1904: 48% [12 libksba8 40.0 kB/92.6 kB 43%]                                     49% [Working]             Get:13 http://archive.ubuntu.com/ubuntu disco/main amd64 libnpth0 amd64 1.6-1 [7736 B]
-I, [2019-12-27T15:12:40.742552 #9825]  INFO -- archive-install-ubuntu-1904: 49% [13 libnpth0 0 B/7736 B 0%]                               49% [Working]             Get:14 http://archive.ubuntu.com/ubuntu disco/main amd64 dirmngr amd64 2.2.12-1ubuntu3 [324 kB]
-I, [2019-12-27T15:12:40.746455 #9825]  INFO -- archive-install-ubuntu-1904: 49% [14 dirmngr 4627 B/324 kB 1%]                                 52% [Working]             Get:15 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 libcurl3-gnutls amd64 7.64.0-2ubuntu1.2 [231 kB]
-I, [2019-12-27T15:12:40.749557 #9825]  INFO -- archive-install-ubuntu-1904: 52% [15 libcurl3-gnutls 4096 B/231 kB 2%]                                         54% [Waiting for headers]                         Get:16 http://archive.ubuntu.com/ubuntu disco/main amd64 liberror-perl all 0.17027-2 [26.6 kB]
-I, [2019-12-27T15:12:40.750215 #9825]  INFO -- archive-install-ubuntu-1904: 54% [16 liberror-perl 26.6 kB/26.6 kB 100%]                                           54% [Working]             Get:17 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 git-man all 1:2.20.1-2ubuntu1.19.04.1 [835 kB]
-I, [2019-12-27T15:12:41.452362 #9825]  INFO -- archive-install-ubuntu-1904: 55% [17 git-man 21.4 kB/835 kB 3%]57% [17 git-man 443 kB/835 kB 53%]                                  60% [Working]             Get:18 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 git amd64 1:2.20.1-2ubuntu1.19.04.1 [4104 kB]
-I, [2019-12-27T15:12:44.277434 #9825]  INFO -- archive-install-ubuntu-1904: 60% [18 git 29.0 kB/4104 kB 1%]62% [18 git 378 kB/4104 kB 9%]                                     1547 kB/s 3s70% [18 git 1876 kB/4104 kB 46%]                                   1547 kB/s 2s72% [18 git 2406 kB/4104 kB 59%]                                   1547 kB/s 2s77% [18 git 3180 kB/4104 kB 77%]                                   1547 kB/s 1s80% [18 git 3922 kB/4104 kB 96%]                                   1547 kB/s 1s82% [Waiting for headers]                                          1547 kB/s 1s                                                                               Get:19 http://archive.ubuntu.com/ubuntu disco/main amd64 gnupg-l10n all 2.2.12-1ubuntu3 [48.9 kB]
-I, [2019-12-27T15:12:44.279005 #9825]  INFO -- archive-install-ubuntu-1904: 82% [19 gnupg-l10n 48.9 kB/48.9 kB 100%]                           1547 kB/s 1s83% [Working]                                                      1547 kB/s 1s                                                                               Get:20 http://archive.ubuntu.com/ubuntu disco/main amd64 gnupg-utils amd64 2.2.12-1ubuntu3 [472 kB]
-I, [2019-12-27T15:12:44.310470 #9825]  INFO -- archive-install-ubuntu-1904: 83% [20 gnupg-utils 0 B/472 kB 0%]                                 1547 kB/s 1s86% [Waiting for headers]                                          1547 kB/s 0s                                                                               Get:21 http://archive.ubuntu.com/ubuntu disco/main amd64 gpg amd64 2.2.12-1ubuntu3 [475 kB]
-I, [2019-12-27T15:12:44.624778 #9825]  INFO -- archive-install-ubuntu-1904: 87% [21 gpg 56.9 kB/475 kB 12%]                                    1547 kB/s 0s90% [Working]                                                      1547 kB/s 0s                                                                               Get:22 http://archive.ubuntu.com/ubuntu disco/main amd64 pinentry-curses amd64 1.1.0-1build2 [35.9 kB]
-I, [2019-12-27T15:12:44.966465 #9825]  INFO -- archive-install-ubuntu-1904: 90% [22 pinentry-curses 2615 B/35.9 kB 7%]                         1547 kB/s 0s90% [Working]                                                      1547 kB/s 0s                                                                               Get:23 http://archive.ubuntu.com/ubuntu disco/main amd64 gpg-agent amd64 2.2.12-1ubuntu3 [229 kB]
-I, [2019-12-27T15:12:45.793808 #9825]  INFO -- archive-install-ubuntu-1904: 90% [23 gpg-agent 1165 B/229 kB 1%]                                1547 kB/s 0s91% [23 gpg-agent 109 kB/229 kB 48%]                               1547 kB/s 0s92% [Waiting for headers]                                          1547 kB/s 0s                                                                               Get:24 http://archive.ubuntu.com/ubuntu disco/main amd64 gpg-wks-client amd64 2.2.12-1ubuntu3 [96.0 kB]
-I, [2019-12-27T15:12:45.823642 #9825]  INFO -- archive-install-ubuntu-1904: 92% [24 gpg-wks-client 1755 B/96.0 kB 2%]                          1547 kB/s 0s94% [Working]                                                      1547 kB/s 0s                                                                               Get:25 http://archive.ubuntu.com/ubuntu disco/main amd64 gpg-wks-server amd64 2.2.12-1ubuntu3 [89.2 kB]
-I, [2019-12-27T15:12:46.048873 #9825]  INFO -- archive-install-ubuntu-1904: 94% [25 gpg-wks-server 1061 B/89.2 kB 1%]                          1547 kB/s 0s95% [Working]                                                      1547 kB/s 0s                                                                               Get:26 http://archive.ubuntu.com/ubuntu disco/main amd64 gpgsm amd64 2.2.12-1ubuntu3 [215 kB]
-I, [2019-12-27T15:12:46.542586 #9825]  INFO -- archive-install-ubuntu-1904: 95% [26 gpgsm 6909 B/215 kB 3%]                                    1547 kB/s 0s97% [Working]                                                      1547 kB/s 0s                                                                               Get:27 http://archive.ubuntu.com/ubuntu disco/main amd64 gnupg all 2.2.12-1ubuntu3 [252 kB]
-I, [2019-12-27T15:12:46.546611 #9825]  INFO -- archive-install-ubuntu-1904: 97% [27 gnupg 0 B/252 kB 0%]                                       1547 kB/s 0s99% [Working]                                                      1547 kB/s 0s                                                                               Get:28 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 patch amd64 2.7.6-3ubuntu0.1 [105 kB]
-I, [2019-12-27T15:12:46.547889 #9825]  INFO -- archive-install-ubuntu-1904: 99% [28 patch 0 B/105 kB 0%]                                       1547 kB/s 0s100% [Working]                                                     1547 kB/s 0s                                                                               Fetched 15.1 MB in 11s (1418 kB/s)
-I, [2019-12-27T15:12:46.694433 #9825]  INFO -- archive-install-ubuntu-1904: debconf: delaying package configuration, since apt-utils is not installed
-I, [2019-12-27T15:12:46.745742 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package perl-modules-5.28.
-I, [2019-12-27T15:12:46.766081 #9825]  INFO -- archive-install-ubuntu-1904: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 10253 files and directories currently installed.)
-I, [2019-12-27T15:12:46.766852 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../00-perl-modules-5.28_5.28.1-6_all.deb ...
-I, [2019-12-27T15:12:46.769667 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking perl-modules-5.28 (5.28.1-6) ...
-I, [2019-12-27T15:12:47.174217 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libgdbm6:amd64.
-I, [2019-12-27T15:12:47.175151 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../01-libgdbm6_1.18.1-4_amd64.deb ...
-I, [2019-12-27T15:12:47.178338 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libgdbm6:amd64 (1.18.1-4) ...
-I, [2019-12-27T15:12:47.205047 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libgdbm-compat4:amd64.
-I, [2019-12-27T15:12:47.206221 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../02-libgdbm-compat4_1.18.1-4_amd64.deb ...
-I, [2019-12-27T15:12:47.216478 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libgdbm-compat4:amd64 (1.18.1-4) ...
-I, [2019-12-27T15:12:47.246143 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libperl5.28:amd64.
-I, [2019-12-27T15:12:47.246226 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../03-libperl5.28_5.28.1-6_amd64.deb ...
-I, [2019-12-27T15:12:47.248027 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libperl5.28:amd64 (5.28.1-6) ...
-I, [2019-12-27T15:12:47.759408 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package perl.
-I, [2019-12-27T15:12:47.761949 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../04-perl_5.28.1-6_amd64.deb ...
-I, [2019-12-27T15:12:47.779593 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking perl (5.28.1-6) ...
-I, [2019-12-27T15:12:47.826244 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libapt-inst2.0:amd64.
-I, [2019-12-27T15:12:47.827881 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../05-libapt-inst2.0_1.8.3_amd64.deb ...
-I, [2019-12-27T15:12:47.830419 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libapt-inst2.0:amd64 (1.8.3) ...
-I, [2019-12-27T15:12:47.868342 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package apt-utils.
-I, [2019-12-27T15:12:47.868425 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../06-apt-utils_1.8.3_amd64.deb ...
-I, [2019-12-27T15:12:47.870720 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking apt-utils (1.8.3) ...
-I, [2019-12-27T15:12:47.926256 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package less.
-I, [2019-12-27T15:12:47.927505 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../07-less_487-0.1build1_amd64.deb ...
-I, [2019-12-27T15:12:47.929096 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking less (487-0.1build1) ...
-I, [2019-12-27T15:12:47.969947 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package netbase.
-I, [2019-12-27T15:12:47.972024 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../08-netbase_5.6_all.deb ...
-I, [2019-12-27T15:12:47.975320 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking netbase (5.6) ...
-I, [2019-12-27T15:12:48.005068 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libassuan0:amd64.
-I, [2019-12-27T15:12:48.006444 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../09-libassuan0_2.5.2-1_amd64.deb ...
-I, [2019-12-27T15:12:48.009992 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libassuan0:amd64 (2.5.2-1) ...
-I, [2019-12-27T15:12:48.040214 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gpgconf.
-I, [2019-12-27T15:12:48.041605 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../10-gpgconf_2.2.12-1ubuntu3_amd64.deb ...
-I, [2019-12-27T15:12:48.049753 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gpgconf (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:48.092899 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libksba8:amd64.
-I, [2019-12-27T15:12:48.094344 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../11-libksba8_1.3.5-2_amd64.deb ...
-I, [2019-12-27T15:12:48.096221 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libksba8:amd64 (1.3.5-2) ...
-I, [2019-12-27T15:12:48.129324 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libnpth0:amd64.
-I, [2019-12-27T15:12:48.131019 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../12-libnpth0_1.6-1_amd64.deb ...
-I, [2019-12-27T15:12:48.132980 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libnpth0:amd64 (1.6-1) ...
-I, [2019-12-27T15:12:48.157650 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package dirmngr.
-I, [2019-12-27T15:12:48.158426 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../13-dirmngr_2.2.12-1ubuntu3_amd64.deb ...
-I, [2019-12-27T15:12:48.172552 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking dirmngr (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:48.232503 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libcurl3-gnutls:amd64.
-I, [2019-12-27T15:12:48.236818 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../14-libcurl3-gnutls_7.64.0-2ubuntu1.2_amd64.deb ...
-I, [2019-12-27T15:12:48.238370 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libcurl3-gnutls:amd64 (7.64.0-2ubuntu1.2) ...
-I, [2019-12-27T15:12:48.283439 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package liberror-perl.
-I, [2019-12-27T15:12:48.284691 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../15-liberror-perl_0.17027-2_all.deb ...
-I, [2019-12-27T15:12:48.286878 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking liberror-perl (0.17027-2) ...
-I, [2019-12-27T15:12:48.308388 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package git-man.
-I, [2019-12-27T15:12:48.309916 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../16-git-man_1%3a2.20.1-2ubuntu1.19.04.1_all.deb ...
-I, [2019-12-27T15:12:48.311831 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking git-man (1:2.20.1-2ubuntu1.19.04.1) ...
-I, [2019-12-27T15:12:48.408659 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package git.
-I, [2019-12-27T15:12:48.411008 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../17-git_1%3a2.20.1-2ubuntu1.19.04.1_amd64.deb ...
-I, [2019-12-27T15:12:48.436259 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking git (1:2.20.1-2ubuntu1.19.04.1) ...
-I, [2019-12-27T15:12:48.925018 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gnupg-l10n.
-I, [2019-12-27T15:12:48.925085 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../18-gnupg-l10n_2.2.12-1ubuntu3_all.deb ...
-I, [2019-12-27T15:12:48.927185 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gnupg-l10n (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:48.950864 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gnupg-utils.
-I, [2019-12-27T15:12:48.955637 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../19-gnupg-utils_2.2.12-1ubuntu3_amd64.deb ...
-I, [2019-12-27T15:12:48.955804 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gnupg-utils (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.020293 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gpg.
-I, [2019-12-27T15:12:49.021111 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../20-gpg_2.2.12-1ubuntu3_amd64.deb ...
-I, [2019-12-27T15:12:49.022713 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gpg (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.097054 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package pinentry-curses.
-I, [2019-12-27T15:12:49.098316 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../21-pinentry-curses_1.1.0-1build2_amd64.deb ...
-I, [2019-12-27T15:12:49.100319 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking pinentry-curses (1.1.0-1build2) ...
-I, [2019-12-27T15:12:49.129056 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gpg-agent.
-I, [2019-12-27T15:12:49.129205 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../22-gpg-agent_2.2.12-1ubuntu3_amd64.deb ...
-I, [2019-12-27T15:12:49.133582 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gpg-agent (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.185065 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gpg-wks-client.
-I, [2019-12-27T15:12:49.187145 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../23-gpg-wks-client_2.2.12-1ubuntu3_amd64.deb ...
-I, [2019-12-27T15:12:49.190940 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gpg-wks-client (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.216174 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gpg-wks-server.
-I, [2019-12-27T15:12:49.218574 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../24-gpg-wks-server_2.2.12-1ubuntu3_amd64.deb ...
-I, [2019-12-27T15:12:49.220941 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gpg-wks-server (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.248011 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gpgsm.
-I, [2019-12-27T15:12:49.251867 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../25-gpgsm_2.2.12-1ubuntu3_amd64.deb ...
-I, [2019-12-27T15:12:49.252384 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gpgsm (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.295290 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package gnupg.
-I, [2019-12-27T15:12:49.296583 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../26-gnupg_2.2.12-1ubuntu3_all.deb ...
-I, [2019-12-27T15:12:49.298432 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking gnupg (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.345141 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package patch.
-I, [2019-12-27T15:12:49.345218 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../27-patch_2.7.6-3ubuntu0.1_amd64.deb ...
-I, [2019-12-27T15:12:49.347120 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking patch (2.7.6-3ubuntu0.1) ...
-I, [2019-12-27T15:12:49.387876 #9825]  INFO -- archive-install-ubuntu-1904: Setting up perl-modules-5.28 (5.28.1-6) ...
-I, [2019-12-27T15:12:49.394276 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libksba8:amd64 (1.3.5-2) ...
-I, [2019-12-27T15:12:49.400371 #9825]  INFO -- archive-install-ubuntu-1904: Setting up less (487-0.1build1) ...
-I, [2019-12-27T15:12:49.502074 #9825]  INFO -- archive-install-ubuntu-1904: debconf: unable to initialize frontend: Dialog
-I, [2019-12-27T15:12:49.502145 #9825]  INFO -- archive-install-ubuntu-1904: debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 76.)
-I, [2019-12-27T15:12:49.502169 #9825]  INFO -- archive-install-ubuntu-1904: debconf: falling back to frontend: Readline
-I, [2019-12-27T15:12:49.532653 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libcurl3-gnutls:amd64 (7.64.0-2ubuntu1.2) ...
-I, [2019-12-27T15:12:49.537702 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libnpth0:amd64 (1.6-1) ...
-I, [2019-12-27T15:12:49.542794 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libassuan0:amd64 (2.5.2-1) ...
-I, [2019-12-27T15:12:49.547489 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libapt-inst2.0:amd64 (1.8.3) ...
-I, [2019-12-27T15:12:49.552843 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gnupg-l10n (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.557824 #9825]  INFO -- archive-install-ubuntu-1904: Setting up patch (2.7.6-3ubuntu0.1) ...
-I, [2019-12-27T15:12:49.564426 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gpgconf (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.569352 #9825]  INFO -- archive-install-ubuntu-1904: Setting up git-man (1:2.20.1-2ubuntu1.19.04.1) ...
-I, [2019-12-27T15:12:49.575311 #9825]  INFO -- archive-install-ubuntu-1904: Setting up netbase (5.6) ...
-I, [2019-12-27T15:12:49.592074 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gpg (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.598177 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libgdbm6:amd64 (1.18.1-4) ...
-I, [2019-12-27T15:12:49.603752 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gnupg-utils (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.609424 #9825]  INFO -- archive-install-ubuntu-1904: Setting up pinentry-curses (1.1.0-1build2) ...
-I, [2019-12-27T15:12:49.617818 #9825]  INFO -- archive-install-ubuntu-1904: Setting up apt-utils (1.8.3) ...
-I, [2019-12-27T15:12:49.628283 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gpg-agent (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.639463 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gpgsm (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.643153 #9825]  INFO -- archive-install-ubuntu-1904: Setting up dirmngr (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.660684 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libgdbm-compat4:amd64 (1.18.1-4) ...
-I, [2019-12-27T15:12:49.665517 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libperl5.28:amd64 (5.28.1-6) ...
-I, [2019-12-27T15:12:49.670707 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gpg-wks-server (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.676028 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gpg-wks-client (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.680766 #9825]  INFO -- archive-install-ubuntu-1904: Setting up perl (5.28.1-6) ...
-I, [2019-12-27T15:12:49.698048 #9825]  INFO -- archive-install-ubuntu-1904: Setting up gnupg (2.2.12-1ubuntu3) ...
-I, [2019-12-27T15:12:49.703094 #9825]  INFO -- archive-install-ubuntu-1904: Setting up liberror-perl (0.17027-2) ...
-I, [2019-12-27T15:12:49.708357 #9825]  INFO -- archive-install-ubuntu-1904: Setting up git (1:2.20.1-2ubuntu1.19.04.1) ...
-I, [2019-12-27T15:12:49.747221 #9825]  INFO -- archive-install-ubuntu-1904: Processing triggers for libc-bin (2.29-0ubuntu2) ...
-I, [2019-12-27T15:12:49.792948 #9825]  INFO -- archive-install-ubuntu-1904: Processing triggers for mime-support (3.60ubuntu1) ...
-I, [2019-12-27T15:12:50.788121 #9825]  INFO -- archive-install-ubuntu-1904: Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 85%Reading package lists... 85%Reading package lists... 86%Reading package lists... 86%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
-I, [2019-12-27T15:12:51.068879 #9825]  INFO -- archive-install-ubuntu-1904: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
-I, [2019-12-27T15:12:51.070383 #9825]  INFO -- archive-install-ubuntu-1904: Reading state information... 0%Reading state information... 0%Reading state information... Done
-I, [2019-12-27T15:12:51.310591 #9825]  INFO -- archive-install-ubuntu-1904: The following additional packages will be installed:
-I, [2019-12-27T15:12:51.311626 #9825]  INFO -- archive-install-ubuntu-1904:   iso-codes python-apt-common python3-apt python3-distro-info
-I, [2019-12-27T15:12:51.312115 #9825]  INFO -- archive-install-ubuntu-1904:   python3-software-properties unattended-upgrades
-I, [2019-12-27T15:12:51.313912 #9825]  INFO -- archive-install-ubuntu-1904: Suggested packages:
-I, [2019-12-27T15:12:51.313968 #9825]  INFO -- archive-install-ubuntu-1904:   isoquery python3-apt-dbg python-apt-doc bsd-mailx default-mta
-I, [2019-12-27T15:12:51.313984 #9825]  INFO -- archive-install-ubuntu-1904:   | mail-transport-agent needrestart powermgmt-base
-I, [2019-12-27T15:12:51.337959 #9825]  INFO -- archive-install-ubuntu-1904: The following NEW packages will be installed:
-I, [2019-12-27T15:12:51.339054 #9825]  INFO -- archive-install-ubuntu-1904:   iso-codes python-apt-common python3-apt python3-distro-info
-I, [2019-12-27T15:12:51.339833 #9825]  INFO -- archive-install-ubuntu-1904:   python3-software-properties software-properties-common unattended-upgrades
-I, [2019-12-27T15:12:51.348667 #9825]  INFO -- archive-install-ubuntu-1904: 0 upgraded, 7 newly installed, 0 to remove and 5 not upgraded.
-I, [2019-12-27T15:12:51.349060 #9825]  INFO -- archive-install-ubuntu-1904: Need to get 2913 kB of archives.
-I, [2019-12-27T15:12:51.349253 #9825]  INFO -- archive-install-ubuntu-1904: After this operation, 21.6 MB of additional disk space will be used.
-I, [2019-12-27T15:12:51.776313 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu disco/main amd64 iso-codes all 4.2-1 [2659 kB]
-I, [2019-12-27T15:12:53.694674 #9825]  INFO -- archive-install-ubuntu-1904: 0% [1 iso-codes 2611 B/2659 kB 0%]4% [1 iso-codes 142 kB/2659 kB 5%]16% [1 iso-codes 573 kB/2659 kB 22%]43% [1 iso-codes 1569 kB/2659 kB 59%]                                     76% [Waiting for headers]                         Get:2 http://archive.ubuntu.com/ubuntu disco/main amd64 python-apt-common all 1.8.4 [16.5 kB]
-I, [2019-12-27T15:12:53.698085 #9825]  INFO -- archive-install-ubuntu-1904: 76% [2 python-apt-common 5511 B/16.5 kB 33%]                                            79% [Working]             Get:3 http://archive.ubuntu.com/ubuntu disco/main amd64 python3-apt amd64 1.8.4 [151 kB]
-I, [2019-12-27T15:12:53.747937 #9825]  INFO -- archive-install-ubuntu-1904: 79% [3 python3-apt 0 B/151 kB 0%]                                 86% [Working]             Get:4 http://archive.ubuntu.com/ubuntu disco/main amd64 python3-distro-info all 0.21ubuntu2 [6344 B]
-I, [2019-12-27T15:12:53.755973 #9825]  INFO -- archive-install-ubuntu-1904: 86% [4 python3-distro-info 0 B/6344 B 0%]                                         89% [Working]             Get:5 http://archive.ubuntu.com/ubuntu disco/main amd64 python3-software-properties all 0.97.11 [23.9 kB]
-I, [2019-12-27T15:12:53.987340 #9825]  INFO -- archive-install-ubuntu-1904: 89% [5 python3-software-properties 1292 B/23.9 kB 5%]                                                     93% [Waiting for headers]                         Get:6 http://archive.ubuntu.com/ubuntu disco/main amd64 software-properties-common all 0.97.11 [10.0 kB]
-I, [2019-12-27T15:12:53.992660 #9825]  INFO -- archive-install-ubuntu-1904: 93% [6 software-properties-common 243 B/10.0 kB 2%]                                                   96% [Working]             Get:7 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 unattended-upgrades all 1.10ubuntu5.2 [46.1 kB]
-I, [2019-12-27T15:12:54.231302 #9825]  INFO -- archive-install-ubuntu-1904: 96% [7 unattended-upgrades 1542 B/46.1 kB 3%]                                             100% [Working]              Fetched 2913 kB in 3s (1014 kB/s)
-I, [2019-12-27T15:12:55.343726 #9825]  INFO -- archive-install-ubuntu-1904: Preconfiguring packages ...
-I, [2019-12-27T15:12:55.482107 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package iso-codes.
-I, [2019-12-27T15:12:55.491746 #9825]  INFO -- archive-install-ubuntu-1904: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 13428 files and directories currently installed.)
-I, [2019-12-27T15:12:55.492284 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../0-iso-codes_4.2-1_all.deb ...
-I, [2019-12-27T15:12:55.494680 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking iso-codes (4.2-1) ...
-I, [2019-12-27T15:12:55.917103 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-apt-common.
-I, [2019-12-27T15:12:55.917175 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../1-python-apt-common_1.8.4_all.deb ...
-I, [2019-12-27T15:12:55.925136 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-apt-common (1.8.4) ...
-I, [2019-12-27T15:12:55.975655 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python3-apt.
-I, [2019-12-27T15:12:55.977475 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../2-python3-apt_1.8.4_amd64.deb ...
-I, [2019-12-27T15:12:55.980447 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python3-apt (1.8.4) ...
-I, [2019-12-27T15:12:56.043029 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python3-distro-info.
-I, [2019-12-27T15:12:56.044694 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../3-python3-distro-info_0.21ubuntu2_all.deb ...
-I, [2019-12-27T15:12:56.047230 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python3-distro-info (0.21ubuntu2) ...
-I, [2019-12-27T15:12:56.078895 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python3-software-properties.
-I, [2019-12-27T15:12:56.078963 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../4-python3-software-properties_0.97.11_all.deb ...
-I, [2019-12-27T15:12:56.080702 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python3-software-properties (0.97.11) ...
-I, [2019-12-27T15:12:56.111264 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package software-properties-common.
-I, [2019-12-27T15:12:56.113817 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../5-software-properties-common_0.97.11_all.deb ...
-I, [2019-12-27T15:12:56.115410 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking software-properties-common (0.97.11) ...
-I, [2019-12-27T15:12:56.161680 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package unattended-upgrades.
-I, [2019-12-27T15:12:56.163648 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../6-unattended-upgrades_1.10ubuntu5.2_all.deb ...
-I, [2019-12-27T15:12:56.182863 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking unattended-upgrades (1.10ubuntu5.2) ...
-I, [2019-12-27T15:12:56.227717 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-apt-common (1.8.4) ...
-I, [2019-12-27T15:12:56.234397 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python3-distro-info (0.21ubuntu2) ...
-I, [2019-12-27T15:12:56.420219 #9825]  INFO -- archive-install-ubuntu-1904: Setting up iso-codes (4.2-1) ...
-I, [2019-12-27T15:12:56.427594 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python3-apt (1.8.4) ...
-I, [2019-12-27T15:12:56.625976 #9825]  INFO -- archive-install-ubuntu-1904: Setting up unattended-upgrades (1.10ubuntu5.2) ...
-I, [2019-12-27T15:12:56.783361 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:12:56.783435 #9825]  INFO -- archive-install-ubuntu-1904: Creating config file /etc/apt/apt.conf.d/20auto-upgrades with new version
-I, [2019-12-27T15:12:56.933500 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:12:56.933567 #9825]  INFO -- archive-install-ubuntu-1904: Creating config file /etc/apt/apt.conf.d/50unattended-upgrades with new version
-I, [2019-12-27T15:12:57.342047 #9825]  INFO -- archive-install-ubuntu-1904: Created symlink /etc/systemd/system/multi-user.target.wants/unattended-upgrades.service → /lib/systemd/system/unattended-upgrades.service.
-I, [2019-12-27T15:12:57.606928 #9825]  INFO -- archive-install-ubuntu-1904: Synchronizing state of unattended-upgrades.service with SysV service script with /lib/systemd/systemd-sysv-install.
-I, [2019-12-27T15:12:57.606991 #9825]  INFO -- archive-install-ubuntu-1904: Executing: /lib/systemd/systemd-sysv-install enable unattended-upgrades
-I, [2019-12-27T15:12:58.126828 #9825]  INFO -- archive-install-ubuntu-1904: /usr/sbin/policy-rc.d returned 101, not running 'start unattended-upgrades.service'
-I, [2019-12-27T15:12:58.162850 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python3-software-properties (0.97.11) ...
-I, [2019-12-27T15:12:58.594067 #9825]  INFO -- archive-install-ubuntu-1904: Setting up software-properties-common (0.97.11) ...
-I, [2019-12-27T15:12:58.918353 #9825]  INFO -- archive-install-ubuntu-1904: Processing triggers for systemd (240-6ubuntu5.8) ...
-I, [2019-12-27T15:12:59.047046 #9825]  INFO -- archive-install-ubuntu-1904: Processing triggers for dbus (1.12.12-1ubuntu1.1) ...
-I, [2019-12-27T15:13:00.311728 #9825]  INFO -- archive-install-ubuntu-1904: Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 85%Reading package lists... 85%Reading package lists... 86%Reading package lists... 86%Reading package lists... 88%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
-I, [2019-12-27T15:13:00.583730 #9825]  INFO -- archive-install-ubuntu-1904: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
-I, [2019-12-27T15:13:00.584655 #9825]  INFO -- archive-install-ubuntu-1904: Reading state information... 0%Reading state information... 0%Reading state information... Done
-I, [2019-12-27T15:13:00.619822 #9825]  INFO -- archive-install-ubuntu-1904: Package python-software-properties is not available, but is referred to by another package.
-I, [2019-12-27T15:13:00.619888 #9825]  INFO -- archive-install-ubuntu-1904: This may mean that the package is missing, has been obsoleted, or
-I, [2019-12-27T15:13:00.619905 #9825]  INFO -- archive-install-ubuntu-1904: is only available from another source
-I, [2019-12-27T15:13:00.619919 #9825]  INFO -- archive-install-ubuntu-1904: However the following packages replace it:
-I, [2019-12-27T15:13:00.619938 #9825]  INFO -- archive-install-ubuntu-1904:   software-properties-common
-I, [2019-12-27T15:13:00.619952 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:13:00.800617 #9825]  INFO -- archive-install-ubuntu-1904: E: Package 'python-software-properties' has no installation candidate
-I, [2019-12-27T15:13:09.393137 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Working]            Hit:1 http://security.ubuntu.com/ubuntu disco-security InRelease
-I, [2019-12-27T15:13:09.393439 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Waiting for headers] [Waiting for headers]                                              Hit:2 http://archive.ubuntu.com/ubuntu disco InRelease
-I, [2019-12-27T15:13:09.399000 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Waiting for headers] [Waiting for headers]                                              Get:3 http://ppa.launchpad.net/ansible/ansible/ubuntu disco InRelease [15.9 kB]
-I, [2019-12-27T15:13:09.527927 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Waiting for headers] [3 InRelease 1140 B/15.9 kB 7%]                                                        Hit:4 http://archive.ubuntu.com/ubuntu disco-updates InRelease
-I, [2019-12-27T15:13:09.654153 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Waiting for headers] [3 InRelease 14.2 kB/15.9 kB 89%]                                                          0% [Waiting for headers]0% [Waiting for headers]                        Hit:5 http://archive.ubuntu.com/ubuntu disco-backports InRelease
-I, [2019-12-27T15:13:10.292073 #9825]  INFO -- archive-install-ubuntu-1904:                         0% [Working]0% [Working]0% [Working]0% [Working]            Get:6 http://ppa.launchpad.net/ansible/ansible/ubuntu disco/main amd64 Packages [622 B]
-I, [2019-12-27T15:13:10.317049 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Working]0% [6 Packages store 0 B]                         0% [Working]100% [Working]              Fetched 16.5 kB in 1s (12.1 kB/s)
-I, [2019-12-27T15:13:12.766367 #9825]  INFO -- archive-install-ubuntu-1904: Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 47%Reading package lists... 69%Reading package lists... 85%Reading package lists... 85%Reading package lists... 86%Reading package lists... 86%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
-I, [2019-12-27T15:13:13.393849 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Working]            Hit:1 http://security.ubuntu.com/ubuntu disco-security InRelease
-I, [2019-12-27T15:13:13.455887 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Waiting for headers] [Connecting to ppa.launchpad.net (91.189.95.83)]                                                                         Hit:2 http://archive.ubuntu.com/ubuntu disco InRelease
-I, [2019-12-27T15:13:13.487568 #9825]  INFO -- archive-install-ubuntu-1904:                                                                          0% [Waiting for headers] [Waiting for headers]                                              Hit:3 http://ppa.launchpad.net/ansible/ansible/ubuntu disco InRelease
-I, [2019-12-27T15:13:13.546285 #9825]  INFO -- archive-install-ubuntu-1904:                                               0% [Waiting for headers]                        Hit:4 http://archive.ubuntu.com/ubuntu disco-updates InRelease
-I, [2019-12-27T15:13:13.640025 #9825]  INFO -- archive-install-ubuntu-1904:                         0% [Working]            Hit:5 http://archive.ubuntu.com/ubuntu disco-backports InRelease
-I, [2019-12-27T15:13:19.605472 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Working]0% [Working]0% [Working]0% [Working]0% [Working]0% [Working]0% [Working]0% [Working]20% [Working]             Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 18%Reading package lists... 60%Reading package lists... 85%Reading package lists... 85%Reading package lists... 86%Reading package lists... 86%Reading package lists... 87%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
-I, [2019-12-27T15:13:22.396879 #9825]  INFO -- archive-install-ubuntu-1904: Reading package lists... 0%Reading package lists... 0%Reading package lists... 0%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 9%Reading package lists... 46%Reading package lists... 81%Reading package lists... 85%Reading package lists... 85%Reading package lists... 86%Reading package lists... 86%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 93%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 96%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
-I, [2019-12-27T15:13:22.629517 #9825]  INFO -- archive-install-ubuntu-1904: Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
-I, [2019-12-27T15:13:22.632663 #9825]  INFO -- archive-install-ubuntu-1904: Reading state information... 0%Reading state information... 0%Reading state information... Done
-I, [2019-12-27T15:13:23.165992 #9825]  INFO -- archive-install-ubuntu-1904: The following additional packages will be installed:
-I, [2019-12-27T15:13:23.166042 #9825]  INFO -- archive-install-ubuntu-1904:   libpython-stdlib libpython2-stdlib libpython2.7-minimal libpython2.7-stdlib
-I, [2019-12-27T15:13:23.166056 #9825]  INFO -- archive-install-ubuntu-1904:   libsodium23 libyaml-0-2 python python-asn1crypto python-bcrypt
-I, [2019-12-27T15:13:23.166068 #9825]  INFO -- archive-install-ubuntu-1904:   python-cffi-backend python-crypto python-cryptography python-enum34
-I, [2019-12-27T15:13:23.166079 #9825]  INFO -- archive-install-ubuntu-1904:   python-httplib2 python-idna python-ipaddress python-jinja2 python-markupsafe
-I, [2019-12-27T15:13:23.166090 #9825]  INFO -- archive-install-ubuntu-1904:   python-minimal python-nacl python-paramiko python-pkg-resources
-I, [2019-12-27T15:13:23.166101 #9825]  INFO -- archive-install-ubuntu-1904:   python-pyasn1 python-setuptools python-six python-yaml python2
-I, [2019-12-27T15:13:23.166111 #9825]  INFO -- archive-install-ubuntu-1904:   python2-minimal python2.7 python2.7-minimal sshpass
-I, [2019-12-27T15:13:23.166122 #9825]  INFO -- archive-install-ubuntu-1904: Suggested packages:
-I, [2019-12-27T15:13:23.166142 #9825]  INFO -- archive-install-ubuntu-1904:   python-doc python-tk python-crypto-doc python-cryptography-doc
-I, [2019-12-27T15:13:23.166153 #9825]  INFO -- archive-install-ubuntu-1904:   python-cryptography-vectors python-enum34-doc python-jinja2-doc
-I, [2019-12-27T15:13:23.166164 #9825]  INFO -- archive-install-ubuntu-1904:   python-nacl-doc python-gssapi python-setuptools-doc python2-doc
-I, [2019-12-27T15:13:23.166174 #9825]  INFO -- archive-install-ubuntu-1904:   python2.7-doc binutils binfmt-support
-I, [2019-12-27T15:13:23.725286 #9825]  INFO -- archive-install-ubuntu-1904: The following NEW packages will be installed:
-I, [2019-12-27T15:13:23.733316 #9825]  INFO -- archive-install-ubuntu-1904:   ansible libpython-stdlib libpython2-stdlib libpython2.7-minimal
-I, [2019-12-27T15:13:23.736022 #9825]  INFO -- archive-install-ubuntu-1904:   libpython2.7-stdlib libsodium23 libyaml-0-2 python python-asn1crypto
-I, [2019-12-27T15:13:23.739428 #9825]  INFO -- archive-install-ubuntu-1904:   python-bcrypt python-cffi-backend python-crypto python-cryptography
-I, [2019-12-27T15:13:23.739482 #9825]  INFO -- archive-install-ubuntu-1904:   python-enum34 python-httplib2 python-idna python-ipaddress python-jinja2
-I, [2019-12-27T15:13:23.739495 #9825]  INFO -- archive-install-ubuntu-1904:   python-markupsafe python-minimal python-nacl python-paramiko
-I, [2019-12-27T15:13:23.739507 #9825]  INFO -- archive-install-ubuntu-1904:   python-pkg-resources python-pyasn1 python-setuptools python-six python-yaml
-I, [2019-12-27T15:13:23.746470 #9825]  INFO -- archive-install-ubuntu-1904:   python2 python2-minimal python2.7 python2.7-minimal sshpass
-I, [2019-12-27T15:13:23.840262 #9825]  INFO -- archive-install-ubuntu-1904: 0 upgraded, 32 newly installed, 0 to remove and 5 not upgraded.
-I, [2019-12-27T15:13:23.841854 #9825]  INFO -- archive-install-ubuntu-1904: Need to get 11.5 MB of archives.
-I, [2019-12-27T15:13:23.841909 #9825]  INFO -- archive-install-ubuntu-1904: After this operation, 84.1 MB of additional disk space will be used.
-I, [2019-12-27T15:13:24.353834 #9825]  INFO -- archive-install-ubuntu-1904: 0% [Working]            Get:1 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 libpython2.7-minimal amd64 2.7.16-2ubuntu0.2 [336 kB]
-I, [2019-12-27T15:13:24.361008 #9825]  INFO -- archive-install-ubuntu-1904: 0% [1 libpython2.7-minimal 4061 B/336 kB 1%] [Waiting for headers]                                                                  Get:2 http://ppa.launchpad.net/ansible/ansible/ubuntu disco/main amd64 ansible all 2.9.2-1ppa~disco [5778 kB]
-I, [2019-12-27T15:13:25.165371 #9825]  INFO -- archive-install-ubuntu-1904: 0% [1 libpython2.7-minimal 14.2 kB/336 kB 4%] [2 ansible 14.2 kB/5778 kB 0%]2% [1 libpython2.7-minimal 214 kB/336 kB 64%] [2 ansible 64.9 kB/5778 kB 1%]                                                                            4% [Waiting for headers] [2 ansible 191 kB/5778 kB 3%]                                                      Get:3 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 python2.7-minimal amd64 2.7.16-2ubuntu0.2 [1309 kB]
-I, [2019-12-27T15:13:26.788975 #9825]  INFO -- archive-install-ubuntu-1904: 6% [3 python2.7-minimal 1163 B/1309 kB 0%] [2 ansible 434 kB/5778 kB 8%]10% [3 python2.7-minimal 469 kB/1309 kB 36%] [2 ansible 525 kB/5778 kB 9%]17% [3 python2.7-minimal 810 kB/1309 kB 62%] [2 ansible 1161 kB/5778 kB 20%]21% [3 python2.7-minimal 997 kB/1309 kB 76%] [2 ansible 1661 kB/5778 kB 29%]                                                                            24% [2 ansible 1677 kB/5778 kB 29%]                                   Get:4 http://archive.ubuntu.com/ubuntu disco/main amd64 python2-minimal amd64 2.7.16-1 [27.8 kB]
-I, [2019-12-27T15:13:26.792429 #9825]  INFO -- archive-install-ubuntu-1904: 24% [4 python2-minimal 0 B/27.8 kB 0%] [2 ansible 1677 kB/5778 kB 29%]                                                                      25% [2 ansible 1677 kB/5778 kB 29%]                                   Get:5 http://archive.ubuntu.com/ubuntu disco/main amd64 python-minimal amd64 2.7.16-1 [5996 B]
-I, [2019-12-27T15:13:26.795118 #9825]  INFO -- archive-install-ubuntu-1904: 25% [5 python-minimal 0 B/5996 B 0%] [2 ansible 1677 kB/5778 kB 29%]                                                                    26% [2 ansible 1677 kB/5778 kB 29%]                                   Get:6 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 libpython2.7-stdlib amd64 2.7.16-2ubuntu0.2 [1913 kB]
-I, [2019-12-27T15:13:28.218328 #9825]  INFO -- archive-install-ubuntu-1904: 26% [6 libpython2.7-stdlib 0 B/1913 kB 0%] [2 ansible 1677 kB/5778 kB 29%]45% [6 libpython2.7-stdlib 896 kB/1913 kB 47%] [2 ansible 3560 kB/5778 kB 62%]56% [6 libpython2.7-stdlib 1652 kB/1913 kB 86%] [2 ansible 4331 kB/5778 kB 75%]                                                                               Get:7 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 python2.7 amd64 2.7.16-2ubuntu0.2 [244 kB]
-I, [2019-12-27T15:13:28.233446 #9825]  INFO -- archive-install-ubuntu-1904:                                                                                61% [7 python2.7 65.5 kB/244 kB 27%] [2 ansible 4701 kB/5778 kB 81%]                                                                    63% [2 ansible 4701 kB/5778 kB 81%]                                   Get:8 http://archive.ubuntu.com/ubuntu disco/main amd64 libpython2-stdlib amd64 2.7.16-1 [7432 B]
-I, [2019-12-27T15:13:28.240020 #9825]  INFO -- archive-install-ubuntu-1904: 63% [8 libpython2-stdlib 0 B/7432 B 0%] [2 ansible 4701 kB/5778 kB 81%]                                                                       64% [2 ansible 4701 kB/5778 kB 81%]                                   Get:9 http://archive.ubuntu.com/ubuntu disco/main amd64 libpython-stdlib amd64 2.7.16-1 [5828 B]
-I, [2019-12-27T15:13:28.243624 #9825]  INFO -- archive-install-ubuntu-1904: 64% [9 libpython-stdlib 0 B/5828 B 0%] [2 ansible 4701 kB/5778 kB 81%]                                                                      64% [2 ansible 4701 kB/5778 kB 81%]                                   Get:10 http://archive.ubuntu.com/ubuntu disco/main amd64 python2 amd64 2.7.16-1 [26.5 kB]
-I, [2019-12-27T15:13:28.248321 #9825]  INFO -- archive-install-ubuntu-1904: 64% [10 python2 0 B/26.5 kB 0%] [2 ansible 4701 kB/5778 kB 81%]                                                               65% [2 ansible 4701 kB/5778 kB 81%]                                   Get:11 http://archive.ubuntu.com/ubuntu disco/main amd64 python amd64 2.7.16-1 [7836 B]
-I, [2019-12-27T15:13:28.253371 #9825]  INFO -- archive-install-ubuntu-1904: 65% [11 python 0 B/7836 B 0%] [2 ansible 4701 kB/5778 kB 81%]                                                             66% [2 ansible 4701 kB/5778 kB 81%]                                   Get:12 http://archive.ubuntu.com/ubuntu disco/main amd64 libsodium23 amd64 1.0.17-1 [147 kB]
-I, [2019-12-27T15:13:28.260391 #9825]  INFO -- archive-install-ubuntu-1904: 66% [12 libsodium23 0 B/147 kB 0%] [2 ansible 4701 kB/5778 kB 81%]                                                                  68% [2 ansible 4701 kB/5778 kB 81%]                                   Get:13 http://archive.ubuntu.com/ubuntu disco/main amd64 libyaml-0-2 amd64 0.2.1-1 [46.7 kB]
-I, [2019-12-27T15:13:28.271776 #9825]  INFO -- archive-install-ubuntu-1904: 68% [13 libyaml-0-2 0 B/46.7 kB 0%] [2 ansible 4701 kB/5778 kB 81%]                                                                   69% [2 ansible 4701 kB/5778 kB 81%]                                   Get:14 http://archive.ubuntu.com/ubuntu disco/main amd64 python-markupsafe amd64 1.1.0-1 [13.1 kB]
-I, [2019-12-27T15:13:28.277770 #9825]  INFO -- archive-install-ubuntu-1904: 69% [14 python-markupsafe 0 B/13.1 kB 0%] [2 ansible 4701 kB/5778 kB 81%]                                                                         69% [2 ansible 4701 kB/5778 kB 81%]                                   Get:15 http://archive.ubuntu.com/ubuntu disco-updates/main amd64 python-jinja2 all 2.10-1ubuntu0.19.04.1 [94.8 kB]
-I, [2019-12-27T15:13:28.337053 #9825]  INFO -- archive-install-ubuntu-1904: 69% [15 python-jinja2 0 B/94.8 kB 0%] [2 ansible 4701 kB/5778 kB 81%]                                                                     71% [Waiting for headers] [2 ansible 4701 kB/5778 kB 81%]                                                         Get:16 http://archive.ubuntu.com/ubuntu disco/main amd64 python-yaml amd64 3.13-2 [123 kB]
-I, [2019-12-27T15:13:28.480088 #9825]  INFO -- archive-install-ubuntu-1904: 71% [16 python-yaml 4061 B/123 kB 3%] [2 ansible 4701 kB/5778 kB 81%]                                                                     79% [2 ansible 5686 kB/5778 kB 98%]                                   Get:17 http://archive.ubuntu.com/ubuntu disco/main amd64 python-cffi-backend amd64 1.12.2-1 [65.9 kB]
-I, [2019-12-27T15:13:28.505914 #9825]  INFO -- archive-install-ubuntu-1904: 80% [17 python-cffi-backend 14.2 kB/65.9 kB 22%] [2 ansible 5778 kB/5778 kB 100                                                                               80% [17 python-cffi-backend 24.3 kB/65.9 kB 37%]                                                Get:18 http://archive.ubuntu.com/ubuntu disco/main amd64 python-six all 1.12.0-1 [11.6 kB]
-I, [2019-12-27T15:13:28.511666 #9825]  INFO -- archive-install-ubuntu-1904:                                                 81% [18 python-six 7429 B/11.6 kB 64%]                                      82% [Waiting for headers]                         Get:19 http://archive.ubuntu.com/ubuntu disco/universe amd64 python-bcrypt amd64 3.1.6-1 [29.9 kB]
-I, [2019-12-27T15:13:28.517948 #9825]  INFO -- archive-install-ubuntu-1904: 82% [19 python-bcrypt 0 B/29.9 kB 0%]                                     83% [Waiting for headers]                         Get:20 http://archive.ubuntu.com/ubuntu disco/main amd64 python-asn1crypto all 0.24.0-1 [72.7 kB]
-I, [2019-12-27T15:13:28.557280 #9825]  INFO -- archive-install-ubuntu-1904: 83% [20 python-asn1crypto 66 B/72.7 kB 0%]                                          Get:21 http://archive.ubuntu.com/ubuntu disco/main amd64 python-enum34 all 1.1.6-2 [34.8 kB]
-I, [2019-12-27T15:13:28.574388 #9825]  INFO -- archive-install-ubuntu-1904:                                           84% [21 python-enum34 3829 B/34.8 kB 11%]                                         Get:22 http://archive.ubuntu.com/ubuntu disco/main amd64 python-idna all 2.6-1 [32.4 kB]
-I, [2019-12-27T15:13:28.794930 #9825]  INFO -- archive-install-ubuntu-1904:                                          85% [22 python-idna 0 B/32.4 kB 0%]86% [Connecting to archive.ubuntu.com (91.189.88.174)]                                                      Get:23 http://archive.ubuntu.com/ubuntu disco/main amd64 python-ipaddress all 1.0.17-1 [18.2 kB]
-I, [2019-12-27T15:13:28.992215 #9825]  INFO -- archive-install-ubuntu-1904:                                                       86% [23 python-ipaddress 5511 B/18.2 kB 30%]                                            86% [Working]             Get:24 http://archive.ubuntu.com/ubuntu disco/main amd64 python-cryptography amd64 2.3-1ubuntu2 [204 kB]
-I, [2019-12-27T15:13:29.379140 #9825]  INFO -- archive-install-ubuntu-1904: 86% [24 python-cryptography 11.3 kB/204 kB 6%]                                              88% [Working]             Get:25 http://archive.ubuntu.com/ubuntu disco/universe amd64 python-nacl amd64 1.3.0-2 [47.7 kB]
-I, [2019-12-27T15:13:29.411322 #9825]  INFO -- archive-install-ubuntu-1904: 88% [25 python-nacl 0 B/47.7 kB 0%]                                   89% [Working]             Get:26 http://archive.ubuntu.com/ubuntu disco/universe amd64 python-pyasn1 all 0.4.2-3 [46.7 kB]
-I, [2019-12-27T15:13:29.478743 #9825]  INFO -- archive-install-ubuntu-1904: 89% [26 python-pyasn1 875 B/46.7 kB 2%]                                       90% [Working]             Get:27 http://archive.ubuntu.com/ubuntu disco/universe amd64 python-paramiko all 2.4.2-0.1ubuntu1 [118 kB]
-I, [2019-12-27T15:13:29.710474 #9825]  INFO -- archive-install-ubuntu-1904: 90% [27 python-paramiko 0 B/118 kB 0%]                                      92% [Working]             Get:28 http://archive.ubuntu.com/ubuntu disco/universe amd64 python-httplib2 all 0.11.3-2 [29.0 kB]
-I, [2019-12-27T15:13:29.873450 #9825]  INFO -- archive-install-ubuntu-1904: 92% [28 python-httplib2 10.8 kB/29.0 kB 37%]                                            Get:29 http://archive.ubuntu.com/ubuntu disco/universe amd64 python-crypto amd64 2.6.1-9build2 [236 kB]
-I, [2019-12-27T15:13:29.987792 #9825]  INFO -- archive-install-ubuntu-1904:                                             93% [29 python-crypto 20.7 kB/236 kB 9%]95% [Working]                                                      1814 kB/s 0s                                                                               Get:30 http://archive.ubuntu.com/ubuntu disco/main amd64 python-pkg-resources all 40.8.0-1 [129 kB]
-I, [2019-12-27T15:13:29.989774 #9825]  INFO -- archive-install-ubuntu-1904: 95% [30 python-pkg-resources 0 B/129 kB 0%]                        1814 kB/s 0s96% [Working]                                                      1814 kB/s 0s                                                                               Get:31 http://archive.ubuntu.com/ubuntu disco/main amd64 python-setuptools all 40.8.0-1 [329 kB]
-I, [2019-12-27T15:13:30.033061 #9825]  INFO -- archive-install-ubuntu-1904: 96% [31 python-setuptools 0 B/329 kB 0%]                           1814 kB/s 0s99% [Working]                                                      1814 kB/s 0s                                                                               Get:32 http://archive.ubuntu.com/ubuntu disco/universe amd64 sshpass amd64 1.06-1 [10.5 kB]
-I, [2019-12-27T15:13:30.085425 #9825]  INFO -- archive-install-ubuntu-1904: 99% [32 sshpass 0 B/10.5 kB 0%]                                    1814 kB/s 0s100% [Working]                                                     1814 kB/s 0s                                                                               Fetched 11.5 MB in 6s (1862 kB/s)
-I, [2019-12-27T15:13:33.650334 #9825]  INFO -- archive-install-ubuntu-1904: Extracting templates from packages: 93%Extracting templates from packages: 100%
-I, [2019-12-27T15:13:33.821228 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libpython2.7-minimal:amd64.
-I, [2019-12-27T15:13:33.838950 #9825]  INFO -- archive-install-ubuntu-1904: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 14674 files and directories currently installed.)
-I, [2019-12-27T15:13:33.842019 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../0-libpython2.7-minimal_2.7.16-2ubuntu0.2_amd64.deb ...
-I, [2019-12-27T15:13:33.845870 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libpython2.7-minimal:amd64 (2.7.16-2ubuntu0.2) ...
-I, [2019-12-27T15:13:34.071943 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python2.7-minimal.
-I, [2019-12-27T15:13:34.077841 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../1-python2.7-minimal_2.7.16-2ubuntu0.2_amd64.deb ...
-I, [2019-12-27T15:13:34.099083 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python2.7-minimal (2.7.16-2ubuntu0.2) ...
-I, [2019-12-27T15:13:34.448693 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python2-minimal.
-I, [2019-12-27T15:13:34.448836 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../2-python2-minimal_2.7.16-1_amd64.deb ...
-I, [2019-12-27T15:13:34.461831 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python2-minimal (2.7.16-1) ...
-I, [2019-12-27T15:13:34.595353 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-minimal.
-I, [2019-12-27T15:13:34.599672 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../3-python-minimal_2.7.16-1_amd64.deb ...
-I, [2019-12-27T15:13:34.605950 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-minimal (2.7.16-1) ...
-I, [2019-12-27T15:13:34.705987 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libpython2.7-stdlib:amd64.
-I, [2019-12-27T15:13:34.707896 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../4-libpython2.7-stdlib_2.7.16-2ubuntu0.2_amd64.deb ...
-I, [2019-12-27T15:13:34.713808 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libpython2.7-stdlib:amd64 (2.7.16-2ubuntu0.2) ...
-I, [2019-12-27T15:13:35.599065 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python2.7.
-I, [2019-12-27T15:13:35.603847 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../5-python2.7_2.7.16-2ubuntu0.2_amd64.deb ...
-I, [2019-12-27T15:13:35.603983 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python2.7 (2.7.16-2ubuntu0.2) ...
-I, [2019-12-27T15:13:35.714486 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libpython2-stdlib:amd64.
-I, [2019-12-27T15:13:35.714537 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../6-libpython2-stdlib_2.7.16-1_amd64.deb ...
-I, [2019-12-27T15:13:35.714642 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libpython2-stdlib:amd64 (2.7.16-1) ...
-I, [2019-12-27T15:13:35.853340 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libpython-stdlib:amd64.
-I, [2019-12-27T15:13:35.853470 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../7-libpython-stdlib_2.7.16-1_amd64.deb ...
-I, [2019-12-27T15:13:35.870844 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libpython-stdlib:amd64 (2.7.16-1) ...
-I, [2019-12-27T15:13:35.982841 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libpython2.7-minimal:amd64 (2.7.16-2ubuntu0.2) ...
-I, [2019-12-27T15:13:36.041882 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python2.7-minimal (2.7.16-2ubuntu0.2) ...
-I, [2019-12-27T15:13:37.764877 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python2-minimal (2.7.16-1) ...
-I, [2019-12-27T15:13:38.043398 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python2.
-I, [2019-12-27T15:13:38.058700 #9825]  INFO -- archive-install-ubuntu-1904: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15431 files and directories currently installed.)
-I, [2019-12-27T15:13:38.062861 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../python2_2.7.16-1_amd64.deb ...
-I, [2019-12-27T15:13:38.071347 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python2 (2.7.16-1) ...
-I, [2019-12-27T15:13:38.278694 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-minimal (2.7.16-1) ...
-I, [2019-12-27T15:13:38.428344 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python.
-I, [2019-12-27T15:13:38.481858 #9825]  INFO -- archive-install-ubuntu-1904: (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 15463 files and directories currently installed.)
-I, [2019-12-27T15:13:38.495244 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../00-python_2.7.16-1_amd64.deb ...
-I, [2019-12-27T15:13:38.540929 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python (2.7.16-1) ...
-I, [2019-12-27T15:13:38.691934 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libsodium23:amd64.
-I, [2019-12-27T15:13:38.705903 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../01-libsodium23_1.0.17-1_amd64.deb ...
-I, [2019-12-27T15:13:38.741668 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libsodium23:amd64 (1.0.17-1) ...
-I, [2019-12-27T15:13:38.936910 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package libyaml-0-2:amd64.
-I, [2019-12-27T15:13:38.951864 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../02-libyaml-0-2_0.2.1-1_amd64.deb ...
-I, [2019-12-27T15:13:38.963141 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking libyaml-0-2:amd64 (0.2.1-1) ...
-I, [2019-12-27T15:13:39.112994 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-markupsafe.
-I, [2019-12-27T15:13:39.113051 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../03-python-markupsafe_1.1.0-1_amd64.deb ...
-I, [2019-12-27T15:13:39.124630 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-markupsafe (1.1.0-1) ...
-I, [2019-12-27T15:13:39.247251 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-jinja2.
-I, [2019-12-27T15:13:39.253136 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../04-python-jinja2_2.10-1ubuntu0.19.04.1_all.deb ...
-I, [2019-12-27T15:13:39.272113 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-jinja2 (2.10-1ubuntu0.19.04.1) ...
-I, [2019-12-27T15:13:39.434132 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-yaml.
-I, [2019-12-27T15:13:39.442872 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../05-python-yaml_3.13-2_amd64.deb ...
-I, [2019-12-27T15:13:39.455561 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-yaml (3.13-2) ...
-I, [2019-12-27T15:13:39.568861 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-cffi-backend.
-I, [2019-12-27T15:13:39.589891 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../06-python-cffi-backend_1.12.2-1_amd64.deb ...
-I, [2019-12-27T15:13:39.589943 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-cffi-backend (1.12.2-1) ...
-I, [2019-12-27T15:13:39.680981 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-six.
-I, [2019-12-27T15:13:39.686087 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../07-python-six_1.12.0-1_all.deb ...
-I, [2019-12-27T15:13:39.699028 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-six (1.12.0-1) ...
-I, [2019-12-27T15:13:39.817118 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-bcrypt.
-I, [2019-12-27T15:13:39.827711 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../08-python-bcrypt_3.1.6-1_amd64.deb ...
-I, [2019-12-27T15:13:39.831471 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-bcrypt (3.1.6-1) ...
-I, [2019-12-27T15:13:39.937854 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-asn1crypto.
-I, [2019-12-27T15:13:39.951865 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../09-python-asn1crypto_0.24.0-1_all.deb ...
-I, [2019-12-27T15:13:39.959102 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-asn1crypto (0.24.0-1) ...
-I, [2019-12-27T15:13:40.136883 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-enum34.
-I, [2019-12-27T15:13:40.154952 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../10-python-enum34_1.1.6-2_all.deb ...
-I, [2019-12-27T15:13:40.155076 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-enum34 (1.1.6-2) ...
-I, [2019-12-27T15:13:40.330020 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-idna.
-I, [2019-12-27T15:13:40.336048 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../11-python-idna_2.6-1_all.deb ...
-I, [2019-12-27T15:13:40.344856 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-idna (2.6-1) ...
-I, [2019-12-27T15:13:40.504882 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-ipaddress.
-I, [2019-12-27T15:13:40.504943 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../12-python-ipaddress_1.0.17-1_all.deb ...
-I, [2019-12-27T15:13:40.504957 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-ipaddress (1.0.17-1) ...
-I, [2019-12-27T15:13:40.662685 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-cryptography.
-I, [2019-12-27T15:13:40.668438 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../13-python-cryptography_2.3-1ubuntu2_amd64.deb ...
-I, [2019-12-27T15:13:40.673017 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-cryptography (2.3-1ubuntu2) ...
-I, [2019-12-27T15:13:40.914320 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-nacl.
-I, [2019-12-27T15:13:40.919850 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../14-python-nacl_1.3.0-2_amd64.deb ...
-I, [2019-12-27T15:13:40.922652 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-nacl (1.3.0-2) ...
-I, [2019-12-27T15:13:41.068382 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-pyasn1.
-I, [2019-12-27T15:13:41.068517 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../15-python-pyasn1_0.4.2-3_all.deb ...
-I, [2019-12-27T15:13:41.086480 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-pyasn1 (0.4.2-3) ...
-I, [2019-12-27T15:13:41.255352 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-paramiko.
-I, [2019-12-27T15:13:41.255406 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../16-python-paramiko_2.4.2-0.1ubuntu1_all.deb ...
-I, [2019-12-27T15:13:41.255420 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-paramiko (2.4.2-0.1ubuntu1) ...
-I, [2019-12-27T15:13:41.399857 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-httplib2.
-I, [2019-12-27T15:13:41.403592 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../17-python-httplib2_0.11.3-2_all.deb ...
-I, [2019-12-27T15:13:41.408497 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-httplib2 (0.11.3-2) ...
-I, [2019-12-27T15:13:41.517786 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-crypto.
-I, [2019-12-27T15:13:41.519068 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../18-python-crypto_2.6.1-9build2_amd64.deb ...
-I, [2019-12-27T15:13:41.519996 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-crypto (2.6.1-9build2) ...
-I, [2019-12-27T15:13:41.801701 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-pkg-resources.
-I, [2019-12-27T15:13:41.818176 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../19-python-pkg-resources_40.8.0-1_all.deb ...
-I, [2019-12-27T15:13:41.818228 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-pkg-resources (40.8.0-1) ...
-I, [2019-12-27T15:13:42.162040 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package python-setuptools.
-I, [2019-12-27T15:13:42.162103 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../20-python-setuptools_40.8.0-1_all.deb ...
-I, [2019-12-27T15:13:42.174164 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking python-setuptools (40.8.0-1) ...
-I, [2019-12-27T15:13:42.481870 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package sshpass.
-I, [2019-12-27T15:13:42.481929 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../21-sshpass_1.06-1_amd64.deb ...
-I, [2019-12-27T15:13:42.481943 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking sshpass (1.06-1) ...
-I, [2019-12-27T15:13:42.632478 #9825]  INFO -- archive-install-ubuntu-1904: Selecting previously unselected package ansible.
-I, [2019-12-27T15:13:42.632540 #9825]  INFO -- archive-install-ubuntu-1904: Preparing to unpack .../22-ansible_2.9.2-1ppa~disco_all.deb ...
-I, [2019-12-27T15:13:42.632555 #9825]  INFO -- archive-install-ubuntu-1904: Unpacking ansible (2.9.2-1ppa~disco) ...
-I, [2019-12-27T15:13:48.168188 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libsodium23:amd64 (1.0.17-1) ...
-I, [2019-12-27T15:13:48.193839 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libyaml-0-2:amd64 (0.2.1-1) ...
-I, [2019-12-27T15:13:48.235451 #9825]  INFO -- archive-install-ubuntu-1904: Setting up sshpass (1.06-1) ...
-I, [2019-12-27T15:13:48.236522 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libpython2.7-stdlib:amd64 (2.7.16-2ubuntu0.2) ...
-I, [2019-12-27T15:13:48.256813 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python2.7 (2.7.16-2ubuntu0.2) ...
-I, [2019-12-27T15:13:52.190676 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libpython2-stdlib:amd64 (2.7.16-1) ...
-I, [2019-12-27T15:13:52.202065 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python2 (2.7.16-1) ...
-I, [2019-12-27T15:13:52.207757 #9825]  INFO -- archive-install-ubuntu-1904: Setting up libpython-stdlib:amd64 (2.7.16-1) ...
-I, [2019-12-27T15:13:52.224118 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python (2.7.16-1) ...
-I, [2019-12-27T15:13:52.306381 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-ipaddress (1.0.17-1) ...
-I, [2019-12-27T15:13:52.959352 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-cffi-backend (1.12.2-1) ...
-I, [2019-12-27T15:13:52.968176 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-enum34 (1.1.6-2) ...
-I, [2019-12-27T15:13:53.460318 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-crypto (2.6.1-9build2) ...
-I, [2019-12-27T15:13:54.255049 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-pkg-resources (40.8.0-1) ...
-I, [2019-12-27T15:13:54.965805 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-httplib2 (0.11.3-2) ...
-I, [2019-12-27T15:13:55.881878 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-asn1crypto (0.24.0-1) ...
-I, [2019-12-27T15:13:56.709293 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-six (1.12.0-1) ...
-I, [2019-12-27T15:13:57.110858 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-pyasn1 (0.4.2-3) ...
-I, [2019-12-27T15:13:57.779853 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-nacl (1.3.0-2) ...
-I, [2019-12-27T15:13:58.151370 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-idna (2.6-1) ...
-I, [2019-12-27T15:13:58.743920 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-setuptools (40.8.0-1) ...
-I, [2019-12-27T15:13:59.576935 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-markupsafe (1.1.0-1) ...
-I, [2019-12-27T15:13:59.961412 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-yaml (3.13-2) ...
-I, [2019-12-27T15:14:00.585454 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-cryptography (2.3-1ubuntu2) ...
-I, [2019-12-27T15:14:01.301406 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-bcrypt (3.1.6-1) ...
-I, [2019-12-27T15:14:01.768440 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-jinja2 (2.10-1ubuntu0.19.04.1) ...
-I, [2019-12-27T15:14:02.419560 #9825]  INFO -- archive-install-ubuntu-1904: Setting up python-paramiko (2.4.2-0.1ubuntu1) ...
-I, [2019-12-27T15:14:03.307346 #9825]  INFO -- archive-install-ubuntu-1904: Setting up ansible (2.9.2-1ppa~disco) ...
-I, [2019-12-27T15:14:15.168040 #9825]  INFO -- archive-install-ubuntu-1904: Processing triggers for libc-bin (2.29-0ubuntu2) ...
-I, [2019-12-27T15:14:15.209196 #9825]  INFO -- archive-install-ubuntu-1904: Processing triggers for mime-support (3.60ubuntu1) ...
-I, [2019-12-27T15:14:15.381372 #9825]  INFO -- archive-install-ubuntu-1904: Transferring files to <archive-install-ubuntu-1904>
-I, [2019-12-27T15:14:17.750468 #9825]  INFO -- archive-install-ubuntu-1904: - downloading role 'systemd', owned by 0x0i
-I, [2019-12-27T15:14:18.795474 #9825]  INFO -- archive-install-ubuntu-1904: - downloading role from https://github.com/0x0I/ansible-role-systemd/archive/master.tar.gz
-I, [2019-12-27T15:14:19.135943 #9825]  INFO -- archive-install-ubuntu-1904: - extracting 0x0i.systemd to /tmp/kitchen/roles/0x0i.systemd
-I, [2019-12-27T15:14:19.147575 #9825]  INFO -- archive-install-ubuntu-1904: - 0x0i.systemd (master) was installed successfully
-I, [2019-12-27T15:14:19.817758 #9825]  INFO -- archive-install-ubuntu-1904: [0;34mansible-playbook 2.9.2[0m
-I, [2019-12-27T15:14:19.817822 #9825]  INFO -- archive-install-ubuntu-1904: [0;34m  config file = /etc/ansible/ansible.cfg[0m
-I, [2019-12-27T15:14:19.817840 #9825]  INFO -- archive-install-ubuntu-1904: [0;34m  configured module search path = [u'/home/kitchen/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules'][0m
-I, [2019-12-27T15:14:19.817855 #9825]  INFO -- archive-install-ubuntu-1904: [0;34m  ansible python module location = /usr/lib/python2.7/dist-packages/ansible[0m
-I, [2019-12-27T15:14:19.818373 #9825]  INFO -- archive-install-ubuntu-1904: [0;34m  executable location = /usr/bin/ansible-playbook[0m
-I, [2019-12-27T15:14:19.818421 #9825]  INFO -- archive-install-ubuntu-1904: [0;34m  python version = 2.7.16 (default, Oct  7 2019, 17:36:04) [GCC 8.3.0][0m
-I, [2019-12-27T15:14:19.818952 #9825]  INFO -- archive-install-ubuntu-1904: [0;34mUsing /etc/ansible/ansible.cfg as config file[0m
-I, [2019-12-27T15:14:19.829291 #9825]  INFO -- archive-install-ubuntu-1904: [0;35m[DEPRECATION WARNING]: The TRANSFORM_INVALID_GROUP_CHARS settings is set to [0m
-I, [2019-12-27T15:14:19.829400 #9825]  INFO -- archive-install-ubuntu-1904: [0;35mallow bad characters in group names by default, this will change, but still be [0m
-I, [2019-12-27T15:14:19.829421 #9825]  INFO -- archive-install-ubuntu-1904: [0;35muser configurable on deprecation. This feature will be removed in version 2.10.[0m
-I, [2019-12-27T15:14:19.829437 #9825]  INFO -- archive-install-ubuntu-1904: [0;35m Deprecation warnings can be disabled by setting deprecation_warnings=False in [0m
-I, [2019-12-27T15:14:19.829451 #9825]  INFO -- archive-install-ubuntu-1904: [0;35mansible.cfg.[0m
-I, [2019-12-27T15:14:19.830067 #9825]  INFO -- archive-install-ubuntu-1904: [1;35m[WARNING]: Invalid characters were found in group names but not replaced, use[0m
-I, [2019-12-27T15:14:19.830121 #9825]  INFO -- archive-install-ubuntu-1904: [1;35m-vvvv to see details[0m
-I, [2019-12-27T15:14:19.830138 #9825]  INFO -- archive-install-ubuntu-1904: [1;35m[0m
-I, [2019-12-27T15:14:20.081222 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:20.081291 #9825]  INFO -- archive-install-ubuntu-1904: PLAYBOOK: default_playbook.yml *************************************************
-I, [2019-12-27T15:14:20.082578 #9825]  INFO -- archive-install-ubuntu-1904: [0;34m1 plays in /tmp/kitchen/default_playbook.yml[0m
-I, [2019-12-27T15:14:20.085062 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:20.085123 #9825]  INFO -- archive-install-ubuntu-1904: PLAY [Default playbook for testing] ********************************************
-I, [2019-12-27T15:14:20.101840 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:20.102039 #9825]  INFO -- archive-install-ubuntu-1904: TASK [Gathering Facts] *********************************************************
-I, [2019-12-27T15:14:20.102733 #9825]  INFO -- archive-install-ubuntu-1904: [1;30mtask path: /tmp/kitchen/default_playbook.yml:2[0m
-I, [2019-12-27T15:14:21.848185 #9825]  INFO -- archive-install-ubuntu-1904: [0;32mok: [localhost][0m
-I, [2019-12-27T15:14:21.849162 #9825]  INFO -- archive-install-ubuntu-1904: [0;34mMETA: ran handlers[0m
-I, [2019-12-27T15:14:21.862545 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:21.862611 #9825]  INFO -- archive-install-ubuntu-1904: TASK [ansible-role-prometheus : Include OS and distribution specific variables.] ***
-I, [2019-12-27T15:14:21.862737 #9825]  INFO -- archive-install-ubuntu-1904: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:2[0m
-I, [2019-12-27T15:14:21.905676 #9825]  INFO -- archive-install-ubuntu-1904: [0;32mok: [localhost] => (item=/tmp/kitchen/roles/ansible-role-prometheus/vars/ubuntu.yml) => {"ansible_facts": {}, "ansible_included_var_files": ["/tmp/kitchen/roles/ansible-role-prometheus/vars/ubuntu.yml"], "ansible_loop_var": "item", "changed": false, "item": "/tmp/kitchen/roles/ansible-role-prometheus/vars/ubuntu.yml"}[0m
-I, [2019-12-27T15:14:21.918446 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:21.918563 #9825]  INFO -- archive-install-ubuntu-1904: TASK [ansible-role-prometheus : Include OS and distribution specific installation tasks.] ***
-I, [2019-12-27T15:14:21.919128 #9825]  INFO -- archive-install-ubuntu-1904: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:10[0m
-I, [2019-12-27T15:14:21.984403 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:21.984466 #9825]  INFO -- archive-install-ubuntu-1904: TASK [ansible-role-prometheus : Include common installation tasks] *************
-I, [2019-12-27T15:14:21.985062 #9825]  INFO -- archive-install-ubuntu-1904: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/main.yml:18[0m
-I, [2019-12-27T15:14:22.100059 #9825]  INFO -- archive-install-ubuntu-1904: [0;36mincluded: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml for localhost[0m
-I, [2019-12-27T15:14:22.116183 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:22.116247 #9825]  INFO -- archive-install-ubuntu-1904: TASK [ansible-role-prometheus : Ensure Prometheus group exists] ****************
-I, [2019-12-27T15:14:22.116662 #9825]  INFO -- archive-install-ubuntu-1904: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:2[0m
-I, [2019-12-27T15:14:22.806467 #9825]  INFO -- archive-install-ubuntu-1904: [0;33mchanged: [localhost] => {"changed": true, "gid": 1001, "name": "prometheus", "state": "present", "system": false}[0m
-I, [2019-12-27T15:14:22.823149 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:22.824285 #9825]  INFO -- archive-install-ubuntu-1904: TASK [ansible-role-prometheus : Create Prometheus user] ************************
-I, [2019-12-27T15:14:22.825206 #9825]  INFO -- archive-install-ubuntu-1904: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:8[0m
-I, [2019-12-27T15:14:23.498630 #9825]  INFO -- archive-install-ubuntu-1904: [0;33mchanged: [localhost] => {"changed": true, "comment": "Prometheus service account", "create_home": true, "group": 1001, "home": "/home/prometheus", "name": "prometheus", "shell": "/bin/sh", "state": "present", "system": false, "uid": 1001}[0m
-I, [2019-12-27T15:14:23.514077 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:23.515280 #9825]  INFO -- archive-install-ubuntu-1904: TASK [ansible-role-prometheus : perform designated installation procedure] *****
-I, [2019-12-27T15:14:23.516363 #9825]  INFO -- archive-install-ubuntu-1904: [1;30mtask path: /tmp/kitchen/roles/ansible-role-prometheus/tasks/common/install.yml:15[0m
-I, [2019-12-27T15:14:23.564454 #9825]  INFO -- archive-install-ubuntu-1904: [0;34mMETA: ran handlers[0m
-I, [2019-12-27T15:14:23.565928 #9825]  INFO -- archive-install-ubuntu-1904: [0;34mMETA: ran handlers[0m
-I, [2019-12-27T15:14:23.567570 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:23.568615 #9825]  INFO -- archive-install-ubuntu-1904: PLAY RECAP *********************************************************************
-I, [2019-12-27T15:14:23.570017 #9825]  INFO -- archive-install-ubuntu-1904: [0;33mlocalhost[0m                  : [0;32mok=5   [0m [0;33mchanged=2   [0m unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-I, [2019-12-27T15:14:23.570733 #9825]  INFO -- archive-install-ubuntu-1904: 
-I, [2019-12-27T15:14:23.625724 #9825]  INFO -- archive-install-ubuntu-1904: Downloading files from <archive-install-ubuntu-1904>
-I, [2019-12-27T15:14:23.628374 #9825]  INFO -- archive-install-ubuntu-1904: Finished converging <archive-install-ubuntu-1904> (1m53.86s).
-I, [2019-12-27T15:14:23.628492 #9825]  INFO -- archive-install-ubuntu-1904: -----> Setting up <archive-install-ubuntu-1904>...
-I, [2019-12-27T15:14:23.629142 #9825]  INFO -- archive-install-ubuntu-1904: Finished setting up <archive-install-ubuntu-1904> (0m0.00s).
-I, [2019-12-27T15:14:23.629241 #9825]  INFO -- archive-install-ubuntu-1904: -----> Verifying <archive-install-ubuntu-1904>...
-I, [2019-12-27T15:14:23.905450 #9825]  INFO -- archive-install-ubuntu-1904: Loaded tests from {:path=>".home.awilson.lab.ansible-role-prometheus.test.integration.install.archive_install"} 
-I, [2019-12-27T15:14:24.013816 #9825]  INFO -- archive-install-ubuntu-1904: Finished verifying <archive-install-ubuntu-1904> (0m0.38s).
-I, [2019-12-27T15:14:24.014211 #9825]  INFO -- archive-install-ubuntu-1904: -----> Destroying <archive-install-ubuntu-1904>...
-I, [2019-12-27T15:14:24.128788 #9825]  INFO -- archive-install-ubuntu-1904: UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
-I, [2019-12-27T15:14:24.128864 #9825]  INFO -- archive-install-ubuntu-1904: root                10725               10703               0                   15:12               ?                   00:00:00            /sbin/init
-I, [2019-12-27T15:14:25.392009 #9825]  INFO -- archive-install-ubuntu-1904: b93bc0f4436b666502272186cf13f3cfa2aef4478b91223d6eaafaeaeb355394
-I, [2019-12-27T15:14:25.917298 #9825]  INFO -- archive-install-ubuntu-1904: b93bc0f4436b666502272186cf13f3cfa2aef4478b91223d6eaafaeaeb355394
-I, [2019-12-27T15:14:25.942111 #9825]  INFO -- archive-install-ubuntu-1904: Finished destroying <archive-install-ubuntu-1904> (0m1.93s).
-I, [2019-12-27T15:14:25.942311 #9825]  INFO -- archive-install-ubuntu-1904: Finished testing <archive-install-ubuntu-1904> (2m2.77s).

@@ -1,0 +1,13 @@
+---
+- name: Default playbook for testing
+  hosts: test-kitchen
+  roles:
+    - ansible-role-prometheus
+  vars:
+    install_type: archive
+    config_dir: /etc/prometheus
+    config:
+      global:
+        scrape_interval: 10s
+        external_labels:
+          monitor: test
