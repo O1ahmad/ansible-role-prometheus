@@ -1,7 +1,7 @@
 ---
 - name: Render rules files
   include_tasks: "common/config/rules_files.yml"
-  with_items: "{{ prometheus_rules_files }}"
+  with_items: "{{ prometheus_rule_files }}"
 
 - name: Render prometheus.yml config
   include_tasks: "common/config/prometheus_config.yml"

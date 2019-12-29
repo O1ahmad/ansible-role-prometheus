@@ -19,7 +19,7 @@
 - name: Copy Prometheus rules file configuration in place
   become: true
   template:
-    src: "{{ rules_file_template }}"
+    src: "{{ rule_files_template }}"
     dest: "{{ rules_path }}/{{ item.name }}"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"

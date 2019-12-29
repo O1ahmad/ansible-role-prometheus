@@ -97,9 +97,9 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/config/prometheus_config
-  - name: rules_files
+  - name: rule_files
     provisioner:
-      playbook: test/integration/config/rules_files/default_playbook.yml
+      playbook: test/integration/config/rule_files/default_playbook.yml
     verifier:
       inspec_tests:
-        - path: test/integration/config/rules_files
+        - path: test/integration/config/rule_files

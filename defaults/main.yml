@@ -20,8 +20,8 @@ prometheus_config:
   remote_read: []
   scrape_configs: []
 
-sd_files_template: file_sd.j2
-prometheus_sd_files: []
+file_sd_template: file_sd.j2
+prometheus_file_sd: []
 
-rules_file_template: rules.j2
-prometheus_rules_files: []
+rule_files_template: rules.j2
+prometheus_rule_files: []

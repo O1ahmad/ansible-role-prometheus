@@ -12,7 +12,7 @@
       rule_files:
         - /opt/prometheus/rules.d/example-rules.yml
         - /etc/prometheus/rules.d/nondefault-path-example-rules.yml
-    prometheus_rules_files:
+    prometheus_rule_files:
       - name: example-rules.yml
         config:
           groups:
