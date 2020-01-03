@@ -1,0 +1,12 @@
+---
+- name: Default playbook for testing
+  hosts: test-kitchen
+  roles:
+    - ansible-role-prometheus
+  vars:
+    install_type: archive
+    extra_run_args:
+      - --web.listen-address=0.0.0.0:9090
+      - --log.level=debug
+    custom_unit_properties:
+      LimitDATA: 1G

@@ -20,3 +20,6 @@
 
 - name: Include common configuration tasks
   include_tasks: "common/config.yml"
+
+- name: Include common launch tasks
+  include_tasks: "common/launch.yml"
