@@ -1,7 +1,23 @@
 ---
+- name: Determine configuration directory
+  set_fact:
+    config_dir: "{{ config_dir | default(install_dir) }}"
+
+- name: Ensure existence of config dir
+  become: true
+  file:
+    path: "{{ config_dir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    state: directory
+
 - name: Render rules files
-  include_tasks: "common/config/rules_files.yml"
+  include_tasks: "common/config/rule_files.yml"
   with_items: "{{ prometheus_rule_files }}"
+
+- name: Render file_sd configs
+  include_tasks: "common/config/file_sds.yml"
+  with_items: "{{ prometheus_file_sd }}"
 
 - name: Render prometheus.yml config
   include_tasks: "common/config/prometheus_config.yml"

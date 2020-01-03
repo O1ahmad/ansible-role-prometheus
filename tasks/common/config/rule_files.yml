@@ -1,8 +1,9 @@
 ---
 #######  Rules file configuration #######
-- name: set default rules files path
+
+- name: set default rule files path
   set_fact:
-    default_rules_path: "{{ install_dir }}/rules.d"
+    default_rules_path: "{{ config_dir }}/rules.d"
 
 - name: set rules path
   set_fact:
@@ -15,6 +16,7 @@
     state: directory
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
+  when: prometheus_rule_files is defined and prometheus_rule_files is not none
 
 - name: Copy Prometheus rules file configuration in place
   become: true

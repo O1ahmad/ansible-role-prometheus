@@ -6,7 +6,7 @@
   vars:
     install_type: archive
     config_dir: /etc/prometheus
-    config:
+    prometheus_config:
       global:
         scrape_interval: 10s
         external_labels:

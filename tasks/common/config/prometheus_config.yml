@@ -1,16 +1,4 @@
 ---
-- name: Determine configuration directory
-  set_fact:
-    config_dir: "{{ config_dir | default(install_dir) }}"
-
-- name: Ensure existence of config dir
-  become: true
-  file:
-    path: "{{ config_dir }}"
-    owner: "{{ prometheus_user }}"
-    group: "{{ prometheus_user }}"
-    state: directory
-
 - name: Copy Prometheus configuration in place
   become: true
   template:

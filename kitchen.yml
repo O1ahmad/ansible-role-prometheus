@@ -103,3 +103,9 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/config/rule_files
+  - name: file_sd
+    provisioner:
+      playbook: test/integration/config/file_sd/default_playbook.yml
+    verifier:
+      inspec_tests:
+        - path: test/integration/config/file_sd
