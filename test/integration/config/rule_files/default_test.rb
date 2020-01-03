@@ -30,3 +30,8 @@ describe command('/opt/prometheus/promtool check rules /etc/prometheus/rules.d/n
   its('exit_status') { should eq 0 }
   its('stdout') { should match('SUCCESS') }
 end
+
+describe command('/opt/prometheus/promtool check config /opt/prometheus/prometheus.yml') do
+  its('exit_status') { should eq 0 }
+  its('stdout') { should match("SUCCESS") }
+end

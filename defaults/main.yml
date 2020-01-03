@@ -15,10 +15,10 @@ default_install_dir: /opt/prometheus
 prometheus_config_file: prometheus.yml
 prometheus_config:
   global: {}
+  scrape_configs: []
   rule_files: []
   remote_write: []
   remote_read: []
-  scrape_configs: []
 
 file_sd_template: file_sd.j2
 prometheus_file_sd: []
