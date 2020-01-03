@@ -1,0 +1,39 @@
+---
+- name: Determine Alertmanger configuration directory
+  set_fact:
+    alertmgr_configdir: "{{ alertmgr_configdir | default(alertmgr_installdir) }}"
+
+- name: Ensure existence of Alertmanager config dir
+  become: true
+  file:
+    path: "{{ alertmgr_configdir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    state: directory
+
+- name: Copy Alertmanager configuration in place
+  become: true
+  template:
+    src: "{{ alertmgr_config_file }}.j2"
+    dest: "{{ alertmgr_configdir }}/{{ alertmgr_config_file }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    mode: 0644
+    validate: "{{ alertmgr_installdir }}/amtool check-config %s"
+  vars:
+    conf: "{{ alertmgr_config }}"
+  when: alertmgr_config is defined and alertmgr_config is not none
+
+- name: Determine Alertmanager data storage directory
+  set_fact:
+    alertmgr_datadir: "{{ alertmgr_datadir | default(default_alertmgr_datadir) }}"
+  when: '"alertmanager" in managed_services'
+
+- name: Ensure existence of Alertmanager data dir
+  become: true
+  file:
+    path: "{{ alertmgr_datadir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    state: directory
+  when: '"alertmanager" in managed_services'

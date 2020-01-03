@@ -1,0 +1,33 @@
+---
+- name: Set unit [Service] configuration
+  set_fact:
+    default_service_unit:
+      ExecStart: "{{ install_dir }}/prometheus --config.file={{ config_dir }}/prometheus.yml --storage.tsdb.path={{ data_dir }} {{ extra_run_args|join(' ') }}"
+      User: "{{ prometheus_user }}"
+      Group: "{{ prometheus_user }}"
+      StandardOutput: journal
+      StandardError: inherit
+  when: '"prometheus" in managed_services'
+
+- name: Setup Prometheus systemd unit
+  include_role:
+    name: 0x0i.systemd
+  vars:
+    unit_config:
+      - name: prometheus
+        Unit:
+          Description: Prometheus - a multi-dimensional time-series data monitoring and alerting toolkit
+          Documentation: https://prometheus.io/docs/introduction/overview/
+          Wants: network-online.target
+          After: network-online.target
+        Service: "{{ default_service_unit | combine(custom_unit_properties) }}"
+        Install:
+          WantedBy: multi-user.target
+  when: '"prometheus" in managed_services'
+
+- name: Ensure start of prometheus service
+  service:
+    name: prometheus
+    state: started
+    enabled: "yes"
+  when: '"prometheus" in managed_services'

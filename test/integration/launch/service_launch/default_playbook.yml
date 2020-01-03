@@ -5,6 +5,7 @@
     - ansible-role-prometheus
   vars:
     install_type: archive
+    managed_services: ['prometheus']
     extra_run_args:
       - --web.listen-address=0.0.0.0:9090
       - --log.level=debug

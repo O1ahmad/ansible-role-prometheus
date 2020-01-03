@@ -1,0 +1,27 @@
+---
+- name: Default playbook for testing
+  hosts: test-kitchen
+  roles:
+    - ansible-role-prometheus
+  vars:
+    managed_services: ['alertmanager']
+    alertmgr_config:
+      global:
+        smtp_smarthost: 'localhost:25'
+        smtp_from: 'alertmanager@example.org'
+      route:
+        receiver: team-X-mails
+        routes:
+          - match_re:
+              service: ^(foo1|foo2|baz)$
+            receiver: team-X-mails
+      receivers:
+        - name: 'team-X-mails'
+          email_configs:
+            - to: 'team-X+alerts@example.org'
+    extra_alertmgr_args:
+      - --storage.path=/var/data/alertmanager
+      - --web.listen-address=0.0.0.0:9090
+      - --log.level=debug
+    custom_alertmgr_properties:
+      LimitDATA: 1G

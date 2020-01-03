@@ -1,9 +1,10 @@
 ---
-#######  Archive installation #######
+#######  Prometheus archive installation #######
 
 - name: Determine installation directory
   set_fact:
     install_dir: "{{ install_dir | default(default_install_dir) }}"
+  when: 'install_type == "archive" and "prometheus" in managed_services'
 
 - name: Create installation directory
   file:
@@ -12,7 +13,7 @@
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
   become: true
-  when: install_type == "archive"
+  when: 'install_type == "archive" and "prometheus" in managed_services'
 
 - name: Download Prometheus archive ({{ archive_url }})
   get_url:
@@ -24,7 +25,7 @@
     mode: '0775'
   register: archive_tmp
   become: true
-  when: install_type == "archive"
+  when: 'install_type == "archive" and "prometheus" in managed_services'
 
 - name: Extract Prometheus archive
   unarchive:
@@ -39,4 +40,4 @@
       - '1'
     creates: "{{ install_dir }}/prometheus"
   become: true
-  when: install_type == "archive"
+  when: 'install_type == "archive" and "prometheus" in managed_services'

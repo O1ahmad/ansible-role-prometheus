@@ -16,7 +16,6 @@
     state: directory
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
-  when: prometheus_rule_files is defined and prometheus_rule_files is not none
 
 - name: Copy Prometheus rules file configuration in place
   become: true
