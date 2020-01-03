@@ -21,3 +21,15 @@
 
 - name: Render prometheus.yml config
   include_tasks: "common/config/prometheus_config.yml"
+
+- name: Determine data/metrics storage directory
+  set_fact:
+    data_dir: "{{ data_dir | default(default_data_dir) }}"
+
+- name: Ensure existence of data dir
+  become: true
+  file:
+    path: "{{ data_dir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    state: directory

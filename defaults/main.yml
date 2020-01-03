@@ -25,3 +25,8 @@ prometheus_file_sd: []
 
 rule_files_template: rules.j2
 prometheus_rule_files: []
+
+default_data_dir: /var/data/prometheus
+
+custom_unit_properties: {}
+extra_run_args: []
