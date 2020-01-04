@@ -13,6 +13,20 @@
     state: directory
   when: '"prometheus" in managed_services'
 
+- name: Determine Alertmanger configuration directory
+  set_fact:
+    alertmgr_configdir: "{{ alertmgr_configdir | default(alertmgr_installdir) }}"
+  when: '"alertmanager" in managed_services'
+
+- name: Ensure existence of Alertmanager config dir
+  become: true
+  file:
+    path: "{{ alertmgr_configdir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    state: directory
+  when: '"alertmanager" in managed_services'
+
 - name: Render rules files
   include_tasks: "common/config/rule_files.yml"
   with_items: "{{ prometheus_rule_files }}"
@@ -40,6 +54,11 @@
     group: "{{ prometheus_user }}"
     state: directory
   when: '"prometheus" in managed_services'
+
+- name: Render Alertmanager template files
+  include_tasks: "common/config/alertmanager_templates.yml"
+  with_items: "{{ alertmanager_templates }}"
+  when: '"alertmanager" in managed_services'
 
 - name: Render Alertmanager config
   include_tasks: "common/config/alertmanager_config.yml"
