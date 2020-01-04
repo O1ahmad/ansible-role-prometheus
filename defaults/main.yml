@@ -33,8 +33,8 @@ default_alertmgr_datadir: /var/data/alertmanager
 custom_unit_properties: {}
 extra_run_args: []
 
-custom_alertmgr_properties: {}
-extra_alertmgr_args: []
+alertmanager_templates_template: alertmanager.tmpl.j2
+alertmanager_templates: []
 
 alertmgr_config_file: alertmanager.yml
 alertmgr_config:
@@ -43,5 +43,8 @@ alertmgr_config:
   receivers: []
   templates: []
   inhibit_rules: []
+
+custom_alertmgr_properties: {}
+extra_alertmgr_args: []
 
 managed_services: ['prometheus', 'alertmanager']
