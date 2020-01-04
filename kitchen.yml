@@ -15,6 +15,7 @@ default_driver_config: &default_driver_config
   provision_command:
     - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
     - systemctl enable sshd.service
+    - yum -y install net-tools
 
 transport:
   # TODO: remove with better solution than workaround:
@@ -43,7 +44,7 @@ platforms:
       provision_command:
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable sshd.service
-        - yum -y install python-pip
+        - yum -y install python-pip net-tools
     provisioner:
       require_pip: true
       ansible_cfg_path: test/ansible.cfg
@@ -53,7 +54,7 @@ platforms:
       provision_command:
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable sshd.service
-        - yum -y install python-pip
+        - yum -y install python-pip net-tools
     provisioner:
       require_pip: true
       ansible_cfg_path: test/ansible.cfg
@@ -63,12 +64,14 @@ platforms:
       provision_command:
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable ssh.service
+        - apt-get -y install net-tools
   - name: ubuntu-19.04
     driver_config:
       <<: *default_driver_config
       provision_command:
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable ssh.service
+        - apt-get -y install net-tools
   - name: debian-8
     driver_config:
       <<: *default_driver_config
@@ -97,13 +100,13 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/config/prometheus_config
-  - name: rule_files
+  - name: rule_files_config
     provisioner:
       playbook: test/integration/config/rule_files/default_playbook.yml
     verifier:
       inspec_tests:
         - path: test/integration/config/rule_files
-  - name: file_sd
+  - name: file_sd_config
     provisioner:
       playbook: test/integration/config/file_sd/default_playbook.yml
     verifier:
@@ -115,9 +118,15 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/launch/service_launch
-  - name: alertmanager_launch
+  - name: alertmanager_setup
     provisioner:
-      playbook: test/integration/launch/alertmanager_launch/default_playbook.yml
+      playbook: test/integration/launch/alertmanager_setup/default_playbook.yml
     verifier:
       inspec_tests:
-        - path: test/integration/launch/alertmanager_launch
+        - path: test/integration/setup/alertmanager_setup
+  - name: exporters_setup
+    provisioner:
+      playbook: test/integration/setup/exporters_setup/default_playbook.yml
+    verifier:
+      inspec_tests:
+        - path: test/integration/setup/exporters_setup

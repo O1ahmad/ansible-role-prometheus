@@ -2,3 +2,10 @@
 - name: Launch designated services
   include_tasks: "common/launch/{{ item }}.yml"
   loop: "{{ managed_services }}"
+
+- name: Launch designated exporters
+  include_tasks: "common/launch/exporter.yml"
+  with_items: "{{ prometheus_exporters }}"
+  loop_control:
+    loop_var: exporter
+  when: prometheus_exporters is defined and prometheus_exporters is not none

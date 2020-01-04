@@ -23,3 +23,10 @@
 - name: perform alertmanager installation procedure
   include_tasks: "common/install/alertmanager_install.yml"
   when: '"alertmanager" in managed_services'
+
+- name: perform exporter installation procedure
+  include_tasks: "common/install/exporter_install.yml"
+  with_items: "{{ prometheus_exporters }}"
+  loop_control:
+    loop_var: exporter
+  when: prometheus_exporters is defined and prometheus_exporters is not none

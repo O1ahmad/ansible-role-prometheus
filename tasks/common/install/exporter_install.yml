@@ -1,0 +1,29 @@
+---
+- name: Determine default Prometheus exporter installation directory
+  set_fact:
+    default_exporter_installdir: "{{ default_exporter_installdir | default(default_install_dir+'/exporters') }}"
+
+- name: Determine Prometheus exporter installation directory
+  set_fact:
+    exporter_installdir: "{{ exporter.path | default(default_exporter_installdir) }}"
+
+- name: Create Prometheus exporter installation directory
+  become: true
+  file:
+    path: "{{ exporter_installdir }}/{{ exporter.name }}"
+    state: directory
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+
+- name: Extract Prometheus exporter archive
+  become: true
+  unarchive:
+    src: "{{ exporter.url }}"
+    dest: "{{ exporter_installdir }}/{{ exporter.name }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    mode: '0775'
+    remote_src: true
+    extra_opts:
+      - --strip-components
+      - '1'
