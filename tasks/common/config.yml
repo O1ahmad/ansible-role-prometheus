@@ -2,6 +2,7 @@
 - name: Determine configuration directory
   set_fact:
     config_dir: "{{ config_dir | default(install_dir) }}"
+  when: '"prometheus" in managed_services'
 
 - name: Ensure existence of config dir
   become: true
@@ -10,21 +11,26 @@
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     state: directory
+  when: '"prometheus" in managed_services'
 
 - name: Render rules files
   include_tasks: "common/config/rule_files.yml"
   with_items: "{{ prometheus_rule_files }}"
+  when: '"prometheus" in managed_services'
 
 - name: Render file_sd configs
   include_tasks: "common/config/file_sds.yml"
   with_items: "{{ prometheus_file_sd }}"
+  when: '"prometheus" in managed_services'
 
 - name: Render prometheus.yml config
   include_tasks: "common/config/prometheus_config.yml"
+  when: '"prometheus" in managed_services'
 
 - name: Determine data/metrics storage directory
   set_fact:
     data_dir: "{{ data_dir | default(default_data_dir) }}"
+  when: '"prometheus" in managed_services'
 
 - name: Ensure existence of data dir
   become: true
@@ -33,3 +39,8 @@
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     state: directory
+  when: '"prometheus" in managed_services'
+
+- name: Render Alertmanager config
+  include_tasks: "common/config/alertmanager_config.yml"
+  when: '"alertmanager" in managed_services'

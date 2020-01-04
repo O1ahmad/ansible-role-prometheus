@@ -1,0 +1,41 @@
+---
+- name: Determine Alertmanager installation directory
+  set_fact:
+    alertmgr_installdir: "{{ alertmgr_installdir | default(default_alertmgr_installdir) }}"
+  when: '"alertmanager" in managed_services'
+
+- name: Create Alertmanager installation directory
+  file:
+    path: "{{ alertmgr_installdir }}"
+    state: directory
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+  become: true
+  when: '"alertmanager" in managed_services'
+
+- name: Download Alertmanager archive ({{ alertmgr_archive_url }})
+  get_url:
+    url: "{{ alertmgr_archive_url }}"
+    dest: "/tmp/{{ alertmgr_archive_url | urlsplit('path') | basename }}"
+    checksum: "{{ alertmgr_checksum_format }}:{{ alertmgr_archive_checksum }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    mode: '0775'
+  register: alertmgr_archive_tmp
+  become: true
+  when: '"alertmanager" in managed_services'
+
+- name: Extract Alertmanager archive
+  unarchive:
+    src: "{{ alertmgr_archive_tmp.dest }}"
+    dest: "{{ alertmgr_installdir }}"
+    owner: "{{ prometheus_user }}"
+    group: "{{ prometheus_user }}"
+    mode: '0775'
+    remote_src: true
+    extra_opts:
+      - --strip-components
+      - '1'
+    creates: "{{ alertmgr_installdir }}/alertmanager"
+  become: true
+  when: '"alertmanager" in managed_services'
