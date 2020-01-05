@@ -45,7 +45,7 @@ Variables are available and organized according to the following software & mach
 
 _The following variables can be customized to control various aspects of this installation process, ranging from software version and source location of binaries to the installation directory where they are stored:_
 
-`managed_services: <list-of-services (prometheus | alertmanager)>` (**default**: ['prometheus', 'alertmanager'])
+`managed_services: <list-of-services (prometheus | alertmanager)>` (**default**: *['prometheus', 'alertmanager']*)
 - list of Prometheus toolkit services to manage via this role
 
 `prometheus_user: <service-user-name>` (**default**: *prometheus*)
