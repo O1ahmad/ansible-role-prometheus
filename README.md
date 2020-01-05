@@ -58,7 +58,7 @@ _The following variables can be customized to control various aspects of this in
 - address of a compressed **tar or zip** archive containing `prometheus` binaries. This method technically supports installation of any available version of `prometheus`. Links to official versions can be found [here](https://prometheus.io/download/#prometheus).
 
 `archive_checksum: <path-or-url-to-checksum>` (**default**: see `defaults/main.yml`)
-- address of a checksum file for verifying the data integrity of the specified archive. While recommended and generally considered a best practice, specifying a checksum is *not required* and can be disabled by providing an empty string (`''`) for its value.
+- address of a checksum file for verifying the data integrity of the specified `prometheus` archive. While recommended and generally considered a best practice, specifying a checksum is *not required* and can be disabled by providing an empty string (`''`) for its value.
 
 `checksum_format: <string>` (**default**: see `sha256`)
 - hash algorithm used for file verification associated with the specified archive checksum. Reference [here](https://en.wikipedia.org/wiki/Cryptographic_hash_function) for more information about *checksums/cryptographic* hashes.
@@ -70,7 +70,7 @@ _The following variables can be customized to control various aspects of this in
 - address of a compressed **tar or zip** archive containing `alertmanager` binaries. This method technically supports installation of any available version of `alertmanager`. Links to official versions can be found [here](https://prometheus.io/download/#alertmanager).
 
 `alertmgr_archive_checksum: <path-or-url-to-checksum>` (**default**: see `defaults/main.yml`)
-- address of a checksum file for verifying the data integrity of the specified archive. While recommended and generally considered a best practice, specifying a checksum is *not required* and can be disabled by providing an empty string (`''`) for its value.
+- address of a checksum file for verifying the data integrity of the specified `alertmanager` archive. While recommended and generally considered a best practice, specifying a checksum is *not required* and can be disabled by providing an empty string (`''`) for its value.
 
 `alertmgr_checksum_format: <string>` (**default**: see `sha256`)
 - hash algorithm used for file verification associated with the specified archive checksum. Reference [here](https://en.wikipedia.org/wiki/Cryptographic_hash_function) for more information about *checksums/cryptographic* hashes.
