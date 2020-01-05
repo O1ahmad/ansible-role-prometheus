@@ -49,7 +49,7 @@ _The following variables can be customized to control various aspects of this in
 - list of Prometheus toolkit services to manage via this role
 
 `prometheus_user: <service-user-name>` (**default**: *prometheus*)
-- dedicated service user, group and directory used by `prometheus` for privilege separation (see [here](https://www.beyondtrust.com/blog/entry/how-separation-privilege-improves-security) for details)
+- dedicated service user and group used by `prometheus` for privilege separation (see [here](https://www.beyondtrust.com/blog/entry/how-separation-privilege-improves-security) for details)
 
 `install_dir: </path/to/installation/dir>` (**default**: `/opt/prometheus`)
 - path on target host where the `prometheus` binaries should be extracted to
