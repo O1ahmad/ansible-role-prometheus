@@ -154,8 +154,8 @@ Rules and alerts are read from all matching files. Rules fall into one of two ca
  ```yaml
   prometheus_config:
     rule_files:
-    - "example.rules"
-    - "example/*.rules"
+    - "example.yml"
+    - "example_rules/*"
   ```
   
 ###### :remote_read
@@ -234,7 +234,7 @@ File-based service discovery provides a more generic way to configure static tar
 `prometheus_file_sd: <list-of-dicts>` (**default**: [])
 - specifies prometheus file_sd configurations to render
 
-Using this role, file-based service discovery configuration settings can be expressed within the hash, `prometheus_file_sd`, which contains a list of dicts representing and encapsulating the path, name and configuration contents of a `yaml` or `json` file set to be loaded by prometheus.
+Using this role, file-based service discovery configuration settings can be expressed within the hash, `prometheus_file_sd`, which contains a list of dicts representing and encapsulating the path, name and configuration contents of a `yaml` or `json` file set to be loaded by prometheus for file-based discovery.
 
 `[prometheus_file_sd : <entry>:] name: <string>` (**default**: NONE - *required*)
 - name of file_sd file to render
@@ -260,8 +260,54 @@ Using this role, file-based service discovery configuration settings can be expr
     - targets: ["host2:1234"]
   ```
   
-  **NB:** An associated `file_sd` service discovery scrape_config is expected to be included within the `prometheus.yml` file for successful load. 
+  **NB:** An associated `file_sd` service discovery scrape_config is expected to be included within the `prometheus.yml` file for successful load.
   
+#### Rule files
+
+Prometheus supports two types of rules which may be configured and then evaluated at regular intervals: recording rules and alerting rules. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their result as a new set of time series.. Alerting rules allow you to define alert conditions based on Prometheus expression language expressions and to send notifications about firing alerts to an external service. See [here](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) for more details.
+
+`prometheus_rule_files: <list-of-dicts>` (**default**: [])
+- specifies prometheus rule files to render
+
+Using this role, both recording and alerting rules can be expressed within the hash, `prometheus_rule_files`, which contains a list of dicts representing and encapsulating the path, name and configuration contents of a `yaml` or `json` file set to be loaded by prometheus for rule setting.
+
+`[prometheus_rule_files : <entry>:] name: <string>` (**default**: NONE - *required*)
+- name of rule file to render
+
+`[prometheus_rule_files : <entry>:] path: <string>` (**default**: `{{ install_dir }}/rules.d`)
+- path of rule file to render
+
+`[prometheus_rule_files : <entry>:] config: <list-of-dicts>` (**default**: NONE - *required*)
+- list of dictionaries representing settings indicating set of rule groups to specify in rule file  
+
+##### Example
+
+ ```yaml
+prometheus_rule_files:
+- name: example-rules.yml
+  config:
+    groups:
+    - name: recording rule example
+      rules:
+      - record: job:http_inprogress_requests:sum
+        expr: sum(http_inprogress_requests) by (job)
+- name: nondefault-path-example-rules.yml
+  path: /etc/prometheus/rules.d
+  config:
+    groups:
+    - name: alerting rule example
+      rules:
+      - alert: HighRequestLatency
+        expr: job:request_latency_seconds:mean5m{job="myjob"} > 0.5
+        for: 10m
+        labels:
+          severity: page
+        annotations:
+          summary: High request latency
+  ```
+  
+**NB:** An associated `rule_files` section is expected to be included within the `prometheus.yml` file for successful load.
+
 #### Launch
 
 This role supports launching all components of the Prometheus monitoring and alerting toolkit ecosystem. This consists of both the Prometheus and Alertmanager services and a myriad of metric exporters. Running each is accomplished utilizing the [systemd](https://www.freedesktop.org/wiki/Software/systemd/) service management tool which manages the services as background processes or daemons subject to the configuration and execution potential provided by its underlying management framework.
