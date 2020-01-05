@@ -93,7 +93,7 @@ Prometheus service configuration can be expressed within the hash, `prometheus_c
 
 The values of these keys are generally dicts or lists of dicts themselves containing a set of key-value pairs representing associated specifications/settings (e.g. the scrape interval or frequency at which to scrape targets for metrics globally) for each section. The following provides an overview and example configurations of each for reference.
 
-##### :global
+###### :global
 
 `[prometheus_config:] global: <key: value,...>` (**default**: see `defaults/main.yml`)
 - specifies parameters that are valid and serve as defaults in all other configuration contexts. See  [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for more details.
@@ -116,7 +116,7 @@ The values of these keys are generally dicts or lists of dicts themselves contai
         foo: bar
   ```
   
-  ##### :scrape_configs
+###### :scrape_configs
 
 `[prometheus_config:] scrape_configs: <list-of-dicts>` (**default**: see `defaults/main.yml`)
 - specifies a set of targets and parameters describing how to scrape them organized into jobs
@@ -142,7 +142,7 @@ Targets may be statically configured or dynamically discovered using one of the 
               - default
   ```
   
-  ##### :rule_files
+###### :rule_files
 
 `[prometheus_config:] rule_files: <list>` (**default**: see `defaults/main.yml`)
 - specifies a list of globs indicating file names and paths
@@ -158,7 +158,7 @@ Rules and alerts are read from all matching files. Rules fall into one of two ca
     - "example/*.rules"
   ```
   
-##### :remote_read
+###### :remote_read
 
 `[prometheus_config:] remote_read: <list-of-dicts>` (**default**: see `defaults/main.yml`)
 - specifies settings related to the remote read feature
@@ -183,7 +183,7 @@ See [here](https://prometheus.io/docs/prometheus/latest/configuration/configurat
         key_file: valid_key_file
   ```
 
-##### :remote_write
+###### :remote_write
 
 `[prometheus_config:] remote_write: <list-of-dicts>` (**default**: see `defaults/main.yml`)
 - specifies settings related to the remote write feature
@@ -208,7 +208,7 @@ See [here](https://prometheus.io/docs/prometheus/latest/configuration/configurat
         key_file: valid_key_file
   ```
 
-##### :alerting
+###### :alerting
 
 `[prometheus_config:] alerting: <key: value,...>` (**default**: see `defaults/main.yml`)
 - specifies settings related to the Alertmanager in addition to Alertmanager instances the Prometheus server sends alerts to
@@ -227,6 +227,40 @@ This section provides the parameters to configure how to communicate with these 
         - "1.2.3.4:9093"
         - "1.2.3.5:9093"
   ```
+#### File service discovery
+
+File-based service discovery provides a more generic way to configure static targets and serves as an interface to plug in custom service discovery mechanisms. It reads a set of files containing a list of zero or more `<static_config>`s. Changes to all defined files are detected via disk watches and applied immediately. Files may be provided in YAML or JSON format. Only changes resulting in well-formed target groups are applied. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#file_sd_config) for more details.
+
+`prometheus_file_sd: <list-of-dicts>` (**default**: [])
+- specifies prometheus file_sd configurations to render
+
+Using this role, file-based service discovery configuration settings can be expressed within the hash, `prometheus_file_sd`, which contains a list of dicts representing and encapsulating the path, name and configuration contents of a `yaml` or `json` file set to be loaded by prometheus.
+
+`[prometheus_file_sd : <entry>:] name: <string>` (**default**: NONE - *required*)
+- name of file_sd file to render
+
+`[prometheus_file_sd : <entry>:] path: <string>` (**default**: `{{ install_dir }}/file_sd`)
+- path of file_sd file to render
+
+`[prometheus_file_sd : <entry>:] config: <list-of-dicts>` (**default**: NONE - *required*)
+- list of dictionaries representing settings indicating set of static targets to specify in file_sd file  
+
+##### Example
+
+ ```yaml
+  prometheus_file_sd:
+  - name: example-file.slow.json
+    config:
+    - targets: ["host1:1234"]
+      labels:
+        test-label: example-slow-file-sd
+  - name: file.yml
+    path: /etc/prometheus/file_sd
+    config:
+    - targets: ["host2:1234"]
+  ```
+  
+  **NB:** An associated `file_sd` service discovery scrape_config is expected to be included within the `prometheus.yml` file for successful load. 
   
 #### Launch
 
@@ -267,10 +301,10 @@ Each exporter dict entry is expected to indicate several properties, including n
 `[prometheus_exporters : <entry>:] url: <string>` (**default**: NONE - *required*)
 - URL of Prometheus exporter to install
 
-`[prometheus_exporters : <entry>:] description: <string>` (**default**: NONE - *required*)
+`[prometheus_exporters : <entry>:] description: <string>` (**default**: `<exporter-name>`)
 - description or documentation of Prometheus exporter to include within exporter's *Systemd* unit file
 
-`[prometheus_exporters : <entry>:] unit_properties: <hash>` (**default**: NONE - *required*)
+`[prometheus_exporters : <entry>:] unit_properties: <hash>` (**default**: `{}`)
 - hash of settings used to customize the `[Service]` unit configuration and execution environment of the *<exporter>* **systemd** service
 
 ##### Example
