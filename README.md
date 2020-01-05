@@ -119,7 +119,7 @@ The values of these keys are generally dicts or lists of dicts themselves contai
   ##### :scrape_configs
 
 `[prometheus_config:] scrape_configs: <list-of-dicts>` (**default**: see `defaults/main.yml`)
-- specifies a set of targets and parameters describing how to scrape them. Targets may be statically configured or dynamically discovered using one of the supported service discovery mechanisms. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) for more details and [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for a list of supported service discovery methods.
+- specifies a set of targets and parameters describing how to scrape them organized into jobs. Targets may be statically configured or dynamically discovered using one of the supported service discovery mechanisms. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) for more details and [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for a list of supported service discovery methods.
 
 ##### Example
 
@@ -139,6 +139,7 @@ The values of these keys are generally dicts or lists of dicts themselves contai
             names:
               - default
   ```
+  
   ##### :rule_files
 
 `[prometheus_config:] rule_files: <list>` (**default**: see `defaults/main.yml`)
@@ -151,6 +152,70 @@ The values of these keys are generally dicts or lists of dicts themselves contai
     rule_files:
     - "example.rules"
     - "example/*.rules"
+  ```
+  
+##### :remote_read
+
+`[prometheus_config:] remote_read: <list-of-dicts>` (**default**: see `defaults/main.yml`)
+- specifies settings related to the remote read feature. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read) for more details.  For a list of available remote read/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage). 
+
+##### Example
+
+ ```yaml
+  prometheus_config:
+    remote_read:
+    - url: http://remote1/read
+      read_recent: true
+      name: default
+    - url: http://remote2/read
+      read_recent: false
+      name: read_special
+      required_matchers:
+        job: special
+      tls_config:
+        cert_file: valid_cert_file
+        key_file: valid_key_file
+  ```
+
+##### :remote_write
+
+`[prometheus_config:] remote_write: <list-of-dicts>` (**default**: see `defaults/main.yml`)
+- specifies settings related to the remote write feature. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write) for more details. For a list of available remote write/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage). 
+
+##### Example
+
+ ```yaml
+  prometheus_config:
+    remote_write:
+    - name: drop_expensive
+      url: http://remote1/push
+      write_relabel_configs:
+      - source_labels: [__name__]
+        regex: expensive.*
+        action: drop
+    - name: rw_tls
+      url: http://remote2/push
+      tls_config:
+        cert_file: valid_cert_file
+        key_file: valid_key_file
+  ```
+
+##### :alerting
+
+`[prometheus_config:] alerting: <key: value,...>` (**default**: see `defaults/main.yml`)
+- specifies settings related to the Alertmanager in addition to Alertmanager instances the Prometheus server sends alerts to. It also provides parameters to configure how to communicate with these Alertmanagers. Alertmanagers may be statically configured via the static configs parameter or dynamically discovered using one of the supported service discovery mechanims. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alertmanager_config) for more details.
+
+##### Example
+
+ ```yaml
+  prometheus_config:
+    alerting:
+      alertmanagers:
+      - scheme: https
+        static_configs:
+      - targets:
+        - "1.2.3.4:9093"
+        - "1.2.3.5:9093"
   ```
   
 #### Launch
