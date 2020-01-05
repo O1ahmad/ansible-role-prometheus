@@ -119,7 +119,9 @@ The values of these keys are generally dicts or lists of dicts themselves contai
   ##### :scrape_configs
 
 `[prometheus_config:] scrape_configs: <list-of-dicts>` (**default**: see `defaults/main.yml`)
-- specifies a set of targets and parameters describing how to scrape them organized into jobs. Targets may be statically configured or dynamically discovered using one of the supported service discovery mechanisms. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) for more details and [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for a list of supported service discovery methods.
+- specifies a set of targets and parameters describing how to scrape them organized into jobs
+
+Targets may be statically configured or dynamically discovered using one of the supported service discovery mechanisms. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) for more details and [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for a list of supported service discovery methods.
 
 ##### Example
 
@@ -143,7 +145,9 @@ The values of these keys are generally dicts or lists of dicts themselves contai
   ##### :rule_files
 
 `[prometheus_config:] rule_files: <list>` (**default**: see `defaults/main.yml`)
-- specifies a list of globs indicating file names and paths. Rules and alerts are read from all matching files. Rules fall into one of two categories: recording and alerting. See [here](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) for details surrounding recording rules and [here](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) for details surrounding alerting rules.
+- specifies a list of globs indicating file names and paths
+
+Rules and alerts are read from all matching files. Rules fall into one of two categories: recording and alerting. See [here](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) for details surrounding recording rules and [here](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) for details surrounding alerting rules.
 
 ##### Example
 
@@ -157,7 +161,9 @@ The values of these keys are generally dicts or lists of dicts themselves contai
 ##### :remote_read
 
 `[prometheus_config:] remote_read: <list-of-dicts>` (**default**: see `defaults/main.yml`)
-- specifies settings related to the remote read feature. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read) for more details.  For a list of available remote read/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage). 
+- specifies settings related to the remote read feature
+
+See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read) for more details.  For a list of available remote read/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage). 
 
 ##### Example
 
@@ -180,7 +186,9 @@ The values of these keys are generally dicts or lists of dicts themselves contai
 ##### :remote_write
 
 `[prometheus_config:] remote_write: <list-of-dicts>` (**default**: see `defaults/main.yml`)
-- specifies settings related to the remote write feature. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write) for more details. For a list of available remote write/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage). 
+- specifies settings related to the remote write feature
+
+See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write) for more details. For a list of available remote write/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage). 
 
 ##### Example
 
@@ -203,7 +211,9 @@ The values of these keys are generally dicts or lists of dicts themselves contai
 ##### :alerting
 
 `[prometheus_config:] alerting: <key: value,...>` (**default**: see `defaults/main.yml`)
-- specifies settings related to the Alertmanager in addition to Alertmanager instances the Prometheus server sends alerts to. It also provides parameters to configure how to communicate with these Alertmanagers. Alertmanagers may be statically configured via the static configs parameter or dynamically discovered using one of the supported service discovery mechanims. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alertmanager_config) for more details.
+- specifies settings related to the Alertmanager in addition to Alertmanager instances the Prometheus server sends alerts to
+
+This section provides the parameters to configure how to communicate with these Alertmanagers. Alertmanagers may be statically configured via the static configs parameter or dynamically discovered using one of the supported service discovery mechanims. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#alertmanager_config) for more details.
 
 ##### Example
 
@@ -220,7 +230,63 @@ The values of these keys are generally dicts or lists of dicts themselves contai
   
 #### Launch
 
-...*description of service launch related vars*...
+This role supports launching all components of the Prometheus monitoring and alerting toolkit ecosystem. This consists of both the Prometheus and Alertmanager services and a myriad of metric exporters. Running each is accomplished utilizing the [systemd](https://www.freedesktop.org/wiki/Software/systemd/) service management tool which manages the services as background processes or daemons subject to the configuration and execution potential provided by its underlying management framework.
+
+_The following variables can be customized to manage the services' **systemd** [Service] unit definition and execution profile/policy:_
+
+###### Prometheus
+
+`extra_run_args: <prometheus-cli-options>` (**default**: `[]`)
+- list of `prometheus` commandline arguments to pass to the binary at runtime for customizing launch.
+
+Supporting full expression of `prometheus`'s [cli](https://gist.github.com/0x0I/eec137d55a26a16d836b84cbc186ab52), this variable enables the launch to be customized according to the user's specification.
+
+`custom_unit_properties: <hash-of-systemd-service-settings>` (**default**: `[]`)
+- hash of settings used to customize the `[Service]` unit configuration and execution environment of the *Prometheus* **systemd** service.
+
+###### Alertmanager
+
+`extra_alertmgr_args: <alertmanager-cli-options>` (**default**: `[]`)
+- list of `alertmanager` commandline arguments to pass to the binary at runtime for customizing launch. 
+
+Supporting full expression of `alertmanager`'s [cli](https://gist.github.com/0x0I/eec137d55a26a16d836b84cbc186ab52), this variable enables the launch to be customized according to the user's specification.
+
+`custom_alertmgr_properties: <hash-of-systemd-service-settings>` (**default**: `[]`)
+- hash of settings used to customize the `[Service]` unit configuration and execution environment of the *Alertmanager* **systemd** service.
+
+###### Exporters
+
+`prometheus_exporters: <list-of-dicts>` (**default**: [])
+- specifies prometheus exporters to install and launch and manage as a systemd services.
+
+Each exporter dict entry is expected to indicate several properties, including name; url and listen address, of the target exporter for proper setup and communication with a *Prometheus* server. Other properties used to customize operation of the exporter can optionally be specified via an `extra_args` variable, which appends provided command-line arguments to the exporter's unit ExecStart setting. See [here](https://prometheus.io/docs/instrumenting/exporters/) for more details and a list of exporter plugins for reference.  
+
+`[prometheus_exporters : <entry>:] name: <string>` (**default**: NONE - *required*)
+- name of Prometheus exporter to install
+
+`[prometheus_exporters : <entry>:] url: <string>` (**default**: NONE - *required*)
+- URL of Prometheus exporter to install
+
+`[prometheus_exporters : <entry>:] description: <string>` (**default**: NONE - *required*)
+- description or documentation of Prometheus exporter to include within exporter's *Systemd* unit file
+
+`[prometheus_exporters : <entry>:] unit_properties: <hash>` (**default**: NONE - *required*)
+- hash of settings used to customize the `[Service]` unit configuration and execution environment of the *<exporter>* **systemd** service
+
+##### Example
+
+ ```yaml
+  prometheus_exporters:
+    - name: node_exporter
+      url: https://github.com/prometheus/node_exporter/releases/download/v0.18.1/node_exporter-0.18.1.linux-amd64.tar.gz
+      description: https://github.com/prometheus/node_exporter
+      unit_properties:
+        User: exporter
+        Group: exporter
+      extra_args:
+        - '--web.listen-address=0.0.0.0:9110'
+        - '--log.level=debug'
+  ```
 
 Dependencies
 ------------
