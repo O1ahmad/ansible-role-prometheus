@@ -491,7 +491,7 @@ Supporting full expression of `prometheus`'s [cli](https://gist.github.com/0x0I/
 `extra_alertmgr_args: <alertmanager-cli-options>` (**default**: `[]`)
 - list of `alertmanager` commandline arguments to pass to the binary at runtime for customizing launch. 
 
-Supporting full expression of `alertmanager`'s [cli](https://gist.github.com/0x0I/eec137d55a26a16d836b84cbc186ab52), this variable enables the launch to be customized according to the user's specification.
+Supporting full expression of `alertmanager`'s [cli](https://gist.github.com/0x0I/4eb3d7841562d215b50f05dee64fa0dc), this variable enables the launch to be customized according to the user's specification.
 
 `custom_alertmgr_properties: <hash-of-systemd-service-settings>` (**default**: `[]`)
 - hash of settings used to customize the `[Service]` unit configuration and execution environment of the *Alertmanager* **systemd** service.
