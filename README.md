@@ -41,7 +41,7 @@ Variables are available and organized according to the following software & mach
 
 #### Install
 
-`prometheus`can be installed using compressed archives (`.tar`, `.zip`), downloaded and extracted from various sources.
+`prometheus` and its associated `alertmanager` can be installed using compressed archives (`.tar`, `.zip`), downloaded and extracted from various sources.
 
 _The following variables can be customized to control various aspects of this installation process, ranging from software version and source location of binaries to the installation directory where they are stored:_
 
@@ -308,6 +308,127 @@ prometheus_rule_files:
   
 **NB:** An associated `rule_files` section is expected to be included within the `prometheus.yml` file for successful load.
 
+#### Alertmanager Service configuration
+
+Alertmanager service configuration can be expressed within the hash, `alertmanager_config`, which contains a set of key-value pairs representing one of a set of sections indicating various route, receiver, templating and alert inhibition configurations.
+
+The values of these keys are generally dicts or lists of dicts themselves containing a set of key-value pairs representing associated specifications/settings (e.g. the API URL to use for Slack notifications) for each section. The following provides an overview and example configurations of each for reference.
+
+###### :global
+
+`[alertmanager_config:] global: <key: value,...>` (**default**: see `defaults/main.yml`)
+- specifies parameters that are valid and serve as defaults in all other configuration contexts. See [here](https://prometheus.io/docs/alerting/configuration/) for more details.
+
+##### Example
+
+ ```yaml
+  alertmanager_config:
+    global:
+      # The smarthost and SMTP sender used for mail notifications.
+      smtp_smarthost: 'localhost:25'
+      smtp_from: 'alertmanager@example.org'
+      smtp_auth_username: 'alertmanager'
+      smtp_auth_password: 'password'
+      # The auth token for Hipchat.
+      hipchat_auth_token: '1234556789'
+      # Alternative host for Hipchat.
+      hipchat_api_url: 'https://hipchat.foobar.org/'
+  ```
+  
+###### :route
+
+`[alertmanager_config:] route: <key: value,...>` (**default**: see `defaults/main.yml`)
+- defines a node in a routing tree and its children
+
+Every alert enters the routing tree at the configured top-level route, which must match all alerts (i.e. not have any configured matchers). It then traverses the child nodes. If continue is set to false, it stops after the first matching child. If continue is true on a matching node, the alert will continue matching against subsequent siblings. See [here](https://prometheus.io/docs/alerting/configuration/#route) for more details.
+
+##### Example
+
+ ```yaml
+  alertmanager_config:
+    route:
+      receiver: 'default-receiver'
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 4h
+      group_by: [cluster, alertname]
+      # All alerts that do not match the following child routes
+      # will remain at the root node and be dispatched to 'default-receiver'.
+      routes:
+        # All alerts with service=mysql or service=cassandra
+        # are dispatched to the database pager.
+      - receiver: 'database-pager'
+        group_wait: 10s
+        match_re:
+          service: mysql|cassandra
+      # All alerts with the team=frontend label match this sub-route.
+      # They are grouped by product and environment rather than cluster
+      # and alertname.
+      - receiver: 'frontend-pager'
+        group_by: [product, environment]
+        match:
+          team: frontend
+  ```
+  
+###### :receivers
+
+`[alertmanager_config:] inhibit_rules: <list-of-dicts>` (**default**: see `defaults/main.yml`)
+- specifies a list of notification receivers
+
+Receivers are named configuration of one or more notification integrations. See [here](https://prometheus.io/docs/alerting/configuration/#receiver) for more details. 
+
+##### Example
+
+ ```yaml
+  alertmanager_config:
+    receivers:
+    - name: 'team-X-mails'
+      email_configs:
+      - to: 'team-X+alerts@example.org'
+      pagerduty_configs:
+      - service_key: <team-X-key>
+      hipchat_configs:
+      - auth_token: <auth_token>
+        room_id: 85
+        message_format: html
+        notify: true
+  ```
+
+###### :inhibit_rules
+
+`[alertmanager_config:] inhibit_rules: <list-of-dicts>` (**default**: see `defaults/main.yml`)
+- specifies a list of inhibition rules
+
+An inhibition rule mutes an alert (target) matching a set of matchers when an alert (source) exists that matches another set of matchers. See [here](https://prometheus.io/docs/alerting/configuration/#inhibit_rule) for more details. 
+
+##### Example
+
+ ```yaml
+  alertmanager_config:
+    inhibit_rules:
+    - source_match:
+        severity: 'critical'
+      target_match:
+        severity: 'warning'
+      # Apply inhibition if the alertname is the same.
+      equal: ['alertname', 'cluster', 'service']
+  ```
+  
+###### :templates
+
+`[alertmanager_config:] templates: <list>` (**default**: see `defaults/main.yml`)
+- specifies files and directories from which notification templates are read
+
+The last component may use a wildcard matcher, e.g. `templates/*.tmpl`. See [here](https://prometheus.io/docs/alerting/notifications/) for a notification template reference and this [link](https://prometheus.io/docs/alerting/notification_examples/) for examples. 
+
+##### Example
+
+ ```yaml
+  alertmanager_config:
+    templates: 
+    - '/etc/alertmanager/template/*.tmpl'
+  ```
+  
 #### Launch
 
 This role supports launching all components of the Prometheus monitoring and alerting toolkit ecosystem. This consists of both the Prometheus and Alertmanager services and a myriad of metric exporters. Running each is accomplished utilizing the [systemd](https://www.freedesktop.org/wiki/Software/systemd/) service management tool which manages the services as background processes or daemons subject to the configuration and execution potential provided by its underlying management framework.
