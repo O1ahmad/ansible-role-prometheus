@@ -1,0 +1,35 @@
+---
+- name: set executable start facts
+  set_fact:
+    exe_dir: "{{ exporter.path | default(exporter_installdir) }}/{{ exporter.name }}"
+    executable: "{{ exporter.executable | default(exporter.name) }}"
+
+- name: Set unit [Service] configuration
+  set_fact:
+    default_service_unit:
+      ExecStart: "{{ exe_dir }}/{{ executable }} {{ exporter.extra_args | default([]) | join(' ') }}"
+      User: "{{ prometheus_user }}"
+      Group: "{{ prometheus_user }}"
+      StandardOutput: journal
+      StandardError: inherit
+
+- name: Setup {{ exporter.name }} Prometheus exporter systemd unit
+  include_role:
+    name: 0x0i.systemd
+  vars:
+    unit_config:
+      - name: "{{ exporter.name }}"
+        Unit:
+          Description: "{{ exporter.name }} - Prometheus exporter"
+          Documentation: "{{ exporter.description | default('https://prometheus.io/docs/instrumenting/exporters/') }}"
+          Wants: network-online.target
+          After: "network-online.target"
+        Service: "{{ default_service_unit | combine(exporter.unit_properties | default({})) | default(default_service_unit) }}"
+        Install:
+          WantedBy: multi-user.target
+
+- name: Ensure start of Prometheus exporter service - {{ exporter.name }}
+  service:
+    name: "{{ exporter.name }}"
+    state: started
+    enabled: "yes"

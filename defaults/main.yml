@@ -2,6 +2,8 @@
 # defaults variable file
 prometheus_user: prometheus
 
+managed_services: ['prometheus', 'alertmanager']
+
 archive_url: https://github.com/prometheus/prometheus/releases/download/v2.15.1/prometheus-2.15.1.linux-amd64.tar.gz
 archive_checksum: f8d2b9e8f9551a3dd6f476a43ea9f699d18d2cc6558baf0eebe0143d8f9c1d5a
 checksum_format: sha256
@@ -47,4 +49,4 @@ alertmgr_config:
 custom_alertmgr_properties: {}
 extra_alertmgr_args: []
 
-managed_services: ['prometheus', 'alertmanager']
+prometheus_exporters: []
