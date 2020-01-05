@@ -72,7 +72,7 @@ _The following variables can be customized to control various aspects of this in
 `alertmgr_archive_checksum: <path-or-url-to-checksum>` (**default**: see `defaults/main.yml`)
 - address of a checksum file for verifying the data integrity of the specified archive. While recommended and generally considered a best practice, specifying a checksum is *not required* and can be disabled by providing an empty string (`''`) for its value.
 
-`alertmgr_checksum_format: <string>` (**default**: see `sha512`)
+`alertmgr_checksum_format: <string>` (**default**: see `sha256`)
 - hash algorithm used for file verification associated with the specified archive checksum. Reference [here](https://en.wikipedia.org/wiki/Cryptographic_hash_function) for more information about *checksums/cryptographic* hashes.
 
 #### Config
