@@ -41,7 +41,12 @@ Variables are available and organized according to the following software & mach
 
 #### Install
 
-...*description of installation related vars*...
+`prometheus`can be installed using compressed archives (`.tar`, `.zip`), downloaded and extracted from various sources.
+
+_The following variables can be customized to control various aspects of this installation process, ranging from software version and source location of binaries to the installation directory where they are stored:_
+
+`prometheus_user: <service-user-name>` (**default**: *prometheus*)
+- dedicated service user, group and directory used by `prometheus` for privilege separation (see [here](https://www.beyondtrust.com/blog/entry/how-separation-privilege-improves-security) for details)
 
 #### Config
 
