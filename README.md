@@ -87,6 +87,12 @@ Using this role, configuration of a `prometheus` installation is organized accor
 
 Each configuration can be expressed within the following variables in order to customize the contents and settings of the designated configuration files to be rendered:
 
+`config_dir: </path/to/configuration/dir>` (**default**: `{{ install_dir }}`)
+- path on target host where the `prometheus` config files should be rendered
+
+`data_dir: </path/to/data/dir>` (**default**: `/var/data/prometheus`)
+- path on target host where `prometheus` stores data 
+
 #### Prometheus Service configuration
 
 Prometheus service configuration can be expressed within the hash, `prometheus_config`, which contains a set of key-value pairs representing one of a set of sections indicating various scrape targets (sources from which to collect metrics), service discovery mechanisms, recording/alert rulesets and configurations for interfacing with remote read/write systems utlized by the Prometheus service.
@@ -428,6 +434,41 @@ The last component may use a wildcard matcher, e.g. `templates/*.tmpl`. See [her
     templates: 
     - '/etc/alertmanager/template/*.tmpl'
   ```
+  
+#### Alertmanager templates
+
+Prometheus creates and sends alerts to the Alertmanager which then sends notifications out to different receivers based on their labels. The notifications sent to receivers are constructed via templates. The Alertmanager comes with default templates but they can also be customized. See [here](https://prometheus.io/docs/alerting/notifications/) for more details.
+
+`altermanager_templates: <list-of-dicts>` (**default**: [])
+- specifies `alertmanager` notification template configurations to render
+
+Using this role, alertmanager template configuration settings can be expressed within the hash, `alertmanager_templates`, which contains a list of dicts representing and encapsulating the path, name and configuration contents of a `tmpl` file set to be loaded by alertmanager.
+
+`[alertmanager_templates : <entry>:] name: <string>` (**default**: NONE - *required*)
+- name of template file to render
+
+`[alertmanager_templates : <entry>:] path: <string>` (**default**: `{{ alertmgr_installdir }}/templates`)
+- path of template file to render
+
+`[alertmanager_templates : <entry>:] config: <list-of-dicts>` (**default**: NONE - *required*)
+- list of dictionaries representing settings indicating set of template configs to render 
+
+##### Example
+
+ ```yaml
+  alertmanager_templates:
+  - name: test
+    config:
+    - define: "myorg.test.guide"
+      template: 'https://internal.myorg.net/wiki/alerts/\{\{ .GroupLabels.app \}\}/\{\{ .GroupLabels.alertname \}\}'
+  - name: test2
+    path: /etc/alertmanager/templates
+    config:
+    - define: "myorg.test.text"
+      template: 'summary: \{\{ .CommonAnnotations.summary \}\}\ndescription: \{\{ .CommonAnnotations.description \}\}'
+  ```
+  
+  **NB:** An associated `templates` config section is expected to be included within the `alertmanager.yml` file for successful load.
   
 #### Launch
 
