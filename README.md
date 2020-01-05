@@ -77,8 +77,82 @@ _The following variables can be customized to control various aspects of this in
 
 #### Config
 
-...*description of configuration related vars*...
+Using this role, configuration of a `prometheus` installation is organized according to the following components:
 
+* prometheus service configuration (`prometheus.yml`)
+* file service discovery (`file_sd - *.[json|yml]`)
+* recording and alerting rules (`rule_files - *.rules`)
+* alertmanager service configuration (`alertmanager.yml`)
+* alertmanager template files (`*.tmpl`)
+
+Each configuration can be expressed within the following variables in order to customize the contents and settings of the designated configuration files to be rendered:
+
+#### Prometheus Service configuration
+
+Prometheus service configuration can be expressed within the hash, `prometheus_config`, which contains a set of key-value pairs representing one of a set of sections indicating various scrape targets (sources from which to collect metrics), service discovery mechanisms, recording/alert rulesets and configurations for interfacing with remote read/write systems utlized by the Prometheus service.
+
+The values of these keys are generally dicts or lists of dicts themselves containing a set of key-value pairs representing associated specifications/settings (e.g. the scrape interval or frequency at which to scrape targets for metrics globally) for each section. The following provides an overview and example configurations of each for reference.
+
+##### :global
+
+`[prometheus_config:] global: <key: value,...>` (**default**: see `defaults/main.yml`)
+- specifies parameters that are valid and serve as defaults in all other configuration contexts. See  [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for more details.
+
+##### Example
+
+ ```yaml
+  prometheus_config:
+    global:
+      # How frequently to scrape targets by default.
+      scrape_interval: 15s
+      # How long until a scrape request times out.
+      scrape_timeout: 30s
+      # How frequently to evaluate rules.
+      evaluation_interval: 30s
+      # The labels to add to any time series or alerts when communicating with
+      # external systems (federation, remote storage, Alertmanager).
+      external_labels:
+        monitor: example
+        foo: bar
+  ```
+  
+  ##### :scrape_configs
+
+`[prometheus_config:] scrape_configs: <list-of-dicts>` (**default**: see `defaults/main.yml`)
+- specifies a set of targets and parameters describing how to scrape them. Targets may be statically configured or dynamically discovered using one of the supported service discovery mechanisms. See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config) for more details and [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/) for a list of supported service discovery methods.
+
+##### Example
+
+ ```yaml
+  prometheus_config:
+    scrape_configs:
+      - job_name: static-example
+        static_configs:
+        - targets: ['localhost:9090', 'localhost:9191']
+          labels:
+            example: label
+      - job_name: kubernetes-example
+        kubernetes_sd_configs:
+        - role: endpoints
+          api_server: 'https://localhost:1234'
+          namespaces:
+            names:
+              - default
+  ```
+  ##### :rule_files
+
+`[prometheus_config:] rule_files: <list>` (**default**: see `defaults/main.yml`)
+- specifies a list of globs indicating file names and paths. Rules and alerts are read from all matching files. Rules fall into one of two categories: recording and alerting. See [here](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) for details surrounding recording rules and [here](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/) for details surrounding alerting rules.
+
+##### Example
+
+ ```yaml
+  prometheus_config:
+    rule_files:
+    - "example.rules"
+    - "example/*.rules"
+  ```
+  
 #### Launch
 
 ...*description of service launch related vars*...
