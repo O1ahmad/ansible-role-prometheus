@@ -596,6 +596,54 @@ customize global scrape and evaluation settings:
           evaluation_interval: 30s
 ```
 
+customize prometheus alerting/alertmanager configuration:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        alerting:
+          alertmanagers:
+          - scheme: https
+            static_configs:
+            - targets:
+              - "1.2.3.4:9093"
+```
+
+create recording and alerting rules:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        rule_files:
+        - /etc/prometheus/rules.d/*
+      prometheus_rule_files:
+      - name: example-rules.yml
+        path: /etc/prometheus/rules.d/*
+        config:
+          groups:
+            - name: recording rule example
+              rules:
+                - record: job:http_inprogress_requests:sum
+                  expr: sum(http_inprogress_requests) by (job)
+      - name: another-example.yml
+        path: /etc/prometheus/rules.d
+        config:
+          groups:
+            - name: alerting rule example
+              rules:
+                - alert: HighRequestLatency
+                  expr: job:request_latency_seconds:mean5m{job="myjob"} > 0.5
+                  for: 10m
+                  labels:
+                    severity: page
+                  annotations:
+                    summary: High request latency
+```
+
 `static` target scrape_config with scrape and evaluation setting overrides:
 ```
 - hosts: all
@@ -778,6 +826,21 @@ customize global scrape and evaluation settings:
               rack: "123"
             allow_stale: true
             scheme: https
+```
+
+customize prometheus alerting/alertmanager configuration:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        alerting:
+          alertmanagers:
+          - scheme: https
+            static_configs:
+            - targets:
+              - "1.2.3.4:9093"
 ```
 
 License
