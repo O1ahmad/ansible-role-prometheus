@@ -596,7 +596,7 @@ customize global scrape and evaluation settings:
           evaluation_interval: 30s
 ```
 
-add `static` target scrape_config with scrape and evaluation setting overrides:
+`static` target scrape_config with scrape and evaluation setting overrides:
 ```
 - hosts: all
   roles:
@@ -615,7 +615,7 @@ add `static` target scrape_config with scrape and evaluation setting overrides:
           evaluation_interval: 10s
 ```
 
-add `file_sd` file-based scrape_config with scrape and evaluation setting overrides:
+`file_sd` file-based scrape_config with scrape and evaluation setting overrides:
 ```
 - hosts: all
   roles:
@@ -648,7 +648,7 @@ add `file_sd` file-based scrape_config with scrape and evaluation setting overri
         - targets: ["host3:1234"]
 ```
 
-add `dns`-based target scrape_config with scrape and evaluation setting overrides:
+`dns`-based target scrape_config:
 ```
 - hosts: all
   roles:
@@ -664,6 +664,120 @@ add `dns`-based target scrape_config with scrape and evaluation setting override
             - second.dns.address.domain.com
           - names:
             - third.dns.address.domain.com
+```
+
+`kubernetes` target scrape_config with TLS and basic authentication settings configured:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: kubernetes-example
+          kubernetes_sd_configs:
+          - role: endpoints
+            api_server: 'https://localhost:1234'
+            tls_config:
+              cert_file: valid_cert_file
+              key_file: valid_key_file
+            basic_auth:
+              username: 'myusername'
+              password: 'mysecret'
+```
+
+`ec2` target scrape_config:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: ec2-example
+          ec2_sd_configs:
+          - region: us-east-1
+            access_key: access
+            secret_key: mysecret
+            profile: profile
+            filters:
+            - name: tag:environment
+              values:
+              - prod
+            - name: tag:service
+              values:
+              - web
+              - db
+```
+
+`openstack` target scrape_config:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: openstack-example
+          openstack_sd_configs:
+          - role: instance
+            region: RegionOne
+            port: 80
+            refresh_interval: 1m
+```
+
+`azure` target scrape_config:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: azure-example
+          azure_sd_configs:
+    -       environment: AzurePublicCloud
+            authentication_method: OAuth
+            subscription_id: 11AAAA11-A11A-111A-A111-1111A1111A11
+            tenant_id: BBBB222B-B2B2-2B22-B222-2BB2222BB2B2
+            client_id: 333333CC-3C33-3333-CCC3-33C3CCCCC33C
+            client_secret: mysecret
+            port: 9100
+```
+
+`marathon` target scrape_config:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: marathon-example
+          marathon_sd_configs:
+          - servers:
+            - 'https://marathon.example.com:443'
+            auth_token: "mysecret"
+```
+
+`consul` target scrape_config:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: consul-example
+          consul_sd_configs:
+          - server: 'localhost:1234'
+            token: mysecret
+            services: ['nginx', 'cache', 'mysql']
+            tags: ["canary", "v1"]
+            node_meta:
+              rack: "123"
+            allow_stale: true
+            scheme: https
 ```
 
 License
