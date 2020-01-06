@@ -81,17 +81,23 @@ Using this role, configuration of a `prometheus` installation is organized accor
 
 * prometheus service configuration (`prometheus.yml`)
 * file service discovery (`file_sd - *.[json|yml]`)
-* recording and alerting rules (`rule_files - *.rules`)
+* recording and alerting rules (`rule_files - *.[json|yml]`)
 * alertmanager service configuration (`alertmanager.yml`)
 * alertmanager template files (`*.tmpl`)
 
 Each configuration can be expressed within the following variables in order to customize the contents and settings of the designated configuration files to be rendered:
 
 `config_dir: </path/to/configuration/dir>` (**default**: `{{ install_dir }}`)
-- path on target host where the `prometheus` config files should be rendered
+- path on target host where `prometheus` config files should be rendered
 
 `data_dir: </path/to/data/dir>` (**default**: `/var/data/prometheus`)
 - path on target host where `prometheus` stores data 
+
+`alertmgr_configdir: </path/to/configuration/dir>` (**default**: `{{ alertmgr_installdir }}`)
+- path on target host where `alertmanager` config files should be rendered
+
+`alertmgr_datadir: </path/to/data/dir>` (**default**: `/var/data/prometheus`)
+- path on target host where `alertmanager` stores data 
 
 #### Prometheus Service configuration
 
@@ -544,6 +550,19 @@ default example:
   - role: 0xOI.prometheus
 ```
 
+adust Prometheus and Alertmanager installation, configuration and data directories:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      install_dir: /usr/local
+      config_dir: /etc/prometheus
+      data_dir: /var/lib/prometheus
+      alertmgr_installdir: /usr/local
+      alertmgr_configdir: /etc/alertmanager
+      alertmgr_datadir: /var/lib/alertmanager
+```
 License
 -------
 
