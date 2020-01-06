@@ -120,7 +120,7 @@ suites:
         - path: test/integration/launch/service_launch
   - name: alertmanager_setup
     provisioner:
-      playbook: test/integration/launch/alertmanager_setup/default_playbook.yml
+      playbook: test/integration/setup/alertmanager_setup/default_playbook.yml
     verifier:
       inspec_tests:
         - path: test/integration/setup/alertmanager_setup
