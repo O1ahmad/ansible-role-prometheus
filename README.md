@@ -828,21 +828,6 @@ create recording and alerting rules:
             scheme: https
 ```
 
-customize prometheus alerting/alertmanager configuration:
-```
-- hosts: all
-  roles:
-  - role: 0xOI.prometheus
-    vars:
-      prometheus_config:
-        alerting:
-          alertmanagers:
-          - scheme: https
-            static_configs:
-            - targets:
-              - "1.2.3.4:9093"
-```
-
 License
 -------
 
