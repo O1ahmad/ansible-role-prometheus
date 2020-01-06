@@ -550,6 +550,25 @@ default example:
   - role: 0xOI.prometheus
 ```
 
+*only* install and manage the Prometheus service (disable alertmanager setup):
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      managed_services: ['prometheus']
+```
+
+install specific version of Prometheus bits:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      archive_url: https://github.com/prometheus/prometheus/releases/download/v2.15.0/prometheus-2.15.0.linux-amd64.tar.gz
+      archive_checksum: 1c2175428e7a70297d97a30a04278b86ccd6fc53bf481344936d6573482203b4
+```
+
 adust Prometheus and Alertmanager installation, configuration and data directories:
 ```
 - hosts: all
@@ -563,6 +582,90 @@ adust Prometheus and Alertmanager installation, configuration and data directori
       alertmgr_configdir: /etc/alertmanager
       alertmgr_datadir: /var/lib/alertmanager
 ```
+
+customize global scrape and evaluation settings:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        global:
+          scrape_interval: 30s
+          scrape_timeout: 30s
+          evaluation_interval: 30s
+```
+
+add `static` target scrape_config with scrape and evaluation setting overrides:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: static-example
+           static_configs:
+           - targets: ['localhost:9090', 'localhost:9191']
+             labels:
+               my:   label
+               your: label
+          scrape_interval: 10s
+          scrape_timeout: 10s
+          evaluation_interval: 10s
+```
+
+add `file_sd` file-based scrape_config with scrape and evaluation setting overrides:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: file-sd-example
+            file_sd_configs:
+            - files:
+              - foo/*.slow.json
+              - single/file.yml
+              refresh_interval: 10m
+            - files:
+             - bar/*.yml
+      prometheus_file_sd:
+      - name: example-file.slow.json
+        path: foo
+        config:
+        - targets: ["host1:1234"]
+          labels:
+            test-label: example-slow-file-sd
+      - name: foo.yml
+        path: bar
+        config:
+        - targets: ["host2:1234"]
+      - name: file.yml
+        path: single
+        config:
+        - targets: ["host3:1234"]
+```
+
+add `dns`-based target scrape_config with scrape and evaluation setting overrides:
+```
+- hosts: all
+  roles:
+  - role: 0xOI.prometheus
+    vars:
+      prometheus_config:
+        scrape_configs:
+        - job_name: dns-example
+          dns_sd_configs:
+          - refresh_interval: 15s
+            names:
+            - first.dns.address.domain.com
+            - second.dns.address.domain.com
+          - names:
+            - third.dns.address.domain.com
+```
+
 License
 -------
 
