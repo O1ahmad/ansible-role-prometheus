@@ -1,14 +1,4 @@
 ---
-- name: Set unit [Service] configuration
-  set_fact:
-    default_service_unit:
-      ExecStart: "{{ alertmgr_installdir }}/alertmanager --config.file={{ alertmgr_configdir }}/alertmanager.yml {{ extra_alertmgr_args|join(' ') }}"
-      User: "{{ prometheus_user }}"
-      Group: "{{ prometheus_user }}"
-      StandardOutput: journal
-      StandardError: inherit
-  when: '"alertmanager" in managed_services'
-
 - name: Setup Alertmanager systemd unit
   include_role:
     name: 0x0i.systemd
@@ -20,7 +10,7 @@
           Documentation: https://prometheus.io/docs/alerting/alertmanager/
           Wants: network-online.target
           After: network-online.target
-        Service: "{{ default_service_unit | combine(custom_alertmgr_properties) }}"
+        Service: "{{ alertmgr_service_unit | combine(custom_alertmgr_properties) }}"
         Install:
           WantedBy: multi-user.target
   when: '"alertmanager" in managed_services'

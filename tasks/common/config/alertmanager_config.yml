@@ -10,12 +10,7 @@
     validate: "{{ alertmgr_installdir }}/amtool check-config %s"
   vars:
     conf: "{{ alertmgr_config }}"
-  when: alertmgr_config is defined and alertmgr_config is not none
-
-- name: Determine Alertmanager data storage directory
-  set_fact:
-    alertmgr_datadir: "{{ alertmgr_datadir | default(default_alertmgr_datadir) }}"
-  when: '"alertmanager" in managed_services'
+  when: alertmgr_config is defined and alertmgr_config.keys()|length > 0
 
 - name: Ensure existence of Alertmanager data dir
   become: true

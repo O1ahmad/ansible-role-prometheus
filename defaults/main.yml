@@ -1,5 +1,4 @@
 ---
-# defaults variable file
 prometheus_user: prometheus
 
 managed_services: ['prometheus', 'alertmanager']
@@ -12,9 +11,10 @@ alertmgr_archive_url: https://github.com/prometheus/alertmanager/releases/downlo
 alertmgr_archive_checksum: 3a826321ee90a5071abf7ba199ac86f77887b7a4daa8761400310b4191ab2819
 alertmgr_checksum_format: sha256
 
-default_install_dir: /opt/prometheus
-default_alertmgr_installdir: /opt/alertmanager
+install_dir: /opt/prometheus
+alertmgr_installdir: /opt/alertmanager
 
+config_dir: "{{ install_dir }}"
 prometheus_config_file: prometheus.yml
 prometheus_config:
   global: {}
@@ -23,30 +23,31 @@ prometheus_config:
   remote_write: []
   remote_read: []
 
+alertmgr_configdir: "{{ alertmgr_installdir }}"
+
+filesd_path: "{{ install_dir }}/file_sd"
 file_sd_template: file_sd.j2
 prometheus_file_sd: []
 
+rules_path: "{{ install_dir }}/rules.d"
 rule_files_template: rules.j2
 prometheus_rule_files: []
 
-default_data_dir: /var/data/prometheus
-default_alertmgr_datadir: /var/data/alertmanager
+data_dir: /var/data/prometheus
+alertmgr_datadir: /var/data/alertmanager
 
 custom_unit_properties: {}
 extra_run_args: []
 
+templates_path: "{{ alertmgr_installdir }}/templates"
 alertmanager_templates_template: alertmanager.tmpl.j2
 alertmanager_templates: []
 
 alertmgr_config_file: alertmanager.yml
-alertmgr_config:
-  global: {}
-  route: []
-  receivers: []
-  templates: []
-  inhibit_rules: []
+alertmgr_config: {}
 
 custom_alertmgr_properties: {}
 extra_alertmgr_args: []
 
+exporter_installdir: "{{ install_dir }}/exporters"
 prometheus_exporters: []

@@ -1,9 +1,4 @@
 ---
-- name: Determine configuration directory
-  set_fact:
-    config_dir: "{{ config_dir | default(install_dir) }}"
-  when: '"prometheus" in managed_services'
-
 - name: Ensure existence of config dir
   become: true
   file:
@@ -12,11 +7,6 @@
     group: "{{ prometheus_user }}"
     state: directory
   when: '"prometheus" in managed_services'
-
-- name: Determine Alertmanger configuration directory
-  set_fact:
-    alertmgr_configdir: "{{ alertmgr_configdir | default(alertmgr_installdir) }}"
-  when: '"alertmanager" in managed_services'
 
 - name: Ensure existence of Alertmanager config dir
   become: true
@@ -39,11 +29,6 @@
 
 - name: Render prometheus.yml config
   include_tasks: "common/config/prometheus_config.yml"
-  when: '"prometheus" in managed_services'
-
-- name: Determine data/metrics storage directory
-  set_fact:
-    data_dir: "{{ data_dir | default(default_data_dir) }}"
   when: '"prometheus" in managed_services'
 
 - name: Ensure existence of data dir

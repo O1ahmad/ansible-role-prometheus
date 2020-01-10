@@ -1,0 +1,20 @@
+---
+- name: Set Prometheus unit [Service] configuration
+  set_fact:
+    default_service_unit:
+      ExecStart: "{{ install_dir }}/prometheus --config.file={{ config_dir }}/prometheus.yml --storage.tsdb.path={{ data_dir }} {{ extra_run_args|join(' ') }}"
+      User: "{{ prometheus_user }}"
+      Group: "{{ prometheus_user }}"
+      StandardOutput: journal
+      StandardError: inherit
+  when: '"prometheus" in managed_services'
+
+- name: Set Alertmanager unit [Service] configuration
+  set_fact:
+    alertmgr_service_unit:
+      ExecStart: "{{ alertmgr_installdir }}/alertmanager --config.file={{ alertmgr_configdir }}/alertmanager.yml {{ extra_alertmgr_args|join(' ') }}"
+      User: "{{ prometheus_user }}"
+      Group: "{{ prometheus_user }}"
+      StandardOutput: journal
+      StandardError: inherit
+  when: '"alertmanager" in managed_services'

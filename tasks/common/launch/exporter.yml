@@ -1,13 +1,14 @@
 ---
-- name: set executable start facts
+- name: Set executable start facts
   set_fact:
     exe_dir: "{{ exporter.path | default(exporter_installdir) }}/{{ exporter.name }}"
     executable: "{{ exporter.executable | default(exporter.name) }}"
+    exe_args: "{{ exporter.extra_args | default([]) }}"
 
 - name: Set unit [Service] configuration
   set_fact:
     default_service_unit:
-      ExecStart: "{{ exe_dir }}/{{ executable }} {{ exporter.extra_args | default([]) | join(' ') }}"
+      ExecStart: "{{ exe_dir }}/{{ executable }} {{ exe_args | join(' ') }}"
       User: "{{ prometheus_user }}"
       Group: "{{ prometheus_user }}"
       StandardOutput: journal

@@ -1,11 +1,4 @@
 ---
-#######  Prometheus archive installation #######
-
-- name: Determine installation directory
-  set_fact:
-    install_dir: "{{ install_dir | default(default_install_dir) }}"
-  when: 'install_type == "archive" and "prometheus" in managed_services'
-
 - name: Create installation directory
   file:
     path: "{{ install_dir }}"
