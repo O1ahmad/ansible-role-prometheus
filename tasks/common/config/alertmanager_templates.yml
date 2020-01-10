@@ -10,7 +10,7 @@
 - name: Render Alertmanager templates configuration
   become: true
   template:
-    src: "{{ alertmanager_templates_template }}"
+    src: "{{ _alertmanager_templates_template }}"
     dest: "{{ templates_path }}/{{ item.name }}.tmpl"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"

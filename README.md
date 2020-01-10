@@ -66,6 +66,9 @@ _The following variables can be customized to control various aspects of this in
 `alertmgr_installdir: </path/to/installation/dir>` (**default**: `/opt/alertmanager`)
 - path on target host where the `alertmanager` binaries should be extracted to
 
+`exporter_installdir: </path/to/installation/dir>` (**default**: `{{ install_dir }}/exporters`)
+- path on target host where Prometheus exporter binaries should be extracted to
+
 `alertmgr_archive_url: <path-or-url-to-archive>` (**default**: see `defaults/main.yml`)
 - address of a compressed **tar or zip** archive containing `alertmanager` binaries. This method technically supports installation of any available version of `alertmanager`. Links to official versions can be found [here](https://prometheus.io/download/#alertmanager).
 
@@ -74,6 +77,15 @@ _The following variables can be customized to control various aspects of this in
 
 `alertmgr_checksum_format: <string>` (**default**: see `sha256`)
 - hash algorithm used for file verification associated with the specified archive checksum. Reference [here](https://en.wikipedia.org/wiki/Cryptographic_hash_function) for more information about *checksums/cryptographic* hashes.
+
+`filesd_path: </path/to/file-sd-files>` (**default**: `{{ install_dir }}/filesd`)
+- path on target host prometheus file discovery files should be stored by default
+
+`rules_path: </path/to/rule-files>` (**default**: `{{ install_dir }}/rules.d`)
+- path on target host prometheus rule files should be stored by default
+
+`templates_path: </path/to/alertmanager-template-files>` (**default**: `{{ alertmgr_installdir }}/templates`)
+- path on target host alertmanager template files  should be stored by default
 
 #### Config
 
@@ -91,13 +103,13 @@ Each configuration can be expressed within the following variables in order to c
 - path on target host where `prometheus` config files should be rendered
 
 `data_dir: </path/to/data/dir>` (**default**: `/var/data/prometheus`)
-- path on target host where `prometheus` stores data 
+- path on target host where `prometheus` stores data
 
 `alertmgr_configdir: </path/to/configuration/dir>` (**default**: `{{ alertmgr_installdir }}`)
 - path on target host where `alertmanager` config files should be rendered
 
 `alertmgr_datadir: </path/to/data/dir>` (**default**: `/var/data/prometheus`)
-- path on target host where `alertmanager` stores data 
+- path on target host where `alertmanager` stores data
 
 #### Prometheus Service configuration
 
@@ -127,7 +139,7 @@ The values of these keys are generally dicts or lists of dicts themselves contai
         monitor: example
         foo: bar
   ```
-  
+
 ###### :scrape_configs
 
 `[prometheus_config:] scrape_configs: <list-of-dicts>` (**default**: see `defaults/main.yml`)
@@ -153,7 +165,7 @@ Targets may be statically configured or dynamically discovered using one of the 
             names:
               - default
   ```
-  
+
 ###### :rule_files
 
 `[prometheus_config:] rule_files: <list>` (**default**: see `defaults/main.yml`)
@@ -169,13 +181,13 @@ Rules and alerts are read from all matching files. Rules fall into one of two ca
     - "example.yml"
     - "example_rules/*"
   ```
-  
+
 ###### :remote_read
 
 `[prometheus_config:] remote_read: <list-of-dicts>` (**default**: see `defaults/main.yml`)
 - specifies settings related to the remote read feature
 
-See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read) for more details.  For a list of available remote read/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage). 
+See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_read) for more details.  For a list of available remote read/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage).
 
 ##### Example
 
@@ -200,7 +212,7 @@ See [here](https://prometheus.io/docs/prometheus/latest/configuration/configurat
 `[prometheus_config:] remote_write: <list-of-dicts>` (**default**: see `defaults/main.yml`)
 - specifies settings related to the remote write feature
 
-See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write) for more details. For a list of available remote write/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage). 
+See [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#remote_write) for more details. For a list of available remote write/storage plugins/integrations, reference this [link](https://prometheus.io/docs/operating/integrations/#remote-endpoints-and-storage).
 
 ##### Example
 
@@ -255,7 +267,7 @@ Using this role, file-based service discovery configuration settings can be expr
 - path of file_sd file to render
 
 `[prometheus_file_sd : <entry>:] config: <list-of-dicts>` (**default**: NONE - *required*)
-- list of dictionaries representing settings indicating set of static targets to specify in file_sd file  
+- list of dictionaries representing settings indicating set of static targets to specify in file_sd file
 
 ##### Example
 
@@ -271,9 +283,9 @@ Using this role, file-based service discovery configuration settings can be expr
     config:
     - targets: ["host2:1234"]
   ```
-  
+
   **NB:** An associated `file_sd` service discovery scrape_config is expected to be included within the `prometheus.yml` file for successful load.
-  
+
 #### Rule files
 
 Prometheus supports two types of rules which may be configured and then evaluated at regular intervals: recording rules and alerting rules. Recording rules allow you to precompute frequently needed or computationally expensive expressions and save their result as a new set of time series.. Alerting rules allow you to define alert conditions based on Prometheus expression language expressions and to send notifications about firing alerts to an external service. See [here](https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/) for more details.
@@ -290,7 +302,7 @@ Using this role, both recording and alerting rules can be expressed within the h
 - path of rule file to render
 
 `[prometheus_rule_files : <entry>:] config: <list-of-dicts>` (**default**: NONE - *required*)
-- list of dictionaries representing settings indicating set of rule groups to specify in rule file  
+- list of dictionaries representing settings indicating set of rule groups to specify in rule file
 
 ##### Example
 
@@ -317,7 +329,7 @@ prometheus_rule_files:
         annotations:
           summary: High request latency
   ```
-  
+
 **NB:** An associated `rule_files` section is expected to be included within the `prometheus.yml` file for successful load.
 
 #### Alertmanager Service configuration
@@ -346,7 +358,7 @@ The values of these keys are generally dicts or lists of dicts themselves contai
       # Alternative host for Hipchat.
       hipchat_api_url: 'https://hipchat.foobar.org/'
   ```
-  
+
 ###### :route
 
 `[alertmanager_config:] route: <key: value,...>` (**default**: see `defaults/main.yml`)
@@ -381,13 +393,13 @@ Every alert enters the routing tree at the configured top-level route, which mus
         match:
           team: frontend
   ```
-  
+
 ###### :receivers
 
 `[alertmanager_config:] inhibit_rules: <list-of-dicts>` (**default**: see `defaults/main.yml`)
 - specifies a list of notification receivers
 
-Receivers are named configuration of one or more notification integrations. See [here](https://prometheus.io/docs/alerting/configuration/#receiver) for more details. 
+Receivers are named configuration of one or more notification integrations. See [here](https://prometheus.io/docs/alerting/configuration/#receiver) for more details.
 
 ##### Example
 
@@ -411,7 +423,7 @@ Receivers are named configuration of one or more notification integrations. See 
 `[alertmanager_config:] inhibit_rules: <list-of-dicts>` (**default**: see `defaults/main.yml`)
 - specifies a list of inhibition rules
 
-An inhibition rule mutes an alert (target) matching a set of matchers when an alert (source) exists that matches another set of matchers. See [here](https://prometheus.io/docs/alerting/configuration/#inhibit_rule) for more details. 
+An inhibition rule mutes an alert (target) matching a set of matchers when an alert (source) exists that matches another set of matchers. See [here](https://prometheus.io/docs/alerting/configuration/#inhibit_rule) for more details.
 
 ##### Example
 
@@ -425,22 +437,22 @@ An inhibition rule mutes an alert (target) matching a set of matchers when an al
       # Apply inhibition if the alertname is the same.
       equal: ['alertname', 'cluster', 'service']
   ```
-  
+
 ###### :templates
 
 `[alertmanager_config:] templates: <list>` (**default**: see `defaults/main.yml`)
 - specifies files and directories from which notification templates are read
 
-The last component may use a wildcard matcher, e.g. `templates/*.tmpl`. See [here](https://prometheus.io/docs/alerting/notifications/) for a notification template reference and this [link](https://prometheus.io/docs/alerting/notification_examples/) for examples. 
+The last component may use a wildcard matcher, e.g. `templates/*.tmpl`. See [here](https://prometheus.io/docs/alerting/notifications/) for a notification template reference and this [link](https://prometheus.io/docs/alerting/notification_examples/) for examples.
 
 ##### Example
 
  ```yaml
   alertmanager_config:
-    templates: 
+    templates:
     - '/etc/alertmanager/template/*.tmpl'
   ```
-  
+
 #### Alertmanager templates
 
 Prometheus creates and sends alerts to the Alertmanager which then sends notifications out to different receivers based on their labels. The notifications sent to receivers are constructed via templates. The Alertmanager comes with default templates but they can also be customized. See [here](https://prometheus.io/docs/alerting/notifications/) for more details.
@@ -457,7 +469,7 @@ Using this role, alertmanager template configuration settings can be expressed w
 - path of template file to render
 
 `[alertmanager_templates : <entry>:] config: <list-of-dicts>` (**default**: NONE - *required*)
-- list of dictionaries representing settings indicating set of template configs to render 
+- list of dictionaries representing settings indicating set of template configs to render
 
 ##### Example
 
@@ -473,9 +485,9 @@ Using this role, alertmanager template configuration settings can be expressed w
     - define: "myorg.test.text"
       template: 'summary: \{\{ .CommonAnnotations.summary \}\}\ndescription: \{\{ .CommonAnnotations.description \}\}'
   ```
-  
+
   **NB:** An associated `templates` config section is expected to be included within the `alertmanager.yml` file for successful load.
-  
+
 #### Launch
 
 This role supports launching all components of the Prometheus monitoring and alerting toolkit ecosystem. This consists of both the Prometheus and Alertmanager services and a myriad of metric exporters. Running each is accomplished utilizing the [systemd](https://www.freedesktop.org/wiki/Software/systemd/) service management tool which manages the services as background processes or daemons subject to the configuration and execution potential provided by its underlying management framework.
@@ -495,7 +507,7 @@ Supporting full expression of `prometheus`'s [cli](https://gist.github.com/0x0I/
 ###### Alertmanager
 
 `extra_alertmgr_args: <alertmanager-cli-options>` (**default**: `[]`)
-- list of `alertmanager` commandline arguments to pass to the binary at runtime for customizing launch. 
+- list of `alertmanager` commandline arguments to pass to the binary at runtime for customizing launch.
 
 Supporting full expression of `alertmanager`'s [cli](https://gist.github.com/0x0I/4eb3d7841562d215b50f05dee64fa0dc), this variable enables the launch to be customized according to the user's specification.
 
@@ -507,7 +519,7 @@ Supporting full expression of `alertmanager`'s [cli](https://gist.github.com/0x0
 `prometheus_exporters: <list-of-dicts>` (**default**: [])
 - specifies prometheus exporters to install and launch and manage as a systemd services.
 
-Each exporter dict entry is expected to indicate several properties, including name; url and listen address, of the target exporter for proper setup and communication with a *Prometheus* server. Other properties used to customize operation of the exporter can optionally be specified via an `extra_args` variable, which appends provided command-line arguments to the exporter's unit ExecStart setting. See [here](https://prometheus.io/docs/instrumenting/exporters/) for more details and a list of exporter plugins for reference.  
+Each exporter dict entry is expected to indicate several properties, including name; url and listen address, of the target exporter for proper setup and communication with a *Prometheus* server. Other properties used to customize operation of the exporter can optionally be specified via an `extra_args` variable, which appends provided command-line arguments to the exporter's unit ExecStart setting. See [here](https://prometheus.io/docs/instrumenting/exporters/) for more details and a list of exporter plugins for reference.
 
 `[prometheus_exporters : <entry>:] name: <string>` (**default**: NONE - *required*)
 - name of Prometheus exporter to install

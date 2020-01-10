@@ -7,7 +7,7 @@
 
 - name: Set unit [Service] configuration
   set_fact:
-    default_service_unit:
+    _default_service_unit:
       ExecStart: "{{ exe_dir }}/{{ executable }} {{ exe_args | join(' ') }}"
       User: "{{ prometheus_user }}"
       Group: "{{ prometheus_user }}"
@@ -25,7 +25,7 @@
           Documentation: "{{ exporter.description | default('https://prometheus.io/docs/instrumenting/exporters/') }}"
           Wants: network-online.target
           After: "network-online.target"
-        Service: "{{ default_service_unit | combine(exporter.unit_properties | default({})) | default(default_service_unit) }}"
+        Service: "{{ _default_service_unit | combine(exporter.unit_properties | default({})) | default(_default_service_unit) }}"
         Install:
           WantedBy: multi-user.target
 

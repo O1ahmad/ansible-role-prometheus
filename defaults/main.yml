@@ -15,7 +15,7 @@ install_dir: /opt/prometheus
 alertmgr_installdir: /opt/alertmanager
 
 config_dir: "{{ install_dir }}"
-prometheus_config_file: prometheus.yml
+_prometheus_config_file: prometheus.yml
 prometheus_config:
   global: {}
   scrape_configs: []
@@ -26,11 +26,11 @@ prometheus_config:
 alertmgr_configdir: "{{ alertmgr_installdir }}"
 
 filesd_path: "{{ install_dir }}/file_sd"
-file_sd_template: file_sd.j2
+_file_sd_template: file_sd.j2
 prometheus_file_sd: []
 
 rules_path: "{{ install_dir }}/rules.d"
-rule_files_template: rules.j2
+_rule_files_template: rules.j2
 prometheus_rule_files: []
 
 data_dir: /var/data/prometheus
@@ -40,10 +40,10 @@ custom_unit_properties: {}
 extra_run_args: []
 
 templates_path: "{{ alertmgr_installdir }}/templates"
-alertmanager_templates_template: alertmanager.tmpl.j2
+_alertmanager_templates_template: alertmanager.tmpl.j2
 alertmanager_templates: []
 
-alertmgr_config_file: alertmanager.yml
+_alertmgr_config_file: alertmanager.yml
 alertmgr_config: {}
 
 custom_alertmgr_properties: {}

@@ -2,8 +2,8 @@
 - name: Copy Alertmanager configuration in place
   become: true
   template:
-    src: "{{ alertmgr_config_file }}.j2"
-    dest: "{{ alertmgr_configdir }}/{{ alertmgr_config_file }}"
+    src: "{{ _alertmgr_config_file }}.j2"
+    dest: "{{ alertmgr_configdir }}/{{ _alertmgr_config_file }}"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     mode: 0644
