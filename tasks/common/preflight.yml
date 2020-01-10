@@ -1,7 +1,17 @@
 ---
+- name: Set Prometheus file_sd path
+  set_fact:
+    filesd_path: '{{ install_dir }}/file_sd'
+  when: install_type == 'archive'
+
+- name: Set Prometheus rule_files path
+  set_fact:
+    rule_files: '{{ install_dir }}/rules.d'
+  when: install_type == 'archive'
+
 - name: Set Prometheus unit [Service] configuration
   set_fact:
-    default_service_unit:
+    _default_service_unit:
       ExecStart: "{{ install_dir }}/prometheus --config.file={{ config_dir }}/prometheus.yml --storage.tsdb.path={{ data_dir }} {{ extra_run_args|join(' ') }}"
       User: "{{ prometheus_user }}"
       Group: "{{ prometheus_user }}"
@@ -9,12 +19,22 @@
       StandardError: inherit
   when: '"prometheus" in managed_services'
 
+- name: Set Alertmanager templates path
+  set_fact:
+    templates_path: '{{ install_dir }}/templates'
+  when: '"alertmanager" in managed_services'
+
 - name: Set Alertmanager unit [Service] configuration
   set_fact:
-    alertmgr_service_unit:
+    _alertmgr_service_unit:
       ExecStart: "{{ alertmgr_installdir }}/alertmanager --config.file={{ alertmgr_configdir }}/alertmanager.yml {{ extra_alertmgr_args|join(' ') }}"
       User: "{{ prometheus_user }}"
       Group: "{{ prometheus_user }}"
       StandardOutput: journal
       StandardError: inherit
+  when: '"alertmanager" in managed_services'
+
+- name: Set Prometheus exporters install dir
+  set_fact:
+    exporter_installdir: '{{ install_dir }}/exporters'
   when: '"alertmanager" in managed_services'

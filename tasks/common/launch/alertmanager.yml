@@ -10,7 +10,7 @@
           Documentation: https://prometheus.io/docs/alerting/alertmanager/
           Wants: network-online.target
           After: network-online.target
-        Service: "{{ alertmgr_service_unit | combine(custom_alertmgr_properties) }}"
+        Service: "{{ _alertmgr_service_unit | combine(custom_alertmgr_properties) }}"
         Install:
           WantedBy: multi-user.target
   when: '"alertmanager" in managed_services'

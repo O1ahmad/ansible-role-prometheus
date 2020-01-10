@@ -2,8 +2,8 @@
 - name: Copy Prometheus configuration in place
   become: true
   template:
-    src: "{{ prometheus_config_file }}.j2"
-    dest: "{{ config_dir }}/{{ prometheus_config_file }}"
+    src: "{{ _prometheus_config_file }}.j2"
+    dest: "{{ config_dir }}/{{ _prometheus_config_file }}"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     mode: 0644

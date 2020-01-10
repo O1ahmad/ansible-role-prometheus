@@ -2,7 +2,7 @@
 - name: Ensure existence of file_sd directory
   become: true
   file:
-    path: "{{ filesd_path }}"
+    path: "{{ item.path | default(filesd_path) }}"
     state: directory
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
@@ -10,8 +10,8 @@
 - name: Copy Prometheus file_sd configuration in place
   become: true
   template:
-    src: "{{ file_sd_template }}"
-    dest: "{{ filesd_path }}/{{ item.name }}"
+    src: "{{ _file_sd_template }}"
+    dest: "{{ item.path | default(filesd_path) }}/{{ item.name }}"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     mode: 0644
