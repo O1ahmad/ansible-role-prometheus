@@ -1,14 +1,4 @@
 ---
-#######  File sd(service discovery) configuration #######
-
-- name: set default file sd path
-  set_fact:
-    default_filesd_path: "{{ config_dir }}/file_sd"
-
-- name: set file sd path
-  set_fact:
-    filesd_path: "{{ item.path | default(default_filesd_path) }}"
-
 - name: Ensure existence of file_sd directory
   become: true
   file:
@@ -28,4 +18,4 @@
   vars:
     conf: "{{ item.config }}"
     name: "{{ item.name }}"
-  when: item.config is defined and item.config is not none
+  when: item.config is defined and item.config|length > 0

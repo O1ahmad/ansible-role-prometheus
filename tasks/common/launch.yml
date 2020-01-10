@@ -8,4 +8,4 @@
   with_items: "{{ prometheus_exporters }}"
   loop_control:
     loop_var: exporter
-  when: prometheus_exporters is defined and prometheus_exporters is not none
+  when: prometheus_exporters is defined and prometheus_exporters|length > 0

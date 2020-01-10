@@ -1,14 +1,4 @@
 ---
-#######  File sd(service discovery) configuration #######
-
-- name: set default Alertmanager templates path
-  set_fact:
-    default_templates_path: "{{ alertmgr_configdir }}/templates"
-
-- name: set Alertmanager templates path
-  set_fact:
-    templates_path: "{{ item.path | default(default_templates_path) }}"
-
 - name: Ensure existence of Alertmanager templates directory
   become: true
   file:
@@ -17,7 +7,7 @@
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
 
-- name: Copy Alertmanager templates configuration in place
+- name: Render Alertmanager templates configuration
   become: true
   template:
     src: "{{ alertmanager_templates_template }}"
@@ -27,4 +17,4 @@
     mode: 0644
   vars:
     conf: "{{ item.config }}"
-  when: item.config is defined and item.config is not none
+  when: item.config is defined and item.config|length > 0

@@ -88,45 +88,45 @@ platforms:
         - systemctl enable ssh.service
 
 suites:
-  - name: archive_install
+  - name: install_archive
     provisioner:
-      playbook: test/integration/install/archive_install/default_playbook.yml
+      playbook: test/integration/install/install_archive/default_playbook.yml
     verifier:
       inspec_tests:
-        - path: test/integration/install/archive_install
-  - name: prometheus_config
+        - path: test/integration/install/install_archive
+  - name: config_prometheus
     provisioner:
-      playbook: test/integration/config/prometheus_config/default_playbook.yml
+      playbook: test/integration/config/config_prometheus/default_playbook.yml
     verifier:
       inspec_tests:
-        - path: test/integration/config/prometheus_config
-  - name: rule_files_config
+        - path: test/integration/config/config_prometheus
+  - name: config_rule_files
     provisioner:
       playbook: test/integration/config/rule_files/default_playbook.yml
     verifier:
       inspec_tests:
         - path: test/integration/config/rule_files
-  - name: file_sd_config
+  - name: config_file_sd
     provisioner:
       playbook: test/integration/config/file_sd/default_playbook.yml
     verifier:
       inspec_tests:
         - path: test/integration/config/file_sd
-  - name: service_launch
+  - name: launch_service
     provisioner:
-      playbook: test/integration/launch/service_launch/default_playbook.yml
+      playbook: test/integration/launch/launch_service/default_playbook.yml
     verifier:
       inspec_tests:
-        - path: test/integration/launch/service_launch
-  - name: alertmanager_setup
+        - path: test/integration/launch/launch_service
+  - name: setup_alertmanager
     provisioner:
-      playbook: test/integration/setup/alertmanager_setup/default_playbook.yml
+      playbook: test/integration/setup/setup_alertmanager/default_playbook.yml
     verifier:
       inspec_tests:
-        - path: test/integration/setup/alertmanager_setup
-  - name: exporters_setup
+        - path: test/integration/setup/setup_alertmanager
+  - name: setup_exporters
     provisioner:
-      playbook: test/integration/setup/exporters_setup/default_playbook.yml
+      playbook: test/integration/setup/setup_exporters/default_playbook.yml
     verifier:
       inspec_tests:
-        - path: test/integration/setup/exporters_setup
+        - path: test/integration/setup/setup_exporters

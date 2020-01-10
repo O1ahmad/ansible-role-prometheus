@@ -1,12 +1,4 @@
 ---
-- name: Determine default Prometheus exporter installation directory
-  set_fact:
-    default_exporter_installdir: "{{ default_exporter_installdir | default(default_install_dir+'/exporters') }}"
-
-- name: Determine Prometheus exporter installation directory
-  set_fact:
-    exporter_installdir: "{{ exporter.path | default(default_exporter_installdir) }}"
-
 - name: Create Prometheus exporter installation directory
   become: true
   file:

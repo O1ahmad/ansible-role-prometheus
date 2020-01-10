@@ -1,9 +1,4 @@
 ---
-- name: Determine Alertmanager installation directory
-  set_fact:
-    alertmgr_installdir: "{{ alertmgr_installdir | default(default_alertmgr_installdir) }}"
-  when: '"alertmanager" in managed_services'
-
 - name: Create Alertmanager installation directory
   file:
     path: "{{ alertmgr_installdir }}"
