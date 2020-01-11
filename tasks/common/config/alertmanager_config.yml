@@ -1,5 +1,5 @@
 ---
-- name: Copy Alertmanager configuration in place
+- name: Render Alertmanager configuration
   become: true
   template:
     src: "{{ _alertmgr_config_file }}.j2"
@@ -11,6 +11,9 @@
   vars:
     conf: "{{ alertmgr_config }}"
   when: alertmgr_config is defined and alertmgr_config.keys()|length > 0
+  tags:
+    - config
+    - alertmanager
 
 - name: Ensure existence of Alertmanager data dir
   become: true
@@ -20,3 +23,7 @@
     group: "{{ prometheus_user }}"
     state: directory
   when: '"alertmanager" in managed_services'
+  tags:
+    - config
+    - alertmanager
+    - data

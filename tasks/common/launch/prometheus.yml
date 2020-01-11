@@ -14,6 +14,8 @@
         Install:
           WantedBy: multi-user.target
   when: '"prometheus" in managed_services'
+  tags:
+    - launch
 
 - name: Ensure start of prometheus service
   service:
@@ -21,3 +23,5 @@
     state: started
     enabled: "yes"
   when: '"prometheus" in managed_services'
+  tags:
+    - launch

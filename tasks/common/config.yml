@@ -7,6 +7,8 @@
     group: "{{ prometheus_user }}"
     state: directory
   when: '"prometheus" in managed_services'
+  tags:
+    - config
 
 - name: Ensure existence of Alertmanager config dir
   become: true
@@ -16,20 +18,31 @@
     group: "{{ prometheus_user }}"
     state: directory
   when: '"alertmanager" in managed_services'
+  tags:
+    - config
+    - alertmanager
 
 - name: Render rules files
   include_tasks: "common/config/rule_files.yml"
   with_items: "{{ prometheus_rule_files }}"
   when: '"prometheus" in managed_services'
+  tags:
+    - config
+    - rules
 
 - name: Render file_sd configs
   include_tasks: "common/config/file_sds.yml"
   with_items: "{{ prometheus_file_sd }}"
   when: '"prometheus" in managed_services'
+  tags:
+    - config
+    - filesd
 
 - name: Render prometheus.yml config
   include_tasks: "common/config/prometheus_config.yml"
   when: '"prometheus" in managed_services'
+  tags:
+    - config
 
 - name: Ensure existence of data dir
   become: true
@@ -39,12 +52,22 @@
     group: "{{ prometheus_user }}"
     state: directory
   when: '"prometheus" in managed_services'
+  tags:
+    - config
+    - data
 
 - name: Render Alertmanager template files
   include_tasks: "common/config/alertmanager_templates.yml"
   with_items: "{{ alertmanager_templates }}"
   when: '"alertmanager" in managed_services'
+  tags:
+    - config
+    - alertmanager
+    - templates
 
 - name: Render Alertmanager config
   include_tasks: "common/config/alertmanager_config.yml"
   when: '"alertmanager" in managed_services'
+  tags:
+    - config
+    - alertmanager

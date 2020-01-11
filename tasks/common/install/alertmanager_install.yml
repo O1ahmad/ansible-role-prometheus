@@ -7,6 +7,9 @@
     group: "{{ prometheus_user }}"
   become: true
   when: '"alertmanager" in managed_services'
+  tags:
+    - install
+    - alertmanager
 
 - name: Download Alertmanager archive ({{ alertmgr_archive_url }})
   get_url:
@@ -19,6 +22,10 @@
   register: alertmgr_archive_tmp
   become: true
   when: '"alertmanager" in managed_services'
+  tags:
+    - install
+    - archive
+    - alertmanager
 
 - name: Extract Alertmanager archive
   unarchive:
@@ -34,3 +41,7 @@
     creates: "{{ alertmgr_installdir }}/alertmanager"
   become: true
   when: '"alertmanager" in managed_services'
+  tags:
+    - install
+    - archive
+    - alertmanager
