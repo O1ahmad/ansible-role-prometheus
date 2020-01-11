@@ -6,8 +6,11 @@
     state: directory
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
+  tags:
+    - config
+    - filesd
 
-- name: Copy Prometheus file_sd configuration in place
+- name: Render Prometheus file_sd configuration
   become: true
   template:
     src: "{{ _file_sd_template }}"
@@ -19,3 +22,6 @@
     conf: "{{ item.config }}"
     name: "{{ item.name }}"
   when: item.config is defined and item.config|length > 0
+  tags:
+    - config
+    - filesd

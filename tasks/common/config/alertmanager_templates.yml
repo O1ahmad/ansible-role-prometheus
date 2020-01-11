@@ -6,6 +6,10 @@
     state: directory
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
+  tags:
+    - config
+    - alertmanager
+    - templates
 
 - name: Render Alertmanager templates configuration
   become: true
@@ -18,3 +22,7 @@
   vars:
     conf: "{{ item.config }}"
   when: item.config is defined and item.config|length > 0
+  tags:
+    - config
+    - alertmanager
+    - templates

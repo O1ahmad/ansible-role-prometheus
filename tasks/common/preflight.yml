@@ -3,11 +3,17 @@
   set_fact:
     filesd_path: '{{ install_dir }}/file_sd'
   when: install_type == 'archive'
+  tags:
+    - preflight
+    - filesd
 
 - name: Set Prometheus rule_files path
   set_fact:
     rule_files: '{{ install_dir }}/rules.d'
   when: install_type == 'archive'
+  tags:
+    - preflight
+    - rules
 
 - name: Set Prometheus unit [Service] configuration
   set_fact:
@@ -18,11 +24,17 @@
       StandardOutput: journal
       StandardError: inherit
   when: '"prometheus" in managed_services'
+  tags:
+    - preflight
 
 - name: Set Alertmanager templates path
   set_fact:
     templates_path: '{{ install_dir }}/templates'
   when: '"alertmanager" in managed_services'
+  tags:
+    - preflight
+    - alertmanager
+    - templates
 
 - name: Set Alertmanager unit [Service] configuration
   set_fact:
@@ -33,8 +45,14 @@
       StandardOutput: journal
       StandardError: inherit
   when: '"alertmanager" in managed_services'
+  tags:
+    - preflight
+    - alertmanager
 
 - name: Set Prometheus exporters install dir
   set_fact:
     exporter_installdir: '{{ install_dir }}/exporters'
   when: '"alertmanager" in managed_services'
+  tags:
+    - preflight
+    - exporters

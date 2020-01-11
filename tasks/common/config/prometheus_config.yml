@@ -1,5 +1,5 @@
 ---
-- name: Copy Prometheus configuration in place
+- name: Render Prometheus configuration
   become: true
   template:
     src: "{{ _prometheus_config_file }}.j2"
@@ -11,3 +11,5 @@
   vars:
     conf: "{{ prometheus_config }}"
   when: prometheus_config is defined and prometheus_config.keys()|length > 0
+  tags:
+    - config

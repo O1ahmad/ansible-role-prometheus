@@ -7,6 +7,9 @@
     group: "{{ prometheus_user }}"
   become: true
   when: 'install_type == "archive" and "prometheus" in managed_services'
+  tags:
+    - install
+    - archive
 
 - name: Download Prometheus archive ({{ archive_url }})
   get_url:
@@ -19,6 +22,9 @@
   register: archive_tmp
   become: true
   when: 'install_type == "archive" and "prometheus" in managed_services'
+  tags:
+    - install
+    - archive
 
 - name: Extract Prometheus archive
   unarchive:
@@ -34,3 +40,6 @@
     creates: "{{ install_dir }}/prometheus"
   become: true
   when: 'install_type == "archive" and "prometheus" in managed_services'
+  tags:
+    - install
+    - archive

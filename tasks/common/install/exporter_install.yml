@@ -6,6 +6,9 @@
     state: directory
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
+  tags:
+    - install
+    - exporters
 
 - name: Extract Prometheus exporter archive
   become: true
@@ -19,3 +22,7 @@
     extra_opts:
       - --strip-components
       - '1'
+  tags:
+    - install
+    - archive
+    - exporters
