@@ -10,6 +10,7 @@
     validate: "{{ alertmgr_installdir }}/amtool check-config %s"
   vars:
     conf: "{{ alertmgr_config }}"
+  notify: Restart alertmanager
   when: alertmgr_config is defined and alertmgr_config.keys()|length > 0
   tags:
     - config

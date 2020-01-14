@@ -22,6 +22,7 @@
   vars:
     conf: "{{ item.config }}"
   when: item.config is defined and item.config|length > 0
+  notify: Restart alertmanager
   tags:
     - config
     - alertmanager

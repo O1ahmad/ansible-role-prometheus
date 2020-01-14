@@ -21,6 +21,7 @@
     validate: "{{ install_dir }}/promtool check rules %s"
   vars:
     conf: "{{ item.config }}"
+  notify: Restart prometheus
   when: item.config is defined and item.config.keys()|length > 0
   tags:
     - config

@@ -2,7 +2,7 @@
 - name: Create Prometheus exporter installation directory
   become: true
   file:
-    path: "{{ exporter_installdir }}/{{ exporter.name }}"
+    path: "{{ exporter.path|default(exporter_installdir) }}/{{ exporter.name }}"
     state: directory
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
@@ -14,7 +14,7 @@
   become: true
   unarchive:
     src: "{{ exporter.url }}"
-    dest: "{{ exporter_installdir }}/{{ exporter.name }}"
+    dest: "{{ exporter.path|default(exporter_installdir) }}/{{ exporter.name }}"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     mode: '0775'
