@@ -1,4 +1,14 @@
 ---
+- name: Include OS and distribution specific variables.
+  include_vars: "{{ item }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution|lower }}.yml"
+        - "{{ ansible_os_family|lower }}.yml"
+      skip: true
+  tags:
+    - always
+
 - name: Set Prometheus file_sd path
   set_fact:
     filesd_path: '{{ install_dir }}/file_sd'
@@ -52,7 +62,20 @@
 - name: Set Prometheus exporters install dir
   set_fact:
     exporter_installdir: '{{ install_dir }}/exporters'
-  when: '"alertmanager" in managed_services'
+  when: '"prometheus" in managed_services'
   tags:
     - preflight
     - exporters
+
+- name: Check for uninstall signal
+  block:
+    - name: Broadcast uninstall signal
+      command: /bin/true
+      notify:
+        - Uninstall prometheus
+        - Uninstall alertmanager
+
+    - name: End play following uninstallation
+      meta: end_play
+  when: perform_uninstall
+  ignore_errors: true

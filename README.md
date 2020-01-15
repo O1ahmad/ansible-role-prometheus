@@ -13,6 +13,7 @@ Ansible Role :fire: :straight_ruler: Prometheus
       - [Install](#install)
       - [Config](#config)
       - [Launch](#launch)
+      - [Uninstall](#uninstall)
   - [Dependencies](#dependencies)
   - [Example Playbook](#example-playbook)
   - [License](#license)
@@ -38,6 +39,7 @@ Variables are available and organized according to the following software & mach
 * _install_
 * _config_
 * _launch_
+* _uninstall_
 
 #### Install
 
@@ -547,6 +549,15 @@ Each exporter dict entry is expected to indicate several properties, including n
         - '--web.listen-address=0.0.0.0:9110'
         - '--log.level=debug'
   ```
+
+#### Uninstall
+
+Support for uninstalling and removing artifacts necessary for provisioning allows for users/operators to return a target host to its configured state prior to application of this role. This can be useful for recycling nodes and roles and perhaps providing more graceful/managed transitions between tooling upgrades.
+
+_The following variable(s) can be customized to manage this uninstall process:_
+
+`perform_uninstall: <true | false>` (**default**: `false`)
+- whether to uninstall and remove all artifacts and remnants of this `prometheus` installation on a target host (**see**: `handlers/main.yml` for details)
 
 Dependencies
 ------------
