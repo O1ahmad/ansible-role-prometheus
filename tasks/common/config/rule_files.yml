@@ -12,6 +12,7 @@
 
 - name: Render Prometheus rules file configuration
   become: true
+  when: item.config is defined and item.config.keys()|length > 0
   template:
     src: "{{ _rule_files_template }}"
     dest: "{{ item.path | default(rules_path) }}/{{ item.name }}"
@@ -22,7 +23,6 @@
   vars:
     conf: "{{ item.config }}"
   notify: Restart prometheus
-  when: item.config is defined and item.config.keys()|length > 0
   tags:
     - config
     - rules

@@ -21,24 +21,24 @@
     - install
 
 - name: Install Prometheus based on install type
-  include_tasks: "common/install/{{ install_type }}_install.yml"
   when: '"prometheus" in managed_services'
+  include_tasks: "common/install/{{ install_type }}_install.yml"
   tags:
     - install
 
 - name: Install Alertmanager
-  include_tasks: "common/install/alertmanager_install.yml"
   when: '"alertmanager" in managed_services'
+  include_tasks: "common/install/alertmanager_install.yml"
   tags:
     - install
     - alertmanager
 
 - name: Install Exporters
+  when: prometheus_exporters is defined and prometheus_exporters|length > 0
   include_tasks: "common/install/exporter_install.yml"
   with_items: "{{ prometheus_exporters }}"
   loop_control:
     loop_var: exporter
-  when: prometheus_exporters is defined and prometheus_exporters|length > 0
   tags:
     - install
     - exporters

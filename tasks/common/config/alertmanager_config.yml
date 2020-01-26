@@ -1,6 +1,7 @@
 ---
 - name: Render Alertmanager configuration
   become: true
+  when: alertmgr_config is defined and alertmgr_config.keys()|length > 0
   template:
     src: "{{ _alertmgr_config_file }}.j2"
     dest: "{{ alertmgr_configdir }}/{{ _alertmgr_config_file }}"
@@ -11,19 +12,18 @@
   vars:
     conf: "{{ alertmgr_config }}"
   notify: Restart alertmanager
-  when: alertmgr_config is defined and alertmgr_config.keys()|length > 0
   tags:
     - config
     - alertmanager
 
 - name: Ensure existence of Alertmanager data dir
+  when: '"alertmanager" in managed_services'
   become: true
   file:
     path: "{{ alertmgr_datadir }}"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     state: directory
-  when: '"alertmanager" in managed_services'
   tags:
     - config
     - alertmanager

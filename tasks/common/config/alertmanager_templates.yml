@@ -13,6 +13,7 @@
 
 - name: Render Alertmanager templates configuration
   become: true
+  when: item.config is defined and item.config|length > 0
   template:
     src: "{{ _alertmanager_templates_template }}"
     dest: "{{ templates_path }}/{{ item.name }}.tmpl"
@@ -21,7 +22,6 @@
     mode: 0644
   vars:
     conf: "{{ item.config }}"
-  when: item.config is defined and item.config|length > 0
   notify: Restart alertmanager
   tags:
     - config

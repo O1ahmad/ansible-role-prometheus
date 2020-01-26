@@ -1,5 +1,6 @@
 ---
 - name: Setup Prometheus systemd unit
+  when: '"prometheus" in managed_services'
   include_role:
     name: 0x0i.systemd
   vars:
@@ -13,15 +14,15 @@
         Service: "{{ _default_service_unit | combine(custom_unit_properties) }}"
         Install:
           WantedBy: multi-user.target
-  when: '"prometheus" in managed_services'
   tags:
     - launch
 
 - name: Ensure start of prometheus service
+  when: '"prometheus" in managed_services'
+  become: true
   service:
     name: prometheus
     state: started
     enabled: "yes"
-  when: '"prometheus" in managed_services'
   tags:
     - launch

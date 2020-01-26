@@ -39,6 +39,7 @@
     - exporters
 
 - name: Ensure start of Prometheus exporter service - {{ exporter.name }}
+  become: true
   service:
     name: "{{ exporter.name }}"
     state: started
