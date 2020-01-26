@@ -1,5 +1,6 @@
 ---
 - name: Setup Alertmanager systemd unit
+  when: '"alertmanager" in managed_services'
   include_role:
     name: 0x0i.systemd
   vars:
@@ -13,17 +14,17 @@
         Service: "{{ _alertmgr_service_unit | combine(custom_alertmgr_properties) }}"
         Install:
           WantedBy: multi-user.target
-  when: '"alertmanager" in managed_services'
   tags:
     - launch
     - alertmanager
 
 - name: Ensure start of Alertmanager service
+  become: true
+  when: '"alertmanager" in managed_services'
   service:
     name: alertmanager
     state: started
     enabled: "yes"
-  when: '"alertmanager" in managed_services'
   tags:
     - launch
     - alertmanager

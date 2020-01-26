@@ -1,6 +1,7 @@
 ---
 - name: Render Prometheus configuration
   become: true
+  when: prometheus_config is defined and prometheus_config.keys()|length > 0
   template:
     src: "{{ _prometheus_config_file }}.j2"
     dest: "{{ config_dir }}/{{ _prometheus_config_file }}"
@@ -11,6 +12,5 @@
   vars:
     conf: "{{ prometheus_config }}"
   notify: Restart prometheus
-  when: prometheus_config is defined and prometheus_config.keys()|length > 0
   tags:
     - config
