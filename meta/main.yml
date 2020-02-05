@@ -5,7 +5,7 @@ galaxy_info:
   role_name: Prometheus
   description: Prometheus - a multi-dimensional time-series data monitoring and alerting toolkit
   company: "O1.IO"
-  license: license (Apache, BSD, MIT)
+  license: license (MIT)
   min_ansible_version: 2.6
   platforms:
     - name: EL
