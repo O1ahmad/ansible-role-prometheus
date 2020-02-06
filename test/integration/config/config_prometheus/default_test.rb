@@ -1,4 +1,4 @@
-title "Prometheus archive installation test suite"
+title "Prometheus archive installation integration tests"
 
 describe file('/etc/prometheus/prometheus.yml') do
   it { should exist }

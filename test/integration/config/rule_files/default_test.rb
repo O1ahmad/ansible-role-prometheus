@@ -1,4 +1,4 @@
-title "Prometheus rules files configuration test suite"
+title "Prometheus rules files configuration integration tests"
 
 describe file('/opt/prometheus/rules.d/example-rules.yml') do
   it { should exist }

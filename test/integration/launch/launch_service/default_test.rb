@@ -1,4 +1,4 @@
-title "Prometheus service launch test suite"
+title "Prometheus service launch integration tests"
 
 describe file('/etc/systemd/system/prometheus.service') do
   it { should exist }
