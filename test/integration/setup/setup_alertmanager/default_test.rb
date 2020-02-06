@@ -1,4 +1,4 @@
-title "Prometheus service launch test suite"
+title "Alertmanager setup integration tests"
 
 describe file('/etc/systemd/system/alertmanager.service') do
   it { should exist }

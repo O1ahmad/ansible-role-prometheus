@@ -1,4 +1,4 @@
-title "Prometheus file sd configuration test suite"
+title "Prometheus file service discovery integration tests"
 
 describe file('/opt/prometheus/file_sd/example-file.slow.json') do
   it { should exist }

@@ -1,7 +1,7 @@
 ---
-- name: Default playbook for testing
+- name: Prometheus archive installation integration test playbook
   hosts: test-kitchen
   roles:
-    - ansible-role-prometheus
-  vars:
-    install_type: archive
+    - role: ansible-role-prometheus
+      vars:
+        install_type: archive

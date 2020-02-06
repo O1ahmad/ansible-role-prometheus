@@ -1,4 +1,4 @@
-title "Prometheus exporter setup test suite"
+title "Prometheus exporter setup integration tests"
 
 describe directory('/opt/prometheus/exporters/node_exporter') do
   it { should exist }

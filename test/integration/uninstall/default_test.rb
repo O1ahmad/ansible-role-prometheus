@@ -1,4 +1,4 @@
-title "Prometheus service uninstall test suite"
+title "Prometheus service uninstall integration tests"
 
 describe service('prometheus') do
   it { should_not be_installed }
