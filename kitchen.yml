@@ -29,6 +29,7 @@ provisioner:
   ansible_verbose: true
   ansible_cfg_path: test/ansible.cfg
   requirements_path: test/requirements-test.yml
+  idempotency_test: true
 
 verifier:
   name: inspec
@@ -92,6 +93,10 @@ suites:
   - name: install_archive
     provisioner:
       playbook: test/integration/install/install_archive/default_playbook.yml
+      ansible_extra_flags: '--skip-tags=config,launch'
+      idempotency_skip_tags:
+        - config
+        - launch
     verifier:
       inspec_tests:
         - path: test/integration/install/install_archive
@@ -134,6 +139,7 @@ suites:
   - name: uninstall
     provisioner:
       playbook: test/integration/uninstall/default_playbook.yml
+      idempotency_test: false
     verifier:
       inspec_tests:
         - path: test/integration/uninstall

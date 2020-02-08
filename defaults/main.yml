@@ -1,7 +1,7 @@
 ---
 prometheus_user: prometheus
 
-managed_services: ['prometheus', 'alertmanager']
+managed_services: ['prometheus']
 
 install_type: archive
 
