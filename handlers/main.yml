@@ -5,8 +5,8 @@
   service:
     name: prometheus
     state: restarted
-  ignore_errors: true
   listen: Restart prometheus
+  ignore_errors: true
 
 - name: Stop Prometheus systemd service
   become: true
@@ -16,6 +16,7 @@
     state: stopped
     enabled: false
   listen: Uninstall prometheus
+  ignore_errors: true
 
 - name: Remove Prometheus systemd service file
   become: true
@@ -108,6 +109,7 @@
     state: stopped
     enabled: false
   listen: Uninstall alertmanager
+  ignore_errors: true
 
 - name: Remove Alertmanager systemd service file
   become: true
@@ -166,6 +168,7 @@
     enabled: false
   with_items: "{{ prometheus_exporters }}"
   listen: Uninstall prometheus
+  ignore_errors: true
 
 - name: Remove Prometheus exporters systemd service file
   become: true
