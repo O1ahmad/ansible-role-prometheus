@@ -17,7 +17,7 @@
   get_url:
     url: "{{ archive_url }}"
     dest: "/tmp/{{ archive_url | urlsplit('path') | basename }}"
-    checksum: "{{ checksum_format }}:{{ archive_checksum }}"
+    checksum: "{{ (archive_checksum|length > 0) | ternary(checksum_format+':'+archive_checksum, '') }}"
     owner: "{{ prometheus_user }}"
     group: "{{ prometheus_user }}"
     mode: '0775'

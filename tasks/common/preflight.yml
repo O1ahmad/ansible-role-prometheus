@@ -25,6 +25,39 @@
     - preflight
     - rules
 
+- name: Set Prometheus exporters install dir
+  when: '"prometheus" in managed_services'
+  set_fact:
+    exporter_installdir: '{{ install_dir }}/exporters'
+  tags:
+    - preflight
+    - exporters
+
+- name: Set Alertmanager templates path
+  when: '"alertmanager" in managed_services'
+  set_fact:
+    templates_path: '{{ install_dir }}/templates'
+  tags:
+    - preflight
+    - alertmanager
+    - templates
+
+- name: Check for uninstall signal
+  when: perform_uninstall
+  block:
+    - name: Broadcast uninstall signal
+      command: /bin/true
+      notify:
+        - Uninstall prometheus
+        - Uninstall alertmanager
+  always:
+    - name: Flush handlers
+      meta: flush_handlers
+    - name: End play following uninstallation
+      meta: end_play
+  tags:
+    - preflight
+
 - name: Set Prometheus unit [Service] configuration
   when: '"prometheus" in managed_services'
   set_fact:
@@ -36,15 +69,6 @@
       StandardError: inherit
   tags:
     - preflight
-
-- name: Set Alertmanager templates path
-  when: '"alertmanager" in managed_services'
-  set_fact:
-    templates_path: '{{ install_dir }}/templates'
-  tags:
-    - preflight
-    - alertmanager
-    - templates
 
 - name: Set Alertmanager unit [Service] configuration
   when: '"alertmanager" in managed_services'
@@ -58,24 +82,3 @@
   tags:
     - preflight
     - alertmanager
-
-- name: Set Prometheus exporters install dir
-  when: '"prometheus" in managed_services'
-  set_fact:
-    exporter_installdir: '{{ install_dir }}/exporters'
-  tags:
-    - preflight
-    - exporters
-
-- name: Check for uninstall signal
-  when: perform_uninstall
-  block:
-    - name: Broadcast uninstall signal
-      command: /bin/true
-      notify:
-        - Uninstall prometheus
-        - Uninstall alertmanager
-
-    - name: End play following uninstallation
-      meta: end_play
-  ignore_errors: true
