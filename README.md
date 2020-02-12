@@ -572,14 +572,14 @@ default example:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
 ```
 
 *only* install and manage the Prometheus service (disable alertmanager setup):
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       managed_services: ['prometheus']
 ```
@@ -588,7 +588,7 @@ install specific version of Prometheus bits:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       archive_url: https://github.com/prometheus/prometheus/releases/download/v2.15.0/prometheus-2.15.0.linux-amd64.tar.gz
       archive_checksum: 1c2175428e7a70297d97a30a04278b86ccd6fc53bf481344936d6573482203b4
@@ -598,7 +598,7 @@ adust Prometheus and Alertmanager installation, configuration and data directori
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       install_dir: /usr/local
       config_dir: /etc/prometheus
@@ -612,7 +612,7 @@ customize global scrape and evaluation settings:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         global:
@@ -625,7 +625,7 @@ customize prometheus alerting/alertmanager configuration:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         alerting:
@@ -640,7 +640,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         rule_files:
@@ -673,7 +673,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
@@ -692,7 +692,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
@@ -725,7 +725,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
@@ -743,7 +743,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
@@ -763,7 +763,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
@@ -787,7 +787,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
@@ -803,7 +803,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
@@ -822,7 +822,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
@@ -837,7 +837,7 @@ create recording and alerting rules:
 ```
 - hosts: all
   roles:
-  - role: 0xOI.prometheus
+  - role: 0x0I.prometheus
     vars:
       prometheus_config:
         scrape_configs:
