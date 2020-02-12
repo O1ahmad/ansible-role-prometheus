@@ -3,9 +3,10 @@
 Ansible Role :fire: :straight_ruler: Prometheus
 =========
 [![Galaxy Role](https://img.shields.io/ansible/role/45498.svg)](https://galaxy.ansible.com/0x0I/prometheus)
-[![Downloads](https://img.shields.io/ansible/role/d/45498.svg)](https://galaxy.ansible.com/0x0I/prometheus)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/0x0I/ansible-role-prometheus?color=yellow)
+[![Downloads](https://img.shields.io/ansible/role/d/45498.svg?color=lightgrey)](https://galaxy.ansible.com/0x0I/prometheus)
 [![Build Status](https://travis-ci.org/0x0I/ansible-role-prometheus.svg?branch=master)](https://travis-ci.org/0x0I/ansible-role-prometheus)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blueviolet.svg)](https://opensource.org/licenses/MIT)
 
 **Table of Contents**
   - [Supported Platforms](#supported-platforms)
@@ -20,7 +21,7 @@ Ansible Role :fire: :straight_ruler: Prometheus
   - [License](#license)
   - [Author Information](#author-information)
 
-Ansible role that installs and configures Prometheus: a multi-dimensional, non-distributed/stand-alone time-series database monitoring/alerting toolkit.
+Ansible role that installs and configures Prometheus: a multi-dimensional, non-distributed time-series database and monitoring/alerting toolkit.
 
 ##### Supported Platforms:
 ```
@@ -111,7 +112,7 @@ Each configuration can be expressed within the following variables in order to c
 `alertmgr_configdir: </path/to/configuration/dir>` (**default**: `{{ alertmgr_installdir }}`)
 - path on target host where `alertmanager` config files should be rendered
 
-`alertmgr_datadir: </path/to/data/dir>` (**default**: `/var/data/prometheus`)
+`alertmgr_datadir: </path/to/data/dir>` (**default**: `/var/data/alertmanager`)
 - path on target host where `alertmanager` stores data
 
 #### Prometheus Service configuration
@@ -261,7 +262,7 @@ File-based service discovery provides a more generic way to configure static tar
 `prometheus_file_sd: <list-of-dicts>` (**default**: [])
 - specifies prometheus file_sd configurations to render
 
-Using this role, file-based service discovery configuration settings can be expressed within the hash, `prometheus_file_sd`, which contains a list of dicts representing and encapsulating the path, name and configuration contents of a `yaml` or `json` file set to be loaded by prometheus for file-based discovery.
+Using this role, file-based service discovery configuration settings can be expressed within the hash, `prometheus_file_sd`, which contains a list of dicts encapsulating the path, name and configuration contents of a `yaml` or `json` file set to be loaded by prometheus for file-based discovery.
 
 `[prometheus_file_sd : <entry>:] name: <string>` (**default**: NONE - *required*)
 - name of file_sd file to render
@@ -296,7 +297,7 @@ Prometheus supports two types of rules which may be configured and then evaluate
 `prometheus_rule_files: <list-of-dicts>` (**default**: [])
 - specifies prometheus rule files to render
 
-Using this role, both recording and alerting rules can be expressed within the hash, `prometheus_rule_files`, which contains a list of dicts representing and encapsulating the path, name and configuration contents of a `yaml` or `json` file set to be loaded by prometheus for rule setting.
+Using this role, both recording and alerting rules can be expressed within the hash, `prometheus_rule_files`, which contains a list of dicts encapsulating the path, name and configuration contents of a `yaml` or `json` file set to be loaded by prometheus for rule setting.
 
 `[prometheus_rule_files : <entry>:] name: <string>` (**default**: NONE - *required*)
 - name of rule file to render
@@ -522,7 +523,7 @@ Supporting full expression of `alertmanager`'s [cli](https://gist.github.com/0x0
 `prometheus_exporters: <list-of-dicts>` (**default**: [])
 - specifies prometheus exporters to install and launch and manage as a systemd services.
 
-Each exporter dict entry is expected to indicate several properties, including name; url and listen address, of the target exporter for proper setup and communication with a *Prometheus* server. Other properties used to customize operation of the exporter can optionally be specified via an `extra_args` variable, which appends provided command-line arguments to the exporter's unit ExecStart setting. See [here](https://prometheus.io/docs/instrumenting/exporters/) for more details and a list of exporter plugins for reference.
+Each exporter dict entry is expected to indicate several properties, including name; url and listen address, of the target exporter for proper setup and communication with a *Prometheus* server. Other properties used to customize operation of the exporter can optionally be specified via an `extra_args` variable, which appends provided command-line arguments to the exporter's unit *ExecStart* setting. See [here](https://prometheus.io/docs/instrumenting/exporters/) for more details and a list of exporter plugins for reference.
 
 `[prometheus_exporters : <entry>:] name: <string>` (**default**: NONE - *required*)
 - name of Prometheus exporter to install
