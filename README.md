@@ -3,10 +3,8 @@
 
 Ansible Role :fire: :straight_ruler: Prometheus
 =========
-[![Galaxy Role](https://img.shields.io/ansible/role/45498.svg)](https://galaxy.ansible.com/0x0I/prometheus)
+[![Galaxy Role](https://img.shields.io/ansible/role/d/0x0i/prometheus)](https://galaxy.ansible.com/0x0I/prometheus)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/0x0I/ansible-role-prometheus?color=yellow)
-[![Downloads](https://img.shields.io/ansible/role/d/45498.svg?color=lightgrey)](https://galaxy.ansible.com/0x0I/prometheus)
-[![Build Status](https://travis-ci.org/0x0I/ansible-role-prometheus.svg?branch=master)](https://travis-ci.org/0x0I/ansible-role-prometheus)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blueviolet.svg)](https://opensource.org/licenses/MIT)
 
 **Table of Contents**
